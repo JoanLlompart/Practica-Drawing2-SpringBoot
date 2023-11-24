@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+</head>
+<body>
+<h1>Regístrate aquí</h1>
+<form action="/register" method="post">
+  <label for="name">Nombre:</label>
+  <input type="text" name="name" id="name" required><br>
+
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email" required><br>
+
+  <label for="password">Contraseña:</label>
+  <input type="password" name="password" id="password" required><br>
+
+  <p><input name="Enviar" value="Registrarse" type="submit"></p>
+</form>
+
+<a href="/login">Ir a login</a>
+
+<!-- Mensajes de éxito o error -->
+<div th:if="${missatgeRegistre != null}" style="color: green;">
+  <span th:text="${missatgeRegistre}"></span>
+</div>
+<div th:if="${missatgeError != null}" style="color: red;">
+  <span th:text="${missatgeError}"></span>
+</div>
+</body>
+</html>

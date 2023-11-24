@@ -1,0 +1,142 @@
+canvas#lienzo {
+    border: 2px solid black;
+    /* Bordes negros */
+    background-color: #ffffff;
+    /* Fondo blanco */
+    margin-inline-start: 5%;
+}
+
+
+
+body {
+    background-color: #f8f8ff;
+    background-image: url(../img/fondoDrawings.jpg);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-inline-start: 5%;
+    padding-bottom: 10%;
+
+}
+
+header {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list {
+    display: flex;
+}
+
+.barra-pagina {
+    margin-right: 20px;
+}
+
+.barra-pagina a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Estils per el toggle switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Estils per el slider del toggle */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Estils per el diseny visual del slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+/* Estils per el diseño visual del punt del slider */
+.slider:before {
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+/* Estils per quant el toggle switch es troba actiu */
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+/* Estils per quant toggle switch es actiu  per  punts */
+input:focus+.slider:before {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+/* Estils  visuals del punt quant el toggle switch es troba actiu */
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+/* Estilos para el texto "Dibujar" */
+.slider:after {
+    color: black;
+    display: block;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    font-size: 14px;
+}
+/* Estils per el text "ON" quant el toggle  switch es troba actiu */
+input:checked+.slider:after {
+    content: "ON";
+    color: white;
+    left: 40%;
+    
+}
+/* Estils per el text "OFF" quant el toggle es troba desactivat */
+input:not(:checked)+.slider:after {
+    content: "OFF";
+    color: white;
+    left: 60%;
+}
+
+.contenedor {
+    display: flex;
+
+}
+
+canvas {
+    float: left;
+    margin-right: 5%;
+}
+
+.listObjects {
+    flex: 1;
+}

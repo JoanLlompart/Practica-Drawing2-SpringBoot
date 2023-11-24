@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/loginStyle.css">
+</head>
+<body>
+<h1>Bienvenido de nuevo</h1>
+<form action="/login" method="post">
+    <!-- form inici de sesió -->
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required><br>
+
+    <label for="password">Contraseña:</label>
+    <input type="password" name="password" id="password" required><br>
+
+    <p><input name="Iniciar sesión" value="Iniciar sesión" type="submit" required></p>
+</form>
+
+<!-- Missatges de exit o error -->
+<div th:if="${missatgeRegistre != null}" style="color: green;">
+    <span th:text="${missatgeRegistre}"></span>
+</div>
+<div th:if="${missatgeLogin != null}" style="color: green;">
+    <span th:text="${missatgeLogin}"></span>
+</div>
+<div th:if="${missatgeError != null}" style="color: red;">
+    <span th:text="${missatgeError}"></span>
+</div>
+
+<!-- Boto de registre -->
+<a th:href="@{/register}">Regístrate aquí</a>
+</body>
+</html>
