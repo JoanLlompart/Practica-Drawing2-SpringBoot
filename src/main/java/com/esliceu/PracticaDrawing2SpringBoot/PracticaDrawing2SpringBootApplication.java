@@ -9,5 +9,4 @@ public class PracticaDrawing2SpringBootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PracticaDrawing2SpringBootApplication.class, args);
 	}
-
 }

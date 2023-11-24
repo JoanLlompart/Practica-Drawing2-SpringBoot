@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Register</title>
+  <link rel="stylesheet" href="/src/main/resources/static/css/loginStyle.css">
 </head>
 <body>
 <h1>Regístrate aquí</h1>
@@ -19,7 +20,7 @@
   <p><input name="Enviar" value="Registrarse" type="submit"></p>
 </form>
 
-<a href="/login">Ir a login</a>
+<a href="/src/main/resources/templates/login.html">Ir a Login</a>
 
 <!-- Mensajes de éxito o error -->
 <div th:if="${missatgeRegistre != null}" style="color: green;">
