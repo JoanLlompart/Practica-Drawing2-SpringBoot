@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+    private String email;
+    private String password;
     @Autowired
     UserRepo userRepo;
     public boolean registrarUsuari(String name, String email, String password) {
@@ -21,4 +23,36 @@ public class UserService {
     public String encriptarPassword(String password) {
         return DigestUtils.md5Hex(password);
     }
+
+    public boolean validLogin(String email, String password) {
+        User user = userRepo.findByEmail(email);
+        if (user == null) {
+            return false;
+        }
+        password = encriptarPassword(password);
+        return userRepo.isPasswordOfUser(user, password);
+    }
+    public UserRepo getUserRepo() {
+        return userRepo;
+    }
+
+    public void setUserRepo(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
