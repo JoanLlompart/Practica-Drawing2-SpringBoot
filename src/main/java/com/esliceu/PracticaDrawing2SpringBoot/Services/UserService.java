@@ -16,7 +16,6 @@ public class UserService {
     public boolean registrarUsuari(String name, String email, String password) {
         String passEncrip=encriptarPassword(password);
         User user = new User(name,email,passEncrip);
-
         System.out.println("registreUsuari a UserService");
         return userRepo.save(user);
     }

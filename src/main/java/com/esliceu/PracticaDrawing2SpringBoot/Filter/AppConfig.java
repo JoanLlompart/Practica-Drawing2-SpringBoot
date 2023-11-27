@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Component
 public class AppConfig implements WebMvcConfigurer {
-    //
     @Autowired
     private SessionInterruptor sessionInterruptor;
 

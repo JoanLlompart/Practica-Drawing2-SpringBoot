@@ -1,5 +1,4 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
-
 import com.esliceu.PracticaDrawing2SpringBoot.Services.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -10,20 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 @Controller
 @RequestMapping("/login")
 public class LoginController {
     @Autowired
     UserService userService;
-    @GetMapping
+    @GetMapping("/login")
     public String showLoginForm(HttpSession session) {
         if (session != null) {
             session.invalidate();
         }
         return "login";
     }
-
     @PostMapping("/login")
     public String login(
             HttpSession session,
@@ -64,7 +61,6 @@ public class LoginController {
         } else {
             userInPause = true;
         }
-
         if (userInPause) {
             model.addAttribute("missatgeError", "Has pasat el nombre maxim de intents. Per tornar a provar has de esperar 1 minut.");
             return "login"; // nombre del archivo JSP asociado (login.jsp)

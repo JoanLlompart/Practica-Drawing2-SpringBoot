@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserRepoImpl implements UserRepo{
+public class UserRepoImpl implements UserRepo {
+    @Autowired
     static List<User> usuaris;
-
     @Override
     public boolean save(User user) {
         String correu =  user.getEmail();
@@ -40,7 +40,6 @@ public class UserRepoImpl implements UserRepo{
             return true;
         }
     }
-
     public User findByEmail(String email) {
         for (User user : usuaris) {
             if (user.getEmail().equals(email)) {
@@ -50,7 +49,6 @@ public class UserRepoImpl implements UserRepo{
         }
         return null;
     }
-
     @Override
     public boolean isPasswordOfUser(User user, String pasword) {
         if (user.getPassword().equals(pasword)) {
@@ -71,7 +69,6 @@ public class UserRepoImpl implements UserRepo{
         }
         return null;
     }
-
     private boolean comprobarSiExisteix(String correu) {
         for (User user1: usuaris) {
             if (user1.getEmail().equals(correu)) {
