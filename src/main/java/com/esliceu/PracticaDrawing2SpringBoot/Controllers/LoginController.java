@@ -10,17 +10,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 @Controller
-@RequestMapping("/login")
+//@RequestMapping("/login")
 public class LoginController {
     @Autowired
     UserService userService;
     @GetMapping("/login")
     public String showLoginForm(HttpSession session) {
+
         if (session != null) {
             session.invalidate();
         }
         return "login";
     }
+
+
     @PostMapping("/login")
     public String login(
             HttpSession session,

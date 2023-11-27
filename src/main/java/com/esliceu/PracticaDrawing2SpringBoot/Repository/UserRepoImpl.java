@@ -4,12 +4,13 @@ import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class UserRepoImpl implements UserRepo {
     @Autowired
-    static List<User> usuaris;
+    static List<User> usuaris = new ArrayList<>();
     @Override
     public boolean save(User user) {
         String correu =  user.getEmail();

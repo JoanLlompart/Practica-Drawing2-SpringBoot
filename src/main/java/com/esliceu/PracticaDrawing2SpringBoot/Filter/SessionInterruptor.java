@@ -23,7 +23,6 @@ public class SessionInterruptor implements HandlerInterceptor {
             response.sendRedirect("/error");
             return;
         }
-
       */
 
         return true;
