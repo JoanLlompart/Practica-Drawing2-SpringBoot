@@ -31,6 +31,11 @@ public class UserService {
         password = encriptarPassword(password);
         return userRepo.isPasswordOfUser(user, password);
     }
+    public String getNameOfUser(String email) {
+        User u = userRepo.findByEmail(email);
+        return u.getName();
+    }
+
     public UserRepo getUserRepo() {
         return userRepo;
     }

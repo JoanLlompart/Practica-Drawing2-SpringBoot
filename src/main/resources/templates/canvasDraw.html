@@ -1,0 +1,73 @@
+
+        <!DOCTYPE html>
+        <html lang="en" xmlns:th="http://www.thymeleaf.org">
+            <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>Dibujar</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="/css/style.css">
+        </head>
+        <body>
+            <header>
+                <div class="header">
+                    <nav>
+                        <ul class="nav-list">
+                            <li class="barra-pagina"><a href="/dibuixar">Dibujar</a></li>
+                            <li class="barra-pagina"><a href="/misCanvas">Mis Canvas</a></li>
+                            <li class="barra-pagina"><a href="/allCanvas">Ver todos los Canvas</a></li>
+                            <li class="barra-pagina"><a href="/login">Salir de la sessión</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <h1>Seccion de Canvas</h1>
+            <br>
+            <h2>Bienvenido, <%= session.getAttribute("name") %> </h2>
+            <br>
+            <div class="contenedor">
+                <canvas id="lienzo" width="500" height="400"></canvas>
+                <section class="listObjects">
+                    <h2>Llista d'objectes</h2>
+                    <ul id="liFigures"></ul>
+                </section>
+            </div>
+        
+            <br>
+                <button id="borrarLienzo" type="button">Limpiar</button>
+                <br>
+                <p>Dibujar</p>
+                <label class="switch">
+                    <input type="checkbox" id="toggleDibuixar">
+                    <span class="slider round"></span>
+                </label>
+                <br>
+            <form id="drawForm" action="/canvasDraw" method="post">
+                <p>Opcions:</p>
+                <select id="selectorFigura">
+                    <option value="sinSeleccionar">Selecciona una Figura</option>
+                    <option value="circulo">Círculo</option>
+                    <option value="cuadrado">Cuadrado</option>
+                    <option value="triangle">Triángulo</option>
+                    <option value="estrella">Estrella</option>
+                </select>
+                    <button id="guardarDibuix" type="submit">Guardar</button>
+                    <input type="hidden" id="figuresData" name="figuresData">
+                    <input type="hidden" id="strokesData" name="strokesData">
+                    <br>
+                    <p>Nombre:</p>
+                    <label for="nomDibuix"></label>
+                    <input type="text" id="nomDibuix" name="nomDibuix">
+                    <br>
+                    <p>Color:</p>
+                    <input type="color" name="color" id="color" value="#000000" >
+                    <br>
+                    Relleno de la figura<input type="checkbox" id="rellenoFigura" name="rellenoFigura" value="false">
+                    <br>
+                    <label for="tamaño">Tamaño de los elementos</label>
+                    <input type="range" id="tamaño" name="tamaño" min="1" max="200" value="50">
+                </form>
+                <script src="/js/lienzo.js"></script>
+        </body>
+
+        </html>

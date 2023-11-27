@@ -46,7 +46,7 @@ public class LoginController {
                 session.setAttribute("email", userService.getEmail());
                 session.setAttribute("loginAttempts", 0);
                 session.setAttribute("usuariLogueat", true);
-                return "redirect:/dibuixar"; // redirige a la URL '/dibuixar'
+                return "redirect:/canvasDraw"; // redirige a la URL '/dibuixar'
             } else {
                 if (loginAttempts == null) {
                     loginAttempts = 1;
