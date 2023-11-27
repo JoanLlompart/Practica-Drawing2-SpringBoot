@@ -16,14 +16,11 @@ public class LoginController {
     UserService userService;
     @GetMapping("/login")
     public String showLoginForm(HttpSession session) {
-
         if (session != null) {
             session.invalidate();
         }
         return "login";
     }
-
-
     @PostMapping("/login")
     public String login(
             HttpSession session,
@@ -35,12 +32,10 @@ public class LoginController {
         Integer loginAttempts = (Integer) session.getAttribute("loginAttempts");
         Long lastFailedLoginTime = (Long) session.getAttribute("lastFailedLoginTime");
         boolean userInPause = false;
-
         userService.registrarUsuari("Joan", "joan@gmail.com", "hola1");
         userService.registrarUsuari("Aina", "aina@gmail.com", "hola1");
         userService.setEmail(email);
         userService.setPassword(userService.encriptarPassword(password));
-
         if (loginAttempts == null || loginAttempts < 3) {
             if (userService.validLogin(email, password)) {
                 session.setAttribute("email", userService.getEmail());
@@ -72,5 +67,4 @@ public class LoginController {
             return "login"; // nombre del archivo JSP asociado (login.jsp)
         }
     }
-
 }
