@@ -32,8 +32,8 @@ public class LoginController {
         Integer loginAttempts = (Integer) session.getAttribute("loginAttempts");
         Long lastFailedLoginTime = (Long) session.getAttribute("lastFailedLoginTime");
         boolean userInPause = false;
-        userService.registrarUsuari("Joan", "joan@gmail.com", "hola1");
-        userService.registrarUsuari("Aina", "aina@gmail.com", "hola1");
+        //userService.registrarUsuari("Joan", "joan@gmail.com", "hola1");
+        //userService.registrarUsuari("Aina", "aina@gmail.com", "hola1");
         userService.setEmail(email);
         userService.setPassword(userService.encriptarPassword(password));
         String nameUser=userService.getNameOfUser(email);

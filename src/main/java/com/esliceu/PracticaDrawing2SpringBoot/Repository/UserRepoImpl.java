@@ -2,16 +2,16 @@ package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+//@Repository
 public class UserRepoImpl implements UserRepo {
-    @Autowired
+    //@Autowired
     static List<User> usuaris = new ArrayList<>();
-    @Override
     public boolean save(User user) {
         String correu =  user.getEmail();
         if (usuaris.size() != 0) {
