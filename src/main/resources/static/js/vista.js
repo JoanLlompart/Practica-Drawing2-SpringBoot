@@ -10,7 +10,6 @@ const pintar = (listStrokes) => {
         ctx.beginPath();
         ctx.strokeStyle = color;
         ctx.lineWidth = size;
-
         // Comensam a dibuixar per la posicio 0.
         ctx.moveTo(puntos[0].x, puntos[0].y);
 

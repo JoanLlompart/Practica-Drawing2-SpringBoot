@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ver Canvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <nav>
+                <ul class="nav-list">
+                    <li class="barra-pagina"><a href="/canvasDraw">Dibujar</a></li>
+                    <li class="barra-pagina"><a href="/misCanvas">Mis Canvas</a></li>
+                    <li class="barra-pagina"><a href="/allCanvas">Ver todos los Canvas</a></li>
+                    <li class="barra-pagina"><a href="/login">Salir de la sessión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <h1>Seccion de Visualización de el Canvas</h1>
+    <br>
+    <h2>Bienvenido, [[${name}]]
+    </h2>
+    <br>
+    <h3>Nombre de el canvas: , [[${nameCanvas}]]</h3>
+    <br>
+    <!--Ara utilitzam th:value per pasar el JSON a js en lloc de value com feiem en la versio anterior.-->
+    <input type="hidden" id="llistaFigureJson" name="llistaFigureJson" th:value="${llistaFigureJson}" />
+    <input type="hidden" id="llistaStroke" name="llistaStroke" th:value="${llistaStroke}" />
+
+    <canvas id="lienzo" width="500" height="400"></canvas>
+    <script src="js/vista.js"></script>
+</body>
+
+</html>
