@@ -1,6 +1,7 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Services;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
+import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepo;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepoImpl;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepo;
@@ -45,7 +46,18 @@ public class CanvasServices {
         //borrara els dibuixos i tornara true si ha anat be.
         return canvasRepo.removeCanvas(idDelete,email);
     }
-
+    public Canvas getCanvasToModify(int id,String emailSessionUser) throws NotYourCanvasException {
+        //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.
+        Canvas c = canvasRepo.getCanvasById(id);
+        //email de el pintor de el dibuix
+        String emailPainter = c.getUser().getEmail();
+        if (emailPainter.equals(emailSessionUser)) {
+            //si el email de el pintor coincideix amb el de el user de la sessio tornara el canvas.
+            return c;
+        } else {
+            throw new NotYourCanvasException("No eres el propietario de este Canvas!");
+        }
+    }
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();
     }
