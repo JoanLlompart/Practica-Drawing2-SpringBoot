@@ -4,9 +4,13 @@ import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.SQLWarningException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.jdbc.core.RowMapper;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +28,16 @@ public class UserRepoImplSQL implements UserRepo  {
 
     @Override
     public User findByEmail(String email) {
-        return null;
+        try {
+            String sql = "SELECT * FROM user WHERE email = ?";
+            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
+            System.out.println(user.toString());
+            return user;
+        } catch (EmptyResultDataAccessException e) {
+            System.err.println("No se ha encontrado el usuario");
+            return null;
+        }
+
     }
 
     @Override
