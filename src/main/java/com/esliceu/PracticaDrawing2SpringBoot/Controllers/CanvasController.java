@@ -18,7 +18,8 @@ public class CanvasController {
     public String getCanvasPage(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         String name = userService.getNameOfUser(email);
-        session.setAttribute("name", name);
+        //session.setAttribute("name", name);
+        model.addAttribute("name", name);
         return "canvasDraw"; // nombre de la vista Thymeleaf
     }
 
