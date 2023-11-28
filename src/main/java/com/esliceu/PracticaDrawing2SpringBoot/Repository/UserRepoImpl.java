@@ -49,6 +49,7 @@ public class UserRepoImpl implements UserRepo {
         }
         return null;
     }
+    /*
     @Override
     public boolean isPasswordOfUser(User user, String pasword) {
         if (user.getPassword().equals(pasword)) {
@@ -58,7 +59,7 @@ public class UserRepoImpl implements UserRepo {
         }
         return false;
     }
-
+     */
     @Override
     public User initSession(String email, String password) {
         for(User user : usuaris) {

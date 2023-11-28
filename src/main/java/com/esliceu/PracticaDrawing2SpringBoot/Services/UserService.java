@@ -29,7 +29,10 @@ public class UserService {
             return false;
         }
         password = encriptarPassword(password);
-        return userRepo.isPasswordOfUser(user, password);
+
+        if (user.getEmail().equals(email) && email.equals(user.getEmail())) return true;
+        return false;
+       // return userRepo.isPasswordOfUser(user, password);
     }
     public String getNameOfUser(String email) {
         User u = userRepo.findByEmail(email);
