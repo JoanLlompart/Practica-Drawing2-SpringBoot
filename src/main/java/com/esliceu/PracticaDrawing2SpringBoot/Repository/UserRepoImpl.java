@@ -20,7 +20,6 @@ public class UserRepoImpl implements UserRepo {
             user.setId(1);
         }
         boolean repetit = comprobarSiExisteix(correu);
-
         if (!repetit) {
             //si es false pot afegir el usuari.
             usuaris.add(user);

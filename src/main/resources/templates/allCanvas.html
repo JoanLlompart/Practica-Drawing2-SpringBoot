@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos los Canvas</title>
+    <link rel="stylesheet" href="/css/showCanvas.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <nav>
+                <ul class="nav-list">
+                    <li class="barra-pagina"><a href="/canvasDraw">Dibujar</a></li>
+                    <li class="barra-pagina"><a href="/misCanvas">Mis Canvas</a></li>
+                    <li class="barra-pagina"><a href="/allCanvas">Ver todos los Canvas</a></li>
+                    <li class="barra-pagina"><a href="/login">Salir de la sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <h2>Bienvenido, [[${name}]]</h2>
+    <table>
+        <tr>
+            <th>IdCanvas</th>
+            <th>Nombre</th>
+            <th>Fecha de creacion</th>
+            <th>Elementos</th>
+            <th>Propietario</th>
+            <th>Opciones</th>
+        </tr>
+        <tr th:each="canvas : ${allCanvas}">
+            <td th:text="${canvas.idObjectes}"></td>
+            <td th:text="${canvas.nameCanvas}"></td>
+            <td th:text="${canvas.dataCreacio}"></td>
+            <td>
+                <ul>
+                    <li th:text="'Total de Objectes que esta compost el dibuix: ' + ${canvas.numberObject}"></li>
+                </ul>
+            </td>
+            <td th:text="${canvas.user.name}"></td>
+            <td>
+                <div>
+                    <form th:action="@{/allCanvas}" method="post">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly/>
+                        <button type="submit" class="delete" th:if="${canvas.user.email == email}">Delete</button>
+                    </form>
+                    <form th:action="@{/viewCanvas}" method="get">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly/>
+                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly/>
+                        <button type="submit" class="viewCanvas">Ver</button>
+                    </form>
+                    <form th:action="@{/modify}" method="get">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly/>
+                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly/>
+                        <button type="submit" class="modify" th:if="${canvas.user.email == email}">Modificar</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

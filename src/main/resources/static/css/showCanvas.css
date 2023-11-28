@@ -1,0 +1,147 @@
+/* Reset some default styles */
+body,
+ul,
+li,
+h2,
+p,
+table {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply a background color to the body */
+body {
+    background-color: #f4f4f4;
+    background-image: url(../img/fondoDrawings.jpg);
+    font-family: Arial, sans-serif;
+}
+
+
+header {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list {
+    display: flex;
+}
+
+.barra-pagina {
+    margin-right: 20px;
+}
+
+.barra-pagina a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Style the header */
+/*
+header {
+    background-color: cornflowerblue;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.barra-pagina {
+    margin-right: 10px;
+}
+
+*/
+/* Style the table */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Style the welcome message */
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style the delete button */
+.delete {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+
+.delete:hover {
+    background-color: #c9302c;
+}
+
+.delete:disabled {
+    background-color: #9b6f6f;
+    cursor: not-allowed;
+}
+
+.viewCanvas {
+    background-color: #2cd82c;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.viewCanvas:hover {
+    background-color: #2fc92c;
+}
+
+/* Modify*/
+
+/* Style the modify button */
+.modify {
+    background-color: #e5eb22;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+
+.modify:hover {
+    background-color: rgb(229, 214, 47);
+}
+
+.modify:disabled {
+    background-color: rgb(202, 205, 161);
+    cursor: not-allowed;
+}

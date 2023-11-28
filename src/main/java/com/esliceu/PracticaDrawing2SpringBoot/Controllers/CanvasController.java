@@ -1,5 +1,4 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
-
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 @Controller
 public class CanvasController {
     @Autowired
