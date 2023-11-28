@@ -26,18 +26,16 @@ public class ViewController {
         Gson gson = new Gson();
         String jsonFigure = gson.toJson(canvas.getFigures());
         String jsonStrokes = gson.toJson(canvas.getStrokes());
-
+        String nameUser=(String) session.getAttribute("name");
         model.addAttribute("llistaFigureJson", jsonFigure);
         model.addAttribute("llistaStroke", jsonStrokes);
         model.addAttribute("nameCanvas", nameCanvas);
+        model.addAttribute(nameUser);
         return "viewCanvas";
     }
-
     public String postViewCanvas(HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
-
         return "viewCanvas";
     }
-
 }

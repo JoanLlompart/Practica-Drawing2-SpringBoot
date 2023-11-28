@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Enumeration;
+
 @Controller
 public class CanvasController {
     @Autowired
@@ -19,10 +22,11 @@ public class CanvasController {
         String email = (String) session.getAttribute("email");
         String name = userService.getNameOfUser(email);
         //session.setAttribute("name", name);
-        model.addAttribute("name", name);
+        String nomSesion = (String)session.getAttribute("name");
+        model.addAttribute("name", nomSesion);
+        printSession(session);
         return "canvasDraw"; // nombre de la vista Thymeleaf
     }
-
     @PostMapping("/canvasDraw")
     public String saveCanvas(HttpServletRequest req, HttpSession session) {
         String email = (String) session.getAttribute("email");
@@ -45,5 +49,16 @@ public class CanvasController {
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
         canvasServices.newCanvas(strokJson, figureJson, email, nameCanvas);
         return "canvasDraw";
+    }
+
+    private void printSession(HttpSession session) {
+        Enumeration<String> attributeNames = session.getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            String attributeName = attributeNames.nextElement();
+            Object attributeValue = session.getAttribute(attributeName);
+            // Realiza alguna acción con el nombre y el valor del atributo
+            System.out.println("(Ojo que en hi ha)Nombre del atributo: " + attributeName);
+            System.out.println("(Ojo que en hi ha)Valor del atributo: " + attributeValue);
+        }
     }
 }

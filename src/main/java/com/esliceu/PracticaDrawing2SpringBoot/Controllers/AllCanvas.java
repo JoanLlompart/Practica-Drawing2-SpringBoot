@@ -25,7 +25,7 @@ public class AllCanvas {
     public String showAllCanvas(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         String name = userService.getNameOfUser(email);
-        session.setAttribute("name", name);
+        //session.setAttribute("name", name);
 
         List<Canvas> listCanvas = canvasServices.showAllCanvas();
         // ... (realiza las operaciones necesarias para calcular numberObject)

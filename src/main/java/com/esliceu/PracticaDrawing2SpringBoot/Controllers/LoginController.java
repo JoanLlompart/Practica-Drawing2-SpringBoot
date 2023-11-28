@@ -36,12 +36,14 @@ public class LoginController {
         userService.registrarUsuari("Aina", "aina@gmail.com", "hola1");
         userService.setEmail(email);
         userService.setPassword(userService.encriptarPassword(password));
+        String nameUser=userService.getNameOfUser(email);
         if (loginAttempts == null || loginAttempts < 3) {
             if (userService.validLogin(email, password)) {
                 session.setAttribute("email", userService.getEmail());
                 session.setAttribute("loginAttempts", 0);
                 session.setAttribute("usuariLogueat", true);
-                return "redirect:/canvasDraw"; // redirige a la URL '/dibuixar'
+                session.setAttribute("name",nameUser);
+                return "redirect:/canvasDraw"; // redirige a la URL '/canvasDraw'
             } else {
                 if (loginAttempts == null) {
                     loginAttempts = 1;
