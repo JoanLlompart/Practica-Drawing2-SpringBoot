@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class AllCanvas {
+public class AllCanvasController {
     @Autowired
     CanvasServices canvasServices;
     @Autowired
@@ -28,20 +28,18 @@ public class AllCanvas {
         //session.setAttribute("name", name);
 
         List<Canvas> listCanvas = canvasServices.showAllCanvas();
-        // ... (realiza las operaciones necesarias para calcular numberObject)
 
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);
 
-        return "allCanvas"; // este es el nombre de tu archivo HTML Thymeleaf
+        return "allCanvas";
     }
     @PostMapping("/allCanvas")
     public String deleteCanvas(@RequestParam("id") int id, HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
         if (!canvasServices.deleteCanvasById(id, email)) {
-            // Manejo de excepciones o redirección a una página de error si es necesario
         }
         return "redirect:/allCanvas";
     }

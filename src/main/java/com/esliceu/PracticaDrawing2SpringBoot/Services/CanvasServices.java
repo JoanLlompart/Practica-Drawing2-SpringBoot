@@ -34,6 +34,7 @@ public class CanvasServices {
         //torna la llista amb els canvas que pertanyen a el usuari
         return canvasRepo.findByUser(u);
     }
+
     //genera un nom si el usuari no ha asignat un nom a el canvas.
     public String generarNom(String nameCanvas) {
         //a la hora de guardar hem de anar alerta que no es repetesqui el numero si
