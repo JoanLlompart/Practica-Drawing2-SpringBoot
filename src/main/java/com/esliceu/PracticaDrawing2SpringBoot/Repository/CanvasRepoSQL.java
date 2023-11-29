@@ -29,14 +29,15 @@ public class CanvasRepoSQL implements CanvasRepo{
 
     @Override
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
-        jdbcTemplate.update("INSERT INTO Canvas (nameCanvas, user_id, dataCreacio, numberObject, figuresJSON, strokesJSON) VALUES (?, ?, ?, ?, ?, ?)",
+        String sql = "INSERT INTO Canvas (nameCanvas, user_id, dataCreacio, numberObject, figuresJSON, strokesJSON) VALUES (?, ?, NOW(), ?, ?, ?)";
+        jdbcTemplate.update(sql,
                 canvas.getNameCanvas(),
                 canvas.getUser().getId(),
-                canvas.getDataCreacio(),
+                //canvas.getDataCreacio(),
                 canvas.getNumberObject(),
                 figureJson,
                 strokesJson
-               );
+        );
     }
     @Override
     public Canvas getCanvasById(int id) {
