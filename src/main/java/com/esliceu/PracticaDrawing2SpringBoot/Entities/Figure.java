@@ -2,7 +2,7 @@ package com.esliceu.PracticaDrawing2SpringBoot.Entities;
 
 import java.util.Date;
 import java.util.List;
-
+/*
 public class Figure extends Canvas {
     private String type;
     private String color;
@@ -79,3 +79,5 @@ public class Figure extends Canvas {
         this.centerY = centerY;
     }
 }
+
+ */

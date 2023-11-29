@@ -1,5 +1,5 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
-
+/*
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Figure;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Strokes;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 //@Repository
+
 public class CanvasRepoImpl implements CanvasRepo {
     //contador per cada vegada que se instancia un nou canvas.
     int contador = 1;
@@ -116,3 +117,5 @@ public class CanvasRepoImpl implements CanvasRepo {
         return null;
     }
 }
+
+ */

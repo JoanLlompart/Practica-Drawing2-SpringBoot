@@ -3,9 +3,7 @@ import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepo;
-import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepoImpl;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepo;
-import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -21,7 +19,7 @@ public class CanvasServices {
             Canvas canvas = new Canvas();
             canvas.setNameCanvas(nameCanvas);
             User u = userRepo.findByEmail(email);
-            canvas.setUser(u);
+            canvas.setUser_email(u.getEmail());
             System.out.println("Nom de el canvas" +canvas.getNameCanvas());
             //parsearObjectes(strokesJson,figureJson);
             canvasRepo.saveCanvas(canvas,strokesJson,figureJson);
@@ -46,6 +44,7 @@ public class CanvasServices {
         //borrara els dibuixos i tornara true si ha anat be.
         return canvasRepo.removeCanvas(idDelete,email);
     }
+    /*
     public Canvas getCanvasToModify(int id,String emailSessionUser) throws NotYourCanvasException {
         //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.
         Canvas c = canvasRepo.getCanvasById(id);
@@ -58,6 +57,8 @@ public class CanvasServices {
             throw new NotYourCanvasException("No eres el propietario de este Canvas!");
         }
     }
+
+     */
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();
     }

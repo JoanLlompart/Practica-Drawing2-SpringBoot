@@ -1,7 +1,5 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
-import com.esliceu.PracticaDrawing2SpringBoot.Entities.Figure;
-import com.esliceu.PracticaDrawing2SpringBoot.Entities.Strokes;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.TakeCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
@@ -95,10 +93,10 @@ public class CanvasRepoSQL implements CanvasRepo{
     }
     @Override
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
-        String sql = "INSERT INTO Canvas (nameCanvas, user_id, dataCreacio, numberObject, figuresJSON, strokesJSON) VALUES (?, ?, NOW(), ?, ?, ?)";
+        String sql = "INSERT INTO Canvas (nameCanvas, user_email, dataCreacio, numberObject, figuresJSON, strokesJSON) VALUES (?, ?, NOW(), ?, ?, ?)";
         jdbcTemplate.update(sql,
                 canvas.getNameCanvas(),
-                canvas.getUser().getId(),
+                canvas.getUser_email(),
                 //canvas.getDataCreacio(),
                 canvas.getNumberObject(),
                 figureJson,

@@ -22,7 +22,7 @@ public class ModifyController {
     public String getModifyCanvas(@RequestParam("id") int idObjectes,
                                   @RequestParam("nameCanvas") String nameCanvas,
                                   HttpSession session, Model model) {
-        String email = (String) session.getAttribute("email");
+     /*   String email = (String) session.getAttribute("email");
         try {
             Canvas canvas = canvasServices.getCanvasToModify(idObjectes, email);
             String nameUser =canvas.getUser().getName();
@@ -38,7 +38,11 @@ public class ModifyController {
             System.out.println("Mensaje del throw " + e.getMessage());
             String message = e.getMessage();
             model.addAttribute("errorMessage", message);
+
             return "errorNotYourCanvas";
         }
+
+      */
+        return null;
     }
 }

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.sql.Date;
 import java.util.List;
-
+/*
 public class Strokes  extends Canvas{
     //utilitzam  @SerializedName per fer que la conversio de JSON funcioni amb diferents noms, es a dir perque
     // es puguin relacionar.
@@ -53,3 +53,6 @@ public class Strokes  extends Canvas{
                 '}';
     }
 }
+
+
+ */

@@ -25,7 +25,6 @@ public class UserRepoImplSQL implements UserRepo  {
             jdbcTemplate.update(sql,user.getName(),user.getEmail(),user.getPassword());
             return true;
     }
-
     @Override
     public User findByEmail(String email) {
         try {

@@ -9,53 +9,19 @@ import java.util.List;
 public class Canvas {
     private String nameCanvas;
     private int idObjectes;
-    private User user;
+    private String user_email;
     private Date dataCreacio;
-    List<Figure> figures;
-    List<Strokes> strokes;
+    String figures;
+    String strokes;
+   // List<Figure> figures;
+    //List<Strokes> strokes;
     private int numberObject;
+    private Date dateLastModified;
 
-    public int getNumberObject() {
-        return numberObject;
-    }
 
-    public void setNumberObject(int numberObject) {
-        this.numberObject = numberObject;
-    }
-//private String enllacDibuix;
-
-    //private Date dataDarreraMod;
-    public Canvas(String nameCanvas, int idObjectes, User user, Date dataCreacio, List<Figure> figures, List<Strokes> strokes) {
-        this.nameCanvas = nameCanvas;
-        this.idObjectes = idObjectes;
-        this.user = user;
-        this.dataCreacio = dataCreacio;
-        this.figures = figures;
-        this.strokes = strokes;
-    }
     //contructor buit
     public Canvas() {
     }
-    //proba de contructor amb les llistes amb String
-    //Cream un constructor diferent que rebra en lloc de llistes de objectes Figure i Strokes rebra un json i ho convertira en el contructor a
-    public Canvas(String nameCanvas, int idObjectes, User user, Date dataCreacio, String figures, String strokes) {
-        this.nameCanvas = nameCanvas;
-        this.idObjectes = idObjectes;
-        this.user = user;
-        this.dataCreacio = dataCreacio;
-        System.out.println("Ha entrat");
-        Gson gson = new Gson();
-            //Parsetjam el JSON a la clase que pertany
-            this.figures = gson.fromJson(figures, new TypeToken<List<Figure>>() {
-            }.getType());
-            Type listType = new TypeToken<List<Strokes>>() {
-            }.getType();
-            this.strokes = gson.fromJson(strokes, listType);
-        //this.figures = figures;
-        //this.strokes = strokes;
-    }
-
-
     public String getNameCanvas() {
         return nameCanvas;
     }
@@ -72,12 +38,12 @@ public class Canvas {
         this.idObjectes = idObjectes;
     }
 
-    public User getUser() {
-        return user;
+    public String getUser_email() {
+        return user_email;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
     }
 
     public Date getDataCreacio() {
@@ -88,44 +54,55 @@ public class Canvas {
         this.dataCreacio = dataCreacio;
     }
 
-    public List<Figure> getFigures() {
+    public String getFigures() {
         return figures;
     }
 
-    public void setFigures(List<Figure> figures) {
+    public void setFigures(String figures) {
         this.figures = figures;
     }
 
-    public List<Strokes> getStrokes() {
+    public String getStrokes() {
         return strokes;
     }
 
-    public void setStrokes(List<Strokes> strokes) {
+    public void setStrokes(String strokes) {
         this.strokes = strokes;
     }
 
-    @Override
-    public String toString() {
-        return "Canvas{" +
-                "nameCanvas='" + nameCanvas + '\'' +
-                ", idObjectes=" + idObjectes +
-                ", user=" + user +
-                ", dataCreacio=" + dataCreacio +
-                ", figures=" + figures +
-                ", strokes=" + strokes +
-                ", numberObject=" + numberObject +
-                '}';
+    public int getNumberObject() {
+        return numberObject;
     }
 
-    public String viewStructure() {
-        return "Canvas{" +
-                "nameCanvas='" + nameCanvas + '\'' +
-                ", idObjectes=" + idObjectes +
-                ", user_id=" + user.getId() +
-                ", dataCreacio=" + dataCreacio +
-                ", figures=" + figures +
-                ", strokes=" + strokes +
-                ", numberObject=" + numberObject +
-                '}';
+    public void setNumberObject(int numberObject) {
+        this.numberObject = numberObject;
     }
+
+    public Date getDateLastModified() {
+        return dateLastModified;
+    }
+
+    public void setDateLastModified(Date dateLastModified) {
+        this.dateLastModified = dateLastModified;
+    }
+    //proba de contructor amb les llistes amb String
+    //Cream un constructor diferent que rebra en lloc de llistes de objectes Figure i Strokes rebra un json i ho convertira en el contructor a
+   /* public Canvas(String nameCanvas, int idObjectes, User user, Date dataCreacio, String figures, String strokes) {
+        this.nameCanvas = nameCanvas;
+        this.idObjectes = idObjectes;
+        this.user = user;
+        this.dataCreacio = dataCreacio;
+        System.out.println("Ha entrat");
+        Gson gson = new Gson();
+            //Parsetjam el JSON a la clase que pertany
+            this.figures = gson.fromJson(figures, new TypeToken<List<Figure>>() {
+            }.getType());
+            Type listType = new TypeToken<List<Strokes>>() {
+            }.getType();
+            this.strokes = gson.fromJson(strokes, listType);
+        //this.figures = figures;
+        //this.strokes = strokes;
+    }
+
+    */
 }
