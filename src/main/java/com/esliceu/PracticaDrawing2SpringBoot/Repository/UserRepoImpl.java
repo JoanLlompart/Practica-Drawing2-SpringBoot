@@ -31,7 +31,6 @@ public class UserRepoImpl implements UserRepo {
             System.out.println("ID :" +use1.getId() + ", " + use1.getName());
         }
         System.out.println("repetit" + repetit);
-
         if (repetit) {
             //Si esta repetit retorna false,no se ha pogut registrar
             return false;

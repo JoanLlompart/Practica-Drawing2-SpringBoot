@@ -32,6 +32,28 @@ public class Canvas {
     //contructor buit
     public Canvas() {
     }
+    //proba de contructor amb les llistes amb String
+    //Cream un constructor diferent que rebra en lloc de llistes de objectes Figure i Strokes rebra un json i ho convertira en el contructor a
+    public Canvas(String nameCanvas, int idObjectes, User user, Date dataCreacio, String figures, Strokes strokes) {
+        this.nameCanvas = nameCanvas;
+        this.idObjectes = idObjectes;
+        this.user = user;
+        this.dataCreacio = dataCreacio;
+
+        /*
+        Gson gson = new Gson();
+            //Parsetjam el JSON a la clase que pertany
+            figureList = gson.fromJson(figureJson, new TypeToken<List<Figure>>() {
+            }.getType());
+            //strokesList = gson.fromJson(strokesJson, new TypeToken<List<Strokes>>() {}.getType());
+            //System.out.println(strokesList);
+            Type listType = new TypeToken<List<Strokes>>() {
+            }.getType();
+            List<Strokes> strokesList = gson.fromJson(strokesJson, listType);
+         */
+        //this.figures = figures;
+        //this.strokes = strokes;
+    }
     public String getNameCanvas() {
         return nameCanvas;
     }

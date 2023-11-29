@@ -27,13 +27,18 @@ public class CanvasRepoSQL implements CanvasRepo{
     }
     @Override
     public List<Canvas> showAllCanvas() {
-        String sql = "SELECT * FROM Canvas";
+        //String sql = "SELECT * FROM Canvas";
       /*  List<Canvas> canvasList = jdbcTemplate.query(sql,
                 new BeanPropertyRowMapper<>(Canvas.class));
         return canvasList;
 
        */
-
+     /*   try {
+            String sql = "SELECT * FROM Canvas";
+            List<Canvas> canvasList = jdbcTemplate.query(sql);
+        } catch (SQLException e) {
+            e.getSQLState();
+        }
         ResultSetExtractor<String> jsonFigures = new ResultSetExtractor<String>() {
             @Override
             public String extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -41,14 +46,11 @@ public class CanvasRepoSQL implements CanvasRepo{
                 if (rs.next()) {
                     rs.getString("figuresJSON");
                 }
-
                 return null;
             }
         };
-
         String jsonF = jdbcTemplate.query(sql, jsonFigures);
-
-
+      */
      /*   String sql = "SELECT * FROM Canvas WHERE idObjectes = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{canvasId}, (resultSet, rowNum) -> {
             Canvas canvas = new Canvas();
@@ -68,14 +70,11 @@ public class CanvasRepoSQL implements CanvasRepo{
 
             List<Figure> figureList = gson.fromJson(figureJson, figureListType);
             List<Strokes> strokesList = gson.fromJson(strokesJson, strokesListType);
-
             // Asignar las listas a la instancia de Canvas
             canvas.setFigures(figureList);
             canvas.setStrokes(strokesList);
-
             return canvas;
         });
-
       */
         return null;
     }
