@@ -16,15 +16,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Repository
+//@Repository
 public class CanvasRepoImpl implements CanvasRepo {
     //contador per cada vegada que se instancia un nou canvas.
     int contador = 1;
-    @Autowired
+  //  @Autowired
     static List<Figure> figureList = new ArrayList<>();
-    @Autowired
+    //@Autowired
     static List<Strokes> strokesList = new ArrayList<>();
-    @Autowired
+    //@Autowired
     static List<Canvas> canvasList = new ArrayList<>();
 
     @Override
@@ -73,41 +73,41 @@ public class CanvasRepoImpl implements CanvasRepo {
             Type listType = new TypeToken<List<Strokes>>() {
             }.getType();
             List<Strokes> strokesList = gson.fromJson(strokesJson, listType);
-            System.out.println(figureList);
+            //System.out.println(figureList);
             // Agafam la fecha i hora actual
             LocalDateTime actualDate = LocalDateTime.now();
             // Convertim de LocalDateTime a Date
             Date date = Date.from(actualDate.atZone(ZoneId.systemDefault()).toInstant());
-            System.out.println("Fecha y hora actual (Date): " + date);
+           // System.out.println("Fecha y hora actual (Date): " + date);
             canvas.setDataCreacio(date);
             canvas.setFigures(figureList);
             canvas.setStrokes(strokesList);
             canvas.setIdObjectes(contador);
             contador++;
-            System.out.println("canvas a DAOImpl " + canvas.toString());
-            System.out.println("Ha arribat a canvas dao");
+            //System.out.println("canvas a DAOImpl " + canvas.toString());
+            //System.out.println("Ha arribat a canvas dao");
+            System.out.println("Estructure : "+canvas.viewStructure());
         } catch (Exception e) {
             System.err.println("No se ha pogut fer la conversio a JSON correctamente . " + e.getMessage());
         }
         try {
             System.out.println(canvas.toString());
             canvasList.add(canvas);
-            System.out.println("Llista " + canvasList);
-            System.out.println("---------------------");
+          //  System.out.println("Llista " + canvasList);
+          //  System.out.println("---------------------");
             for (Canvas c : canvasList) {
-                System.out.println(c.getIdObjectes());
+           //     System.out.println(c.getIdObjectes());
             }
         } catch (Exception e) {
             System.err.println("Error en la llista de canvas, algo ha fallat." + e.getCause());
         }
     }
-
     @Override
     public Canvas getCanvasById(int id) {
         try {
             for (Canvas canvas : canvasList) {
                 if (canvas.getIdObjectes() == id) {
-                    System.out.println("ID de el canvas:" + canvas.getIdObjectes());
+                 //   System.out.println("ID de el canvas:" + canvas.getIdObjectes());
                     return canvas;
                 }
             }

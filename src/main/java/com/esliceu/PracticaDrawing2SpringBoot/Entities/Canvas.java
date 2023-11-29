@@ -92,4 +92,16 @@ public class Canvas {
                 ", numberObject=" + numberObject +
                 '}';
     }
+
+    public String viewStructure() {
+        return "Canvas{" +
+                "nameCanvas='" + nameCanvas + '\'' +
+                ", idObjectes=" + idObjectes +
+                ", user_id=" + user.getId() +
+                ", dataCreacio=" + dataCreacio +
+                ", figures=" + figures +
+                ", strokes=" + strokes +
+                ", numberObject=" + numberObject +
+                '}';
+    }
 }

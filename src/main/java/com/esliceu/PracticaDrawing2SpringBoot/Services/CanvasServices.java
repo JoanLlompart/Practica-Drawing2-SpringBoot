@@ -22,8 +22,7 @@ public class CanvasServices {
             canvas.setNameCanvas(nameCanvas);
             User u = userRepo.findByEmail(email);
             canvas.setUser(u);
-            System.out.println("Nom de el canvas"+canvas.getNameCanvas());
-
+            System.out.println("Nom de el canvas" +canvas.getNameCanvas());
             //parsearObjectes(strokesJson,figureJson);
             canvasRepo.saveCanvas(canvas,strokesJson,figureJson);
         } catch (Exception e) {

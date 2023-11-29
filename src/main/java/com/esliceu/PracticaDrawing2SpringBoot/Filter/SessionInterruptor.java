@@ -15,17 +15,12 @@ public class SessionInterruptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
         System.out.println("Dins el filtre.");
         //String user = (String) session.getAttribute("email")
-        /*String user = (String) session.getAttribute("email");
+        String user = (String) session.getAttribute("email");
         request.setAttribute("email",user);
-        request.setAttribute("password",user);
         if (user == null) {
             // si el usuari no esta logeat se redirigeix a el login
-            response.sendRedirect("/error");
-            return;
+            response.sendRedirect("/login");
         }
-
-
-         */
         return true;
     }
 }
