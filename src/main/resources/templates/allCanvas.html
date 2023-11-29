@@ -40,12 +40,12 @@
                     <li th:text="'Total de Objectes que esta compost el dibuix: ' + ${canvas.numberObject}"></li>
                 </ul>
             </td>
-            <td th:text="${canvas.user.name}"></td>
+            <td th:text="${canvas.user.getName()}"></td>
             <td>
                 <div>
                     <form th:action="@{/allCanvas}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
-                        <button type="submit" class="delete" th:if="${canvas.user.email == email}">Delete</button>
+                        <button type="submit" class="delete" th:if="${canvas.user.getEmail() == email}">Delete</button>
                     </form>
                     <form th:action="@{/viewCanvas}" method="get">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />

@@ -3,6 +3,7 @@ import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Figure;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Strokes;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
+import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.TakeCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,12 +28,17 @@ public class CanvasRepoSQL implements CanvasRepo{
     }
     @Override
     public List<Canvas> showAllCanvas() {
-        //String sql = "SELECT * FROM Canvas";
-      /*  List<Canvas> canvasList = jdbcTemplate.query(sql,
-                new BeanPropertyRowMapper<>(Canvas.class));
-        return canvasList;
+        try {
+            String sql = "SELECT * FROM Canvas";
+            List<Canvas> canvasList = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Canvas.class));
+            return canvasList;
+        } catch(TakeCanvasException e) {
+            System.err.println("Error en el showCanvasAll");
+            e.printStackTrace();
+        }
 
-       */
+
      /*   try {
             String sql = "SELECT * FROM Canvas";
             List<Canvas> canvasList = jdbcTemplate.query(sql);
@@ -76,6 +82,7 @@ public class CanvasRepoSQL implements CanvasRepo{
             return canvas;
         });
       */
+
         return null;
     }
     @Override

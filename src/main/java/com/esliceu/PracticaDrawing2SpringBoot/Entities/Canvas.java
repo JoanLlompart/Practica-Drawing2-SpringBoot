@@ -1,4 +1,8 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Entities;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 
@@ -34,26 +38,24 @@ public class Canvas {
     }
     //proba de contructor amb les llistes amb String
     //Cream un constructor diferent que rebra en lloc de llistes de objectes Figure i Strokes rebra un json i ho convertira en el contructor a
-    public Canvas(String nameCanvas, int idObjectes, User user, Date dataCreacio, String figures, Strokes strokes) {
+    public Canvas(String nameCanvas, int idObjectes, User user, Date dataCreacio, String figures, String strokes) {
         this.nameCanvas = nameCanvas;
         this.idObjectes = idObjectes;
         this.user = user;
         this.dataCreacio = dataCreacio;
-
-        /*
+        System.out.println("Ha entrat");
         Gson gson = new Gson();
             //Parsetjam el JSON a la clase que pertany
-            figureList = gson.fromJson(figureJson, new TypeToken<List<Figure>>() {
+            this.figures = gson.fromJson(figures, new TypeToken<List<Figure>>() {
             }.getType());
-            //strokesList = gson.fromJson(strokesJson, new TypeToken<List<Strokes>>() {}.getType());
-            //System.out.println(strokesList);
             Type listType = new TypeToken<List<Strokes>>() {
             }.getType();
-            List<Strokes> strokesList = gson.fromJson(strokesJson, listType);
-         */
+            this.strokes = gson.fromJson(strokes, listType);
         //this.figures = figures;
         //this.strokes = strokes;
     }
+
+
     public String getNameCanvas() {
         return nameCanvas;
     }
