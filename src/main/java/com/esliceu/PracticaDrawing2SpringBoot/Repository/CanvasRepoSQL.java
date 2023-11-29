@@ -105,6 +105,16 @@ public class CanvasRepoSQL implements CanvasRepo{
     }
     @Override
     public Canvas getCanvasById(int id) {
-        return null;
+        try {
+            String sql = "SELECT * FROM Canvas WHERE idObjectes = ?";
+            Canvas canvas= jdbcTemplate.queryForObject(sql,
+                    new BeanPropertyRowMapper<>(Canvas.class),id);
+            return canvas;
+        } catch(TakeCanvasException e) {
+            System.err.println("Error en el showCanvasAll");
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

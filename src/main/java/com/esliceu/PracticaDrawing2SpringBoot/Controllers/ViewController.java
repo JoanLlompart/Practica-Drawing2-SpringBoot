@@ -23,12 +23,12 @@ public class ViewController {
                              HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         Canvas canvas = canvasServices.getCanvas(idObjectes);
-        Gson gson = new Gson();
-        String jsonFigure = gson.toJson(canvas.getFigures());
-        String jsonStrokes = gson.toJson(canvas.getStrokes());
+        //Gson gson = new Gson();
+        //String jsonFigure = gson.toJson(canvas.getFigures());
+        //String jsonStrokes = gson.toJson(canvas.getStrokes());
         String nameUser=(String) session.getAttribute("name");
-        model.addAttribute("llistaFigureJson", jsonFigure);
-        model.addAttribute("llistaStroke", jsonStrokes);
+        model.addAttribute("llistaFigureJson", canvas.getFigures());
+        model.addAttribute("llistaStroke", canvas.getStrokes());
         model.addAttribute("nameCanvas", nameCanvas);
         model.addAttribute(nameUser);
         return "viewCanvas";

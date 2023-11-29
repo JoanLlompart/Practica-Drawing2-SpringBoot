@@ -58,12 +58,11 @@ public class UserRepoImplSQL implements UserRepo  {
         String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
         try {
             System.out.println("PAS DE INIT :" +password);
-            // Utilizando queryForObject para obtener un solo resultado
             User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email,password);
             System.out.println(user.toString());
             return user;
         } catch (Exception e) {
-            // Manejar la excepción de manera apropiada (log, relanzar, etc.)
+            // Controla la excepción de manera apropiada (log, relanzar, etc.)
             e.printStackTrace();
         }
         return null;
