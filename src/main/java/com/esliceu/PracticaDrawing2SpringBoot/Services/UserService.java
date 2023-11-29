@@ -39,6 +39,7 @@ public class UserService {
     }
     public String getNameOfUser(String email) {
         User u = userRepo.findByEmail(email);
+        System.out.println("getName of user");
         return u.getName();
     }
 

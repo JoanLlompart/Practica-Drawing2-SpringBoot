@@ -1,23 +1,32 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Entities;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
+import javax.persistence.Column;
 import java.util.Date;
-import java.util.List;
 
 public class Canvas {
     private String nameCanvas;
     private int idObjectes;
     private String user_email;
     private Date dataCreacio;
+
+    @Column(name = "figuresJSON")
     String figures;
+    @Column(name = "strokesJSON")
     String strokes;
    // List<Figure> figures;
     //List<Strokes> strokes;
     private int numberObject;
     private Date dateLastModified;
 
+    public Canvas(String nameCanvas, int idObjectes, String user_email, Date dataCreacio, String figures, String strokes, int numberObject) {
+        this.nameCanvas = nameCanvas;
+        this.idObjectes = idObjectes;
+        this.user_email = user_email;
+        this.dataCreacio = dataCreacio;
+        this.figures = figures;
+        this.strokes = strokes;
+        this.numberObject = numberObject;
+    }
 
     //contructor buit
     public Canvas() {
@@ -105,4 +114,18 @@ public class Canvas {
     }
 
     */
+
+    @Override
+    public String toString() {
+        return "Canvas{" +
+                "nameCanvas='" + nameCanvas + '\'' +
+                ", idObjectes=" + idObjectes +
+                ", user_email='" + user_email + '\'' +
+                ", dataCreacio=" + dataCreacio +
+                ", figures='" + figures + '\'' +
+                ", strokes='" + strokes + '\'' +
+                ", numberObject=" + numberObject +
+                ", dateLastModified=" + dateLastModified +
+                '}';
+    }
 }
