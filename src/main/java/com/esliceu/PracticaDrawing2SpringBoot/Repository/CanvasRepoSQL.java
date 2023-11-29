@@ -42,5 +42,4 @@ public class CanvasRepoSQL implements CanvasRepo{
     public Canvas getCanvasById(int id) {
         return null;
     }
-
 }
