@@ -38,7 +38,7 @@ public class LoginController {
         userService.setPassword(userService.encriptarPassword(password));
         String nameUser=userService.getNameOfUser(email);
         if (loginAttempts == null || loginAttempts < 3) {
-            if (userService.validLogin(email, password)) {
+            if (userService.validLogin(userService.getEmail(), userService.getPassword())) {
                 session.setAttribute("email", userService.getEmail());
                 session.setAttribute("loginAttempts", 0);
                 session.setAttribute("usuariLogueat", true);

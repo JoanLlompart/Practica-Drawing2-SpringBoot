@@ -24,14 +24,17 @@ public class UserService {
     }
 
     public boolean validLogin(String email, String password) {
-        User user = userRepo.findByEmail(email);
+        User user = userRepo.initSession(email,password);
         if (user == null) {
+            System.out.println("Nuuull");
+            System.out.println(user);
             return false;
         }
-        password = encriptarPassword(password);
-
+       /* password = encriptarPassword(password);
         if (user.getEmail().equals(email) && email.equals(user.getEmail())) return true;
         return false;
+        */
+        return true;
        // return userRepo.isPasswordOfUser(user, password);
     }
     public String getNameOfUser(String email) {

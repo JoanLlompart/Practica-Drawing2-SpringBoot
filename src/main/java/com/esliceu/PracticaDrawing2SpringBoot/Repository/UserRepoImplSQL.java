@@ -37,11 +37,9 @@ public class UserRepoImplSQL implements UserRepo  {
             System.err.println("No se ha encontrado el usuario");
             return null;
         }
-
     }
 
-    /*
-    @Override
+/*
     public boolean isPasswordOfUser(User user, String pasword) {
         try {
             String sql = "SELECT password FROM user WHERE email = ?";
@@ -54,10 +52,21 @@ public class UserRepoImplSQL implements UserRepo  {
         }
     }
 
-     */
+ */
 
     @Override
     public User initSession(String email, String password) {
+        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+        try {
+            System.out.println("PAS DE INIT :" +password);
+            // Utilizando queryForObject para obtener un solo resultado
+            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email,password);
+            System.out.println(user.toString());
+            return user;
+        } catch (Exception e) {
+            // Manejar la excepción de manera apropiada (log, relanzar, etc.)
+            e.printStackTrace();
+        }
         return null;
     }
 }
