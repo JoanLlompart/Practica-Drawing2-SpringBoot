@@ -52,11 +52,6 @@ public class CanvasRepoSQL implements CanvasRepo{
     }
     @Override
     public boolean removeCanvas(int idCanvas, String emailSessio) {
-       //  String query = "DELETE FROM Canvas WHERE idObjectes = ? AND user_id = (SELECT id FROM user WHERE email = ?)";
-        //int rowsAffected = jdbcTemplate.update(query, idCanvas, emailSessio);
-        //si se elimina algun registre retornara true, si no False perque no se ha eliminat res.
-       // return rowsAffected > 0;
-
             String deleteVersionQuery = "DELETE FROM Version WHERE idDraw = ? AND user_email = ?";
             String deleteCanvasQuery = "DELETE FROM Canvas WHERE idObjectes = ? AND user_email = ?";
            // try {
@@ -68,7 +63,6 @@ public class CanvasRepoSQL implements CanvasRepo{
                 // Manejar excepciones
                 e.getMessage("Error al eliminar el lienzo");
             }
-
              */
     }
 
@@ -98,7 +92,7 @@ public class CanvasRepoSQL implements CanvasRepo{
                 "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
                 "WHERE c.idObjectes = ? " + // Obtener el lienzo por su ID
                 "ORDER BY v.dateLastModified DESC " + // Ordenar por la fecha de modificación más reciente
-                "LIMIT 1"; // Obtener solo un registro, el más reciente
+                "LIMIT 1"; // Agafa nomes el registre de la darrera versio.
             return jdbcTemplate.queryForObject(selectSQL, new Object[]{id}, (resultSet, i) -> {
                 Canvas canvas = new Canvas();
                 canvas.setIdObjectes(id);

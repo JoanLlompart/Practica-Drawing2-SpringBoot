@@ -16,6 +16,6 @@ public class AppConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(sessionInterruptor)
-                .addPathPatterns("/canvasDraw","/modify","/viewCanvas","/allCanvas");
+                .addPathPatterns("/canvasDraw","/modify","/viewCanvas","/allCanvas","/trash");
     }
 }
