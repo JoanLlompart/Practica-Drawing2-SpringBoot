@@ -33,7 +33,7 @@
             <th>Propietario</th>
             <th>Opciones</th>
         </tr>
-        <tr th:each="canvas : ${allCanvas}">
+        <tr th:each="canvas : ${trash}">
             <td th:text="${canvas.idObjectes}"></td>
             <td th:text="${canvas.nameCanvas}"></td>
             <td th:text="${canvas.dataCreacio}"></td>
@@ -45,19 +45,13 @@
             <td th:text="${canvas.getUser_email()}"></td>
             <td>
                 <div>
-                    <form th:action="@{/allCanvas}" method="post">
+                    <form th:action="@{/trash}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Delete</button>
                     </form>
-                    <form th:action="@{/viewCanvas}" method="get">
+                    <form th:action="@{/trash}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
-                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
-                        <button type="submit" class="viewCanvas">Ver</button>
-                    </form>
-                    <form th:action="@{/modify}" method="get">
-                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
-                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
-                        <button type="submit" class="modify" th:if="${canvas.getUser_email == email}">Modificar</button>
+                        <button type="submit" class="exitTrash" th:if="${canvas.getUser_email == email}">Treure de la paperera.</button>
                     </form>
                 </div>
             </td>
