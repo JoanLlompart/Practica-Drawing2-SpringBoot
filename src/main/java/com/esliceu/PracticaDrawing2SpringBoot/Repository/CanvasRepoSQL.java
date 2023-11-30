@@ -119,13 +119,12 @@ public class CanvasRepoSQL implements CanvasRepo{
 
     @Transactional
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
-        // Suponiendo que ya tienes acceso al usuario y su ID para la relación
-        // y el canvas tiene los datos necesarios
 
+        //Nomes valid per guardar el canvas per primer pic, si no se actualitzara la data de creacio per ara.
         try {
             // Insertar un nuevo Canvas
-            String insertCanvasQuery = "INSERT INTO Canvas (nameCanvas, dataCreacio, user_email, trash) VALUES (?, ?, ?, ?)";
-            jdbcTemplate.update(insertCanvasQuery, canvas.getNameCanvas(), canvas.getDataCreacio(), canvas.getUser_email(), canvas.isTrash());
+            String insertCanvasQuery = "INSERT INTO Canvas (nameCanvas, dataCreacio, user_email, trash) VALUES (?, NOW(), ?, ?)";
+            jdbcTemplate.update(insertCanvasQuery, canvas.getNameCanvas(), canvas.getUser_email(), canvas.isTrash());
 
             // Obtener el ID del Canvas insertado
             Integer canvasId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);

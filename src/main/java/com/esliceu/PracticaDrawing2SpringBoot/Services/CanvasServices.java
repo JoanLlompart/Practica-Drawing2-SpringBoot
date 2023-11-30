@@ -20,6 +20,8 @@ public class CanvasServices {
             canvas.setNameCanvas(nameCanvas);
             User u = userRepo.findByEmail(email);
             canvas.setUser_email(u.getEmail());
+            //No esta a la paperera.
+            canvas.setTrash(false);
             System.out.println("Nom de el canvas" +canvas.getNameCanvas());
             //parsearObjectes(strokesJson,figureJson);
             canvasRepo.saveCanvas(canvas,strokesJson,figureJson);
