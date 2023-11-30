@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.sql.ResultSet;
@@ -100,6 +101,7 @@ public class CanvasRepoSQL implements CanvasRepo{
        // return rowsAffected > 0;
         return false;
     }
+    /*
     @Override
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
         String sql = "INSERT INTO Canvas (nameCanvas, user_email, dataCreacio, numberObject, figuresJSON, strokesJSON) VALUES (?, ?, NOW(), ?, ?, ?)";
@@ -111,6 +113,30 @@ public class CanvasRepoSQL implements CanvasRepo{
                 figureJson,
                 strokesJson
         );
+    }
+
+     */
+
+    @Transactional
+    public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
+        // Suponiendo que ya tienes acceso al usuario y su ID para la relación
+        // y el canvas tiene los datos necesarios
+
+        try {
+            // Insertar un nuevo Canvas
+            String insertCanvasQuery = "INSERT INTO Canvas (nameCanvas, dataCreacio, user_email, trash) VALUES (?, ?, ?, ?)";
+            jdbcTemplate.update(insertCanvasQuery, canvas.getNameCanvas(), canvas.getDataCreacio(), canvas.getUser_email(), canvas.isTrash());
+
+            // Obtener el ID del Canvas insertado
+            Integer canvasId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+
+            // Insertar un nuevo registre en la taula de Version
+            String insertVersionQuery = "INSERT INTO Version (idDraw, figuresJSON, strokesJSON, dateLastModified, user_email, numberObject) VALUES (?, ?, ?, NOW(), ?, ?)";
+            jdbcTemplate.update(insertVersionQuery, canvasId, figureJson, strokesJson, canvas.getUser_email(), 1);
+        } catch (Exception e) {
+            // Manejar excepciones
+            throw new RuntimeException("Error al guardar el Canvas", e);
+        }
     }
     @Override
     public Canvas getCanvasById(int id) {
