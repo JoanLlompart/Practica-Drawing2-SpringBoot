@@ -51,12 +51,12 @@ public class CanvasServices {
         System.out.println("No se ha pogut eliminar canvas amb id " + idDelete);
         return false;
     }
-    /*
+
     public Canvas getCanvasToModify(int id,String emailSessionUser) throws NotYourCanvasException {
         //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.
         Canvas c = canvasRepo.getCanvasById(id);
         //email de el pintor de el dibuix
-        String emailPainter = c.getUser().getEmail();
+        String emailPainter = c.getUser_email();
         if (emailPainter.equals(emailSessionUser)) {
             //si el email de el pintor coincideix amb el de el user de la sessio tornara el canvas.
             return c;
@@ -65,7 +65,6 @@ public class CanvasServices {
         }
     }
 
-     */
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();
     }

@@ -22,10 +22,10 @@ public class ModifyController {
     public String getModifyCanvas(@RequestParam("id") int idObjectes,
                                   @RequestParam("nameCanvas") String nameCanvas,
                                   HttpSession session, Model model) {
-     /*   String email = (String) session.getAttribute("email");
+        String email = (String) session.getAttribute("email");
         try {
             Canvas canvas = canvasServices.getCanvasToModify(idObjectes, email);
-            String nameUser =canvas.getUser().getName();
+            String nameUser = (String) session.getAttribute("name");
             Gson gson = new Gson();
             String jsonFigure = gson.toJson(canvas.getFigures());
             String jsonStrokes = gson.toJson(canvas.getStrokes());
@@ -41,8 +41,5 @@ public class ModifyController {
 
             return "errorNotYourCanvas";
         }
-
-      */
-        return null;
     }
 }
