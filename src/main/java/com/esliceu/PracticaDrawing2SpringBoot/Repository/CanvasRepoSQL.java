@@ -46,51 +46,6 @@ public class CanvasRepoSQL implements CanvasRepo{
             System.err.println("Error en el showCanvasAll");
             e.printStackTrace();
         }
-
-     /*   try {
-            String sql = "SELECT * FROM Canvas";
-            List<Canvas> canvasList = jdbcTemplate.query(sql);
-        } catch (SQLException e) {
-            e.getSQLState();
-        }
-        ResultSetExtractor<String> jsonFigures = new ResultSetExtractor<String>() {
-            @Override
-            public String extractData(ResultSet rs) throws SQLException, DataAccessException {
-                // Guardar el valor de la primera fila
-                if (rs.next()) {
-                    rs.getString("figuresJSON");
-                }
-                return null;
-            }
-        };
-        String jsonF = jdbcTemplate.query(sql, jsonFigures);
-      */
-     /*   String sql = "SELECT * FROM Canvas WHERE idObjectes = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{canvasId}, (resultSet, rowNum) -> {
-            Canvas canvas = new Canvas();
-            canvas.setIdObjectes(resultSet.getInt("idObjectes"));
-            canvas.setNameCanvas(resultSet.getString("nameCanvas"));
-            // ... otras asignaciones de campos Canvas
-
-            String figureJson = resultSet.getString("figuresJSON");
-            String strokesJson = resultSet.getString("strokesJSON");
-
-            // Convertir figureJson y strokesJson a listas de Figure y Strokes
-            Gson gson = new Gson();
-            Type figureListType = new TypeToken<List<Figure>>() {
-            }.getType();
-            Type strokesListType = new TypeToken<List<Strokes>>() {
-            }.getType();
-
-            List<Figure> figureList = gson.fromJson(figureJson, figureListType);
-            List<Strokes> strokesList = gson.fromJson(strokesJson, strokesListType);
-            // Asignar las listas a la instancia de Canvas
-            canvas.setFigures(figureList);
-            canvas.setStrokes(strokesList);
-            return canvas;
-        });
-      */
-
         return null;
     }
     @Override
@@ -101,21 +56,6 @@ public class CanvasRepoSQL implements CanvasRepo{
        // return rowsAffected > 0;
         return false;
     }
-    /*
-    @Override
-    public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
-        String sql = "INSERT INTO Canvas (nameCanvas, user_email, dataCreacio, numberObject, figuresJSON, strokesJSON) VALUES (?, ?, NOW(), ?, ?, ?)";
-        jdbcTemplate.update(sql,
-                canvas.getNameCanvas(),
-                canvas.getUser_email(),
-                //canvas.getDataCreacio(),
-                canvas.getNumberObject(),
-                figureJson,
-                strokesJson
-        );
-    }
-
-     */
 
     @Transactional
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
