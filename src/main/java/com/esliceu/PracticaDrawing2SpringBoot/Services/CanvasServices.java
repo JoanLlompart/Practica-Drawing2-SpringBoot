@@ -44,7 +44,12 @@ public class CanvasServices {
     }
     public boolean deleteCanvasById(int idDelete,String email) {
         //borrara els dibuixos i tornara true si ha anat be.
-        return canvasRepo.removeCanvas(idDelete,email);
+        if (canvasRepo.removeCanvas(idDelete,email)) {
+            System.out.println("Eliminat canvas amb id " + idDelete);
+            return true;
+        }
+        System.out.println("No se ha pogut eliminar canvas amb id " + idDelete);
+        return false;
     }
     /*
     public Canvas getCanvasToModify(int id,String emailSessionUser) throws NotYourCanvasException {
