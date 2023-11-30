@@ -123,7 +123,6 @@ public class CanvasServices {
             canvasVersionDTO.setTrash(canvas.isTrash());
             canvasVersionDTO.setDateLastModified((Date) version.getDateLastModified()); // Convierte LocalDateTime a Date
             canvasVersionDTO.setVersion(version.getIdVersion());
-
             canvasVersionDTOList.add(canvasVersionDTO);
         }
 
