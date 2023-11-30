@@ -29,6 +29,7 @@ public class AllCanvasController {
         for (Canvas c : listCanvas) {
             System.out.println(c.toString());
         }
+        model.addAttribute()
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);

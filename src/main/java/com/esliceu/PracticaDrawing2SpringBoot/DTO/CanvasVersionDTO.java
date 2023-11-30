@@ -1,7 +1,9 @@
 package com.esliceu.PracticaDrawing2SpringBoot.DTO;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import java.sql.Date;
-
+@Component
 public class CanvasVersionDTO {
     private int idObjectes;
     private String nameCanvas;

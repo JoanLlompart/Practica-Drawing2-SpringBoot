@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface CanvasRepo {
     List<Canvas> findByUser(User u);
-    List<Canvas> showAllCanvas();
+    //List<Canvas> showAllCanvas();
+
+
     boolean removeCanvas(int idCanvas,String emailSessio);
 
     void saveCanvas(Canvas canvas,String strokesJson, String figureJson);
