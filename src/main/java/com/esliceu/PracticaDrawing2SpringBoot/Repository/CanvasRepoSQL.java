@@ -1,6 +1,7 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
+import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotFindCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.TakeCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
 import com.google.gson.Gson;
@@ -76,6 +77,7 @@ public class CanvasRepoSQL implements CanvasRepo{
             throw new RuntimeException("Error al guardar el Canvas", e);
         }
     }
+    /*
     @Override
     public Canvas getCanvasById(int id) {
         try {
@@ -89,6 +91,69 @@ public class CanvasRepoSQL implements CanvasRepo{
             e.printStackTrace();
             return null;
         }
+    }
+
+     */
+ /*   @Override
+    public Canvas getCanvasById(int id) {
+        String selectCanvasQuery = "SELECT c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
+                "FROM Canvas c " +
+                "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
+                "WHERE c.idObjectes = ? " + // Obtener el lienzo por su ID
+                "ORDER BY v.dateLastModified DESC " + // Ordenar por la fecha de modificación más reciente
+                "LIMIT 1"; // Obtener solo un registro, el más reciente
+
+        try {
+            return jdbcTemplate.queryForObject(selectCanvasQuery, new Object[]{id}, (resultSet, i) -> {
+                Canvas canvas = new Canvas();
+                canvas.setIdObjectes(id);
+                canvas.setNameCanvas(resultSet.getString("nameCanvas"));
+                canvas.setDataCreacio(resultSet.getTimestamp("dataCreacio"));
+                canvas.setUser_email(resultSet.getString("user_email"));
+
+                // Puedes crear un objeto Version para almacenar los datos de la versión
+                Version version = new Version();
+                version.setFiguresJSON(resultSet.getString("figuresJSON"));
+                version.setStrokesJSON(resultSet.getString("strokesJSON"));
+                version.setDateLastModified(resultSet.getTimestamp("dateLastModified"));
+
+                // Asignar la versión al lienzo
+                canvas.setVersion(version);
+
+                return canvas;
+            });
+        } catch (NotFindCanvasException e) {
+            return null; // Manejar el caso en que no se encuentre el lienzo con el ID dado
+        }
+    }
+
+  */
+    @Override
+    public Canvas getCanvasById(int id) {
+
+            String selectSQL = "SELECT c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
+                "FROM Canvas c " +
+                "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
+                "WHERE c.idObjectes = ? " + // Obtener el lienzo por su ID
+                "ORDER BY v.dateLastModified DESC " + // Ordenar por la fecha de modificación más reciente
+                "LIMIT 1"; // Obtener solo un registro, el más reciente
+
+            return jdbcTemplate.queryForObject(selectSQL, new Object[]{id}, (resultSet, i) -> {
+                Canvas canvas = new Canvas();
+                canvas.setIdObjectes(id);
+                canvas.setNameCanvas(resultSet.getString("nameCanvas"));
+                canvas.setDataCreacio(resultSet.getTimestamp("dataCreacio"));
+                canvas.setUser_email(resultSet.getString("user_email"));
+
+                canvas.setFigures(resultSet.getString("figuresJSON"));
+                canvas.setStrokes(resultSet.getString("strokesJSON"));
+                canvas.setDateLastModified(resultSet.getTimestamp("dateLastModified"));
+
+                // Asignar la versión al lienzo
+                //canvas.setVersion(version);
+
+                return canvas;
+            });
 
     }
 }

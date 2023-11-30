@@ -64,7 +64,8 @@ public class CanvasServices {
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();
     }
-    public Canvas getCanvas(int id) {
+    public Canvas getCanvas(int id,String email) {
+
         return canvasRepo.getCanvasById(id);
     }
 }

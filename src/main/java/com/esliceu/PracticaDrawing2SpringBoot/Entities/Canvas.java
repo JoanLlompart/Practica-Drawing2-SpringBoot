@@ -15,9 +15,10 @@ public class Canvas {
     @Column(name = "strokesJSON")
     String strokes;
     boolean trash;
+    private Date dateLastModified;
+    //private int version;
 
     public Canvas () {
-
     }
     public Canvas(int idObjectes, String nameCanvas, String user_email, Date dataCreacio, int numberObject, String figures, String strokes, boolean trash) {
         this.idObjectes = idObjectes;
@@ -28,6 +29,25 @@ public class Canvas {
         this.figures = figures;
         this.strokes = strokes;
         this.trash = trash;
+    }
+
+    /*
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+
+     */
+    public Date getDateLastModified() {
+        return dateLastModified;
+    }
+
+    public void setDateLastModified(Date dateLastModified) {
+        this.dateLastModified = dateLastModified;
     }
 
     public int getIdObjectes() {

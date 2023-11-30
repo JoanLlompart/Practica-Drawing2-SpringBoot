@@ -22,7 +22,7 @@ public class ViewController {
                              @RequestParam("nameCanvas") String nameCanvas,
                              HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
-        Canvas canvas = canvasServices.getCanvas(idObjectes);
+        Canvas canvas = canvasServices.getCanvas(idObjectes,email);
         //Gson gson = new Gson();
         //String jsonFigure = gson.toJson(canvas.getFigures());
         //String jsonStrokes = gson.toJson(canvas.getStrokes());
