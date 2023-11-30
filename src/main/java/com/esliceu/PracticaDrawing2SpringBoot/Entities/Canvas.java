@@ -8,14 +8,13 @@ public class Canvas {
     private int idObjectes;
     private String user_email;
     private Date dataCreacio;
-
+    private int numberObject;
     @Column(name = "figuresJSON")
     String figures;
     @Column(name = "strokesJSON")
     String strokes;
-   // List<Figure> figures;
-    //List<Strokes> strokes;
-    private int numberObject;
+    boolean trash;
+
     private Date dateLastModified;
 
     public Canvas(String nameCanvas, int idObjectes, String user_email, Date dataCreacio, String figures, String strokes, int numberObject) {

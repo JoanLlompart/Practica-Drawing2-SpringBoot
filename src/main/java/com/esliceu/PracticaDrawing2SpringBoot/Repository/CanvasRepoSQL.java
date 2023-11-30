@@ -23,10 +23,11 @@ public class CanvasRepoSQL implements CanvasRepo{
     @Override
     public List<Canvas> findByUser(User u) {
         try {
-            String sql = "SELECT * FROM Canvas WHERE idObjectes = ?";
+            String sql = "SELECT * FROM Canvas WHERE user_email = ?";
             List<Canvas> listCanvas= jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Canvas.class),u.getEmail());
-            return canvas;
+            System.out.println("llista canvas findByUser" + listCanvas);
+            return listCanvas;
         } catch(TakeCanvasException e) {
             System.err.println("Error en el showCanvasAll");
             e.printStackTrace();
@@ -117,6 +118,7 @@ public class CanvasRepoSQL implements CanvasRepo{
             String sql = "SELECT * FROM Canvas WHERE idObjectes = ?";
             Canvas canvas= jdbcTemplate.queryForObject(sql,
                     new BeanPropertyRowMapper<>(Canvas.class),id);
+            System.out.println("Return canvas by id : " + canvas.toString());
             return canvas;
         } catch(TakeCanvasException e) {
             System.err.println("Error en el showCanvasAll");
