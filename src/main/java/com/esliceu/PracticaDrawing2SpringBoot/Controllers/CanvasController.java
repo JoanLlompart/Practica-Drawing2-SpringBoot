@@ -50,7 +50,6 @@ public class CanvasController {
         canvasServices.newCanvas(strokJson, figureJson, email, nameCanvas);
         return "canvasDraw";
     }
-
     private void printSession(HttpSession session) {
         Enumeration<String> attributeNames = session.getAttributeNames();
         while (attributeNames.hasMoreElements()) {

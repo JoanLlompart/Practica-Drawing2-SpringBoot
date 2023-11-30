@@ -102,4 +102,19 @@ public class Canvas {
     public void setTrash(boolean trash) {
         this.trash = trash;
     }
+
+    @Override
+    public String toString() {
+        return "Canvas{" +
+                "idObjectes=" + idObjectes +
+                ", nameCanvas='" + nameCanvas + '\'' +
+                ", user_email='" + user_email + '\'' +
+                ", dataCreacio=" + dataCreacio +
+                ", numberObject=" + numberObject +
+                ", figures='" + figures + '\'' +
+                ", strokes='" + strokes + '\'' +
+                ", trash=" + trash +
+                ", dateLastModified=" + dateLastModified +
+                '}';
+    }
 }
