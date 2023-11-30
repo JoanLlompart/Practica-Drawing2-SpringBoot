@@ -11,6 +11,7 @@ public interface CanvasRepo {
     boolean removeCanvas(int idCanvas,String emailSessio);
 
     void saveCanvas(Canvas canvas,String strokesJson, String figureJson);
-    Canvas getCanvasById(int id);
+    //Canvas getCanvasById(int id);
+    List<Object>  getCanvasById(int id);
 
 }

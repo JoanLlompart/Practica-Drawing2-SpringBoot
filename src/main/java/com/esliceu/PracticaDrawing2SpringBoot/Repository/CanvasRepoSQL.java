@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 @Repository
 public class CanvasRepoSQL implements CanvasRepo{
@@ -88,7 +89,7 @@ public class CanvasRepoSQL implements CanvasRepo{
         }
     }
     @Override
-    public Canvas getCanvasById(int id) {
+    public List<Object> getCanvasById(int id) {
             String selectSQL = "SELECT c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
                 "FROM Canvas c " +
                 "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
@@ -108,8 +109,10 @@ public class CanvasRepoSQL implements CanvasRepo{
                 version.setDateLastModified(resultSet.getTimestamp("dateLastModified"));
 
                 // Asignar la versión al lienzo
-                //canvas.setVersion(version);
-                return canvas;
+                List<Object> canvasAndVersion = new ArrayList<>();
+                canvasAndVersion.add(canvas);
+                canvasAndVersion.add(version);
+                return canvasAndVersion;
              /*
                 canvas.setFigures(resultSet.getString("figuresJSON"));
                 canvas.setStrokes(resultSet.getString("strokesJSON"));
