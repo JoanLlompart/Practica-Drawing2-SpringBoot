@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class CanvasServices {
@@ -103,9 +104,39 @@ public class CanvasServices {
         }
     }
 
+    public List<CanvasVersionDTO> showAllCanvas() {
+        List<Object[]> listOb = canvasRepo.showAllCanvas();
+        List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
+
+        for (Object[] objects : listOb) {
+            Canvas canvas = (Canvas) objects[0];
+            Version version = (Version) objects[1];
+
+            CanvasVersionDTO canvasVersionDTO = new CanvasVersionDTO();
+            canvasVersionDTO.setIdObjectes(canvas.getIdObjectes());
+            canvasVersionDTO.setNameCanvas(canvas.getNameCanvas());
+            canvasVersionDTO.setUser_email(canvas.getUser_email());
+            canvasVersionDTO.setDataCreacio((Date) canvas.getDataCreacio()); // Convierte LocalDateTime a Date
+            canvasVersionDTO.setNumberObject(version.getNumberObject());
+            canvasVersionDTO.setFigures(version.getFigures());
+            canvasVersionDTO.setStrokes(version.getStrokes());
+            canvasVersionDTO.setTrash(canvas.isTrash());
+            canvasVersionDTO.setDateLastModified((Date) version.getDateLastModified()); // Convierte LocalDateTime a Date
+            canvasVersionDTO.setVersion(version.getIdVersion());
+
+            canvasVersionDTOList.add(canvasVersionDTO);
+        }
+
+        return canvasVersionDTOList;
+    }
+
+    /*
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();
     }
+
+     */
+
     public Canvas getCanvas(int id,String email) {
         List<Object> list =canvasRepo.getCanvasById(id);
         Canvas c = (Canvas) list.get(0);

@@ -1,5 +1,6 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
 
+import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.UserService;
@@ -19,17 +20,18 @@ public class AllCanvasController {
     CanvasServices canvasServices;
     @Autowired
     UserService userService;
+    @Autowired
+    CanvasVersionDTO canvasVersionDTO;
     @GetMapping("/allCanvas")
     public String showAllCanvas(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         String name = userService.getNameOfUser(email);
         //session.setAttribute("name", name);
         System.out.println("antes de petar");
-        List<Canvas> listCanvas = canvasServices.showAllCanvas();
-        for (Canvas c : listCanvas) {
+        List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas();
+        for (CanvasVersionDTO c : listCanvas) {
             System.out.println(c.toString());
         }
-        model.addAttribute()
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);
