@@ -6,37 +6,34 @@ import java.util.Date;
 public class Canvas {
     private int idObjectes;
     private String nameCanvas;
-
     private String user_email;
     private Date dataCreacio;
-    private int numberObject;
-    @Column(name = "figuresJSON")
-    String figures;
-    @Column(name = "strokesJSON")
-    String strokes;
     boolean trash;
-    private Date dateLastModified;
-    //private int version;
+    @Column(name = "public")
+    boolean publicDraw;
 
     public Canvas () {
     }
-    public Canvas(int idObjectes, String nameCanvas, String user_email, Date dataCreacio, int numberObject, String figures, String strokes, boolean trash) {
+
+    public Canvas(int idObjectes, String nameCanvas, String user_email, Date dataCreacio, boolean trash, boolean publicDraw) {
         this.idObjectes = idObjectes;
         this.nameCanvas = nameCanvas;
         this.user_email = user_email;
         this.dataCreacio = dataCreacio;
-        this.numberObject = numberObject;
-        this.figures = figures;
-        this.strokes = strokes;
         this.trash = trash;
+        this.publicDraw = publicDraw;
     }
 
-    public Date getDateLastModified() {
-        return dateLastModified;
-    }
-
-    public void setDateLastModified(Date dateLastModified) {
-        this.dateLastModified = dateLastModified;
+    @Override
+    public String toString() {
+        return "Canvas{" +
+                "idObjectes=" + idObjectes +
+                ", nameCanvas='" + nameCanvas + '\'' +
+                ", user_email='" + user_email + '\'' +
+                ", dataCreacio=" + dataCreacio +
+                ", trash=" + trash +
+                ", publicDraw=" + publicDraw +
+                '}';
     }
 
     public int getIdObjectes() {
@@ -71,30 +68,6 @@ public class Canvas {
         this.dataCreacio = dataCreacio;
     }
 
-    public int getNumberObject() {
-        return numberObject;
-    }
-
-    public void setNumberObject(int numberObject) {
-        this.numberObject = numberObject;
-    }
-
-    public String getFigures() {
-        return figures;
-    }
-
-    public void setFigures(String figures) {
-        this.figures = figures;
-    }
-
-    public String getStrokes() {
-        return strokes;
-    }
-
-    public void setStrokes(String strokes) {
-        this.strokes = strokes;
-    }
-
     public boolean isTrash() {
         return trash;
     }
@@ -103,18 +76,11 @@ public class Canvas {
         this.trash = trash;
     }
 
-    @Override
-    public String toString() {
-        return "Canvas{" +
-                "idObjectes=" + idObjectes +
-                ", nameCanvas='" + nameCanvas + '\'' +
-                ", user_email='" + user_email + '\'' +
-                ", dataCreacio=" + dataCreacio +
-                ", numberObject=" + numberObject +
-                ", figures='" + figures + '\'' +
-                ", strokes='" + strokes + '\'' +
-                ", trash=" + trash +
-                ", dateLastModified=" + dateLastModified +
-                '}';
+    public boolean isPublicDraw() {
+        return publicDraw;
+    }
+
+    public void setPublicDraw(boolean publicDraw) {
+        this.publicDraw = publicDraw;
     }
 }

@@ -1,5 +1,6 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
 
+import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ModifyController {
     @Autowired
     CanvasServices canvasServices;
+
+    @Autowired
+    CanvasVersionDTO canvasVersionDTO;
     @Autowired
     UserService userService;
     @GetMapping("/modify")
@@ -24,6 +28,25 @@ public class ModifyController {
                                   HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         try {
+          CanvasVersionDTO canvasVersionDTO = canvasServices.getCanvasToModify(idObjectes, email);
+            String nameUser = (String) session.getAttribute("name");
+            System.out.println("print figures" + canvasVersionDTO.getFigures());
+
+            System.out.println("print strokes" + canvasVersionDTO.getStrokes());
+            model.addAttribute("llistaFigureJson", canvasVersionDTO.getFigures());
+            model.addAttribute("llistaStroke", canvasVersionDTO.getStrokes());
+            model.addAttribute("nameCanvas", nameCanvas);
+            model.addAttribute("name",nameUser);
+            return "modify";
+        } catch (NotYourCanvasException e) {
+            System.out.println("Mensaje del throw " + e.getMessage());
+            String message = e.getMessage();
+            model.addAttribute("errorMessage", message);
+            return "errorNotYourCanvas";
+        }
+
+
+       /* try {
             Canvas canvas = canvasServices.getCanvasToModify(idObjectes, email);
             String nameUser = (String) session.getAttribute("name");
             System.out.println("print figures" + canvas.getFigures());
@@ -40,5 +63,7 @@ public class ModifyController {
             model.addAttribute("errorMessage", message);
             return "errorNotYourCanvas";
         }
+
+        */
     }
 }

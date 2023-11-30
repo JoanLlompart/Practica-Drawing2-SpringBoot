@@ -1,6 +1,8 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
+import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotFindCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.TakeCanvasException;
@@ -100,11 +102,22 @@ public class CanvasRepoSQL implements CanvasRepo{
                 canvas.setDataCreacio(resultSet.getTimestamp("dataCreacio"));
                 canvas.setUser_email(resultSet.getString("user_email"));
 
+                Version version = new Version();
+                version.setFigures(resultSet.getString("figuresJSON"));
+                version.setStrokes(resultSet.getString("strokesJSON"));
+                version.setDateLastModified(resultSet.getTimestamp("dateLastModified"));
+
+                // Asignar la versión al lienzo
+                //canvas.setVersion(version);
+                return canvas;
+             /*
                 canvas.setFigures(resultSet.getString("figuresJSON"));
                 canvas.setStrokes(resultSet.getString("strokesJSON"));
                 canvas.setDateLastModified(resultSet.getTimestamp("dateLastModified"));
 
                 return canvas;
+
+              */
             });
 
     }
