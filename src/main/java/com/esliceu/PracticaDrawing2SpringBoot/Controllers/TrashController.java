@@ -48,9 +48,8 @@ public class TrashController {
     public String recoverCanvas(@RequestParam("id") int id, HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
-        if (!canvasServices.deleteCanvasById(id, email)) {
-            //TODO
+        if (!canvasServices.sendOutToTrash(id, email)) {
         }
-        return "redirect:/trash";
+        return "redirect:/allCanvas";
     }
 }
