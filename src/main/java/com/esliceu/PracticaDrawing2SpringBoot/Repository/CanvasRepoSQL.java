@@ -34,6 +34,8 @@ public class CanvasRepoSQL implements CanvasRepo{
             return null;
         }
     }
+
+
     @Override
     public List<Object[]> showAllCanvas(String sessionEmail) {
         String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +

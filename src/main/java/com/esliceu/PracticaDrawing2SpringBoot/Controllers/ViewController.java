@@ -35,6 +35,8 @@ public class ViewController {
         model.addAttribute(nameUser);
         return "viewCanvas";
     }
+
+
     public String postViewCanvas(HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService. setEmail(email);

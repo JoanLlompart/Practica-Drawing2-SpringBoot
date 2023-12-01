@@ -128,6 +128,7 @@ public class CanvasServices {
             throw new NotYourCanvasException("No eres el propietario de este Canvas!");
         }
     }
+
     public List<CanvasVersionDTO> showAllCanvas(String email) {
         List<Object[]> listOb = canvasRepo.showAllCanvas(email);
         List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();

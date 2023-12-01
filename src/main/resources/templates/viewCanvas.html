@@ -34,6 +34,31 @@
     <input type="hidden" id="llistaStroke" name="llistaStroke" th:value="${llistaStroke}" />
 
     <canvas id="lienzo" width="800" height="550"></canvas>
+    <table>
+        <tr>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Permisos</th>
+        </tr>
+        <tr th:each="canvas : ${allCanvas}">
+            <td th:text="${canvas.nameCanvas}"></td>
+            <td th:text="${canvas.getUser_email()}"></td>
+            <td>
+                <div>
+                    <form th:action="@{/viewCanvas/read}" method="get">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
+                        <button type="submit" class="read">Ver</button>
+                    </form>
+                    <form th:action="@{/viewCanvas/write}" method="get">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
+                        <button type="submit" class="write">Ver</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
     <script src="js/vista.js"></script>
 </body>
 
