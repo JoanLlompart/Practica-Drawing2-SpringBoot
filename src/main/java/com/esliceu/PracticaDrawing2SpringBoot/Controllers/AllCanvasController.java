@@ -30,8 +30,10 @@ public class AllCanvasController {
         System.out.println("antes de petar");
         List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas();
         for (CanvasVersionDTO c : listCanvas) {
-            System.out.println(c.toString());
+            System.out.println("ID OBEJCTEEES : ");
+            System.out.println(c.getIdObjectes());
         }
+
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);

@@ -31,21 +31,21 @@
             <th>Propietario</th>
             <th>Opciones</th>
         </tr>
-        <tr th:each="CanvasVersionDTO : ${allCanvas}">
-            <td th:text="${CanvasVersionDTO.idObjectes}"></td>
-            <td th:text="${CanvasVersionDTO.nameCanvas}"></td>
-            <td th:text="${CanvasVersionDTO.dataCreacio}"></td>
+        <tr th:each="canvas : ${allCanvas}">
+            <td th:text="${canvas.idObjectes}"></td>
+            <td th:text="${canvas.nameCanvas}"></td>
+            <td th:text="${canvas.dataCreacio}"></td>
             <td>
                 <ul>
-                    <li th:text="'Total de Objectes que esta compost el dibuix: ' + ${CanvasVersionDTO.numberObject}"></li>
+                    <li th:text="'Total de Objectes que esta compost el dibuix: ' + ${canvas.numberObject}"></li>
                 </ul>
             </td>
-            <td th:text="${CanvasVersionDTO.getUser_email()}"></td>
+            <td th:text="${canvas.getUser_email()}"></td>
             <td>
                 <div>
                     <form th:action="@{/allCanvas}" method="post">
-                        <input type="hidden" name="id" th:value="${canvasVersionDTO.idObjectes}" readonly />
-                        <button type="submit" class="delete" th:if="${canvasVersionDTO.user_email == email}">Delete</button>
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                        <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Delete</button>
                     </form>
                     <form th:action="@{/viewCanvas}" method="get">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
