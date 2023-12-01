@@ -29,10 +29,13 @@ public class AllCanvasController {
         //session.setAttribute("name", name);
         System.out.println("antes de petar");
         List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas();
-        for (CanvasVersionDTO c : listCanvas) {
+
+       /* for (CanvasVersionDTO c : listCanvas) {
             System.out.println("ID OBEJCTEEES : ");
             System.out.println(c.getIdObjectes());
         }
+
+        */
 
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
