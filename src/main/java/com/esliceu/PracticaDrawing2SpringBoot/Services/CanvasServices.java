@@ -8,7 +8,6 @@ import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepo;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -27,13 +26,11 @@ public class CanvasServices {
             canvas.setNameCanvas(nameCanvas);
             User u = userRepo.findByEmail(email);
             canvas.setUser_email(u.getEmail());
-
             if (esPub == null) {
                 canvas.setPublicDraw(false);
             }else if (esPub.equals("on")) {
                 canvas.setPublicDraw(true);
             }
-
             System.out.println(canvas.isPublicDraw());
             //No esta a la paperera.
             canvas.setTrash(false);
@@ -128,7 +125,6 @@ public class CanvasServices {
             throw new NotYourCanvasException("No eres el propietario de este Canvas!");
         }
     }
-
     public List<CanvasVersionDTO> showAllCanvas(String email) {
         List<Object[]> listOb = canvasRepo.showAllCanvas(email);
         List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
@@ -152,8 +148,6 @@ public class CanvasServices {
         }
         return canvasVersionDTOList;
     }
-
-
     /*
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();
