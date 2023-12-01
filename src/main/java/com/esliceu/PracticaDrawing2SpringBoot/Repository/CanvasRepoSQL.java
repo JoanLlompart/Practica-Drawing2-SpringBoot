@@ -127,10 +127,26 @@ public class CanvasRepoSQL implements CanvasRepo{
             // Retorna true si se han actualitzat els camps correctament.
             return columnesCambiades > 0;
         } catch (Exception e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            e.printStackTrace();
             return false;
         }
     }
+
+    @Override
+    public boolean sendOutOfTrash(int idCanvas, String emailSessio) {
+        //Si esta a la papelera i antes era puclic que pasa???
+        String sql = "UPDATE Canvas SET trash = false, public = false " +
+                "WHERE idObjectes = ? AND user_email = ?";
+        try {
+            int columnesCambiades = jdbcTemplate.update(sql, idCanvas, emailSessio);
+            // Retorna true si se han actualitzat els camps correctament.
+            return columnesCambiades > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     @Transactional
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
