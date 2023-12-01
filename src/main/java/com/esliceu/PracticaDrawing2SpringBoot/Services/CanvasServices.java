@@ -134,17 +134,13 @@ public class CanvasServices {
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }
-
         return canvasVersionDTOList;
     }
-
     /*
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();
     }
-
      */
-
     public Canvas getCanvas(int id,String email) {
         List<Object> list =canvasRepo.getCanvasById(id);
         Canvas c = (Canvas) list.get(0);
@@ -173,7 +169,25 @@ public class CanvasServices {
         return canvasVersionDTO;
     }
 
-    public List<CanvasVersionDTO> showMyTrash() {
-        return null;
+    public List<CanvasVersionDTO> showMyTrash(String emailSession) {
+        List<Object[]> listOb = canvasRepo.showMyTrash(emailSession);
+        List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
+        for (Object[] objects : listOb) {
+            Canvas canvas = (Canvas) objects[0];
+            Version version = (Version) objects[1];
+            CanvasVersionDTO canvasVersionDTO = new CanvasVersionDTO();
+            canvasVersionDTO.setIdObjectes(canvas.getIdObjectes());
+            canvasVersionDTO.setNameCanvas(canvas.getNameCanvas());
+            canvasVersionDTO.setUser_email(canvas.getUser_email());
+            canvasVersionDTO.setDataCreacio(canvas.getDataCreacio());
+            canvasVersionDTO.setNumberObject(version.getNumberObject());
+            canvasVersionDTO.setFigures(version.getFigures());
+            canvasVersionDTO.setStrokes(version.getStrokes());
+            canvasVersionDTO.setTrash(canvas.isTrash());
+            canvasVersionDTO.setDateLastModified( version.getDateLastModified());
+            canvasVersionDTO.setVersion(version.getIdVersion());
+            canvasVersionDTOList.add(canvasVersionDTO);
+        }
+        return canvasVersionDTOList;
     }
 }

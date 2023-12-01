@@ -25,7 +25,7 @@ public class TrashController {
         String email = (String) session.getAttribute("email");
         String name = userService.getNameOfUser(email);
 
-        List<CanvasVersionDTO> listCanvas = canvasServices.showMyTrash();
+        List<CanvasVersionDTO> listCanvas = canvasServices.showMyTrash(email);
      /*   for (CanvasVersionDTO c : listCanvas) {
             System.out.println(c.toString());
         }
