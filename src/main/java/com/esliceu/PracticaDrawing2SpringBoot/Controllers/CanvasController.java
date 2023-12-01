@@ -8,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.util.Enumeration;
-
 @Controller
 public class CanvasController {
     @Autowired
@@ -32,7 +30,6 @@ public class CanvasController {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
         userService.setEmail(email);
-
         String strokJson = req.getParameter("strokesData");
         System.out.println("Dibuix amb json " + strokJson);
         String figureJson = req.getParameter("figuresData");
@@ -47,9 +44,7 @@ public class CanvasController {
             nameCanvas = canvasServices.generarNom(nameCanvas);
         }
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
-
         String esPub=req.getParameter("isPublic");
-
         System.out.println("Valkor de si es public o no -> " + esPub);
         canvasServices.newCanvas(strokJson, figureJson, email, nameCanvas,esPub);
         return "canvasDraw";
