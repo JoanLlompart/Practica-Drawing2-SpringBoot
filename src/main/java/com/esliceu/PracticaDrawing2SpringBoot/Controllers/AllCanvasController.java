@@ -28,7 +28,7 @@ public class AllCanvasController {
         String name = userService.getNameOfUser(email);
         //session.setAttribute("name", name);
         System.out.println("antes de petar");
-        List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas();
+        List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas(email);
 
        /* for (CanvasVersionDTO c : listCanvas) {
             System.out.println("ID OBEJCTEEES : ");

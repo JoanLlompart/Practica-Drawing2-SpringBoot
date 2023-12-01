@@ -25,7 +25,6 @@ public class RegisterController {
                                       @RequestParam String password,
                                       Model model, HttpServletResponse resp) throws IOException {
         boolean passwordValida = password.length() >= 5;
-
         if (passwordValida) {
             boolean registrat = userService.registrarUsuari(name, email, password);
             if (registrat) {

@@ -128,8 +128,8 @@ public class CanvasServices {
             throw new NotYourCanvasException("No eres el propietario de este Canvas!");
         }
     }
-    public List<CanvasVersionDTO> showAllCanvas() {
-        List<Object[]> listOb = canvasRepo.showAllCanvas();
+    public List<CanvasVersionDTO> showAllCanvas(String email) {
+        List<Object[]> listOb = canvasRepo.showAllCanvas(email);
         List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
 
         for (Object[] objects : listOb) {
@@ -151,6 +151,8 @@ public class CanvasServices {
         }
         return canvasVersionDTOList;
     }
+
+
     /*
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();

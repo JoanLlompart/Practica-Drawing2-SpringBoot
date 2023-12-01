@@ -51,6 +51,7 @@ public class CanvasRepoSQL implements CanvasRepo{
 
      */
 
+    /*
     @Override
     public List<Object[]> showAllCanvas() {
         String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
@@ -61,6 +62,57 @@ public class CanvasRepoSQL implements CanvasRepo{
 
         try {
             return jdbcTemplate.query(selectAllCanvasQuery, (resultSet, i) -> {
+                int canvasId = resultSet.getInt("idObjectes");
+                String nameCanvas = resultSet.getString("nameCanvas");
+                //Instant dataCreacio = resultSet.getTimestamp("dataCreacio").toInstant();
+                String userEmail = resultSet.getString("user_email");
+                String figuresJSON = resultSet.getString("figuresJSON");
+                String strokesJSON = resultSet.getString("strokesJSON");
+                //Instant dateLastModified = resultSet.getTimestamp("dateLastModified").toInstant();
+
+                Instant dataCreacio = null;
+                Timestamp dataCreacioTimestamp = resultSet.getTimestamp("dataCreacio");
+                if (dataCreacioTimestamp != null) {
+                    dataCreacio = dataCreacioTimestamp.toInstant();
+                }
+
+                Instant dateLastModified = null;
+                Timestamp dateLastModifiedTimestamp = resultSet.getTimestamp("dateLastModified");
+                if (dateLastModifiedTimestamp != null) {
+                    dateLastModified = dateLastModifiedTimestamp.toInstant();
+                }
+                // Crear objetos Canvas y Version y almacenarlos en un array de objetos
+                Canvas canvas = new Canvas();
+                canvas.setIdObjectes(canvasId);
+                canvas.setNameCanvas(nameCanvas);
+                canvas.setDataCreacio(dataCreacio);
+                canvas.setUser_email(userEmail);
+
+                Version version = new Version();
+                version.setFigures(figuresJSON);
+                version.setStrokes(strokesJSON);
+                version.setDateLastModified(dateLastModified);
+
+                // Toran un array de objectes amb el Canvas i la Version asociada
+                return new Object[]{canvas, version};
+            });
+        } catch (EmptyResultDataAccessException e) {
+            return Collections.emptyList();
+        }
+    }
+
+     */
+
+    @Override
+    public List<Object[]> showAllCanvas(String sessionEmail) {
+        String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
+                "FROM Canvas c " +
+                "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
+                "WHERE (c.trash = false AND c.public = true) OR (c.user_email = ? AND c.public = false) " +
+                "ORDER BY c.idObjectes, v.dateLastModified DESC";
+
+        try {
+            return jdbcTemplate.query(selectAllCanvasQuery, new Object[]{sessionEmail}, (resultSet, i) -> {
                 int canvasId = resultSet.getInt("idObjectes");
                 String nameCanvas = resultSet.getString("nameCanvas");
                 //Instant dataCreacio = resultSet.getTimestamp("dataCreacio").toInstant();
