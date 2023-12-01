@@ -80,9 +80,6 @@ public class CanvasRepoSQL implements CanvasRepo{
                 if (dateLastModifiedTimestamp != null) {
                     dateLastModified = dateLastModifiedTimestamp.toInstant();
                 }
-
-
-
                 // Crear objetos Canvas y Version y almacenarlos en un array de objetos
                 Canvas canvas = new Canvas();
                 canvas.setIdObjectes(canvasId);
