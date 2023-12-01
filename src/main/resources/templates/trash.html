@@ -44,11 +44,11 @@
             <td th:text="${canvas.getUser_email()}"></td>
             <td>
                 <div>
-                    <form th:action="@{/trash}" method="post">
+                    <form th:action="@{/trash/delete}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Delete</button>
                     </form>
-                    <form th:action="@{/trash}" method="post">
+                    <form th:action="@{/trash/exitTrash}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <button type="submit" class="exitTrash" th:if="${canvas.getUser_email == email}">Treure de la paperera.</button>
                     </form>

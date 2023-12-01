@@ -21,22 +21,21 @@ public class TrashController {
     @Autowired
     UserService userService;
     @GetMapping("/trash")
-    public String showAllCanvas(HttpSession session, Model model) {
+    public String showTrash(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         String name = userService.getNameOfUser(email);
-
         List<CanvasVersionDTO> listCanvas = canvasServices.showMyTrash(email);
      /*   for (CanvasVersionDTO c : listCanvas) {
             System.out.println(c.toString());
         }
-
       */
         model.addAttribute("trash", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);
         return "trash";
     }
- /*   @PostMapping("/trash")
+
+    @PostMapping("/trash/delete")
     public String deleteCanvas(@RequestParam("id") int id, HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
@@ -45,6 +44,13 @@ public class TrashController {
         }
         return "redirect:/trash";
     }
-
-  */
+    @PostMapping("/trash/exitTrash")
+    public String recoverCanvas(@RequestParam("id") int id, HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        userService.setEmail(email);
+        if (!canvasServices.deleteCanvasById(id, email)) {
+            //TODO
+        }
+        return "redirect:/trash";
+    }
 }

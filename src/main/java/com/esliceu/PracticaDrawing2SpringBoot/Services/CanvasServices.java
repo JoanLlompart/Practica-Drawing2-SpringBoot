@@ -103,7 +103,6 @@ public class CanvasServices {
 
         //email de el pintor de el dibuix
         String emailPainter = c.getUser_email();
-
         if (emailPainter.equals(emailSessionUser)) {
             //si el email de el pintor coincideix amb el de el user de la sessio tornara el canvas.
             System.out.println("Print a canvasServices modify" + c.toString());
@@ -112,7 +111,6 @@ public class CanvasServices {
             throw new NotYourCanvasException("No eres el propietario de este Canvas!");
         }
     }
-
     public List<CanvasVersionDTO> showAllCanvas() {
         List<Object[]> listOb = canvasRepo.showAllCanvas();
         List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
