@@ -78,7 +78,6 @@ public class CanvasServices {
         System.out.println("No se ha pogut mandar a la defora de papelera el canvas amb id " + idCanvasTrash);
         return false;
     }
-
     /*
     public Canvas getCanvasToModify(int id,String emailSessionUser) throws NotYourCanvasException {
         //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.
