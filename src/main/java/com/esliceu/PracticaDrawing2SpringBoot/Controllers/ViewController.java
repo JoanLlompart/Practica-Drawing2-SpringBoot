@@ -38,19 +38,48 @@ public class ViewController {
         return "viewCanvas";
     }
 
+    @PostMapping("/viewCanvas")
+    public String postViewCanvas(HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        userService. setEmail(email);
+        return "viewCanvas";
+    }
+
+    /*
     @PostMapping("/viewCanvas/write")
     public String writePermission(HttpSession session) {
         String email = (String) session.getAttribute("email");
-        userService. setEmail(email);
+        permissionService.setUser_email(email);
+        permissionService.getPermission();
         return "viewCanvas";
     }
-
-
     @PostMapping("/viewCanvas/write")
     public String readPermission(HttpSession session) {
-        String email = (String) session.getAttribute("email");
-        permissionService.
-        userService. setEmail(email);
+        //String email = (String) session.getAttribute("email");
+        permissionService.setUser_email(email,);
         return "viewCanvas";
     }
+
+     */
+    @PostMapping("/viewCanvas/write")
+    public String writePermission(@RequestParam("id") int id,
+                                  @RequestParam("nameCanvas") String nameCanvas,
+                                  HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        permissionService.setUser_email(email);
+        return "viewCanvas";
+    }
+
+    @PostMapping("/viewCanvas/read")
+    public String readPermission(@RequestParam("id") int id,
+                                 @RequestParam("user_email") String user_email,
+                                 HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        permissionService.setUser_email(email);
+        permissionService.getPermission();
+        return "viewCanvas";
+    }
+
+
+
 }

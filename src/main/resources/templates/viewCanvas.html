@@ -47,13 +47,13 @@
                 <div>
                     <form th:action="@{/viewCanvas/read}" method="get">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
-                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
-                        <button type="submit" class="read">Ver</button>
+                        <input type="hidden" name="user_email" th:value="${canvas.nameCanvas}" readonly />
+                        <button type="submit" class="read">Lectura</button>
                     </form>
                     <form th:action="@{/viewCanvas/write}" method="get">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
-                        <button type="submit" class="write">Ver</button>
+                        <button type="submit" class="write">Escritura</button>
                     </form>
                 </div>
             </td>

@@ -17,6 +17,9 @@ body {
 
 }
 
+
+
+
 header {
     background-color: #f0f0f0;
     padding: 20px;
@@ -45,6 +48,17 @@ nav {
     text-decoration: none;
     color: #000;
     font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .nav-list {
+        flex-direction: column; /* Cambia a una disposición vertical en pantallas pequeñas */
+    }
+    
+    .barra-pagina {
+        margin: 10px 0; /* Espacio entre elementos en modo vertical */
+    }
 }
 
 /* Estils per el toggle switch */

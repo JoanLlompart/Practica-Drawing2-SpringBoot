@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-
     private String email;
     private String password;
     @Autowired
