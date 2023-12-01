@@ -20,12 +20,21 @@ public class CanvasServices {
     @Autowired
     CanvasVersionDTO canvasVersionDTO;
 
-    public void newCanvas(String strokesJson, String figureJson, String email, String nameCanvas) {
+    public void newCanvas(String strokesJson, String figureJson, String email, String nameCanvas, String esPub) {
+
         try {
             Canvas canvas = new Canvas();
             canvas.setNameCanvas(nameCanvas);
             User u = userRepo.findByEmail(email);
             canvas.setUser_email(u.getEmail());
+
+            if (esPub == null) {
+                canvas.setPublicDraw(false);
+            }else if (esPub.equals("on")) {
+                canvas.setPublicDraw(true);
+            }
+
+            System.out.println(canvas.isPublicDraw());
             //No esta a la paperera.
             canvas.setTrash(false);
             System.out.println("Nom de el canvas" +canvas.getNameCanvas());
@@ -40,7 +49,6 @@ public class CanvasServices {
         //torna la llista amb els canvas que pertanyen a el usuari
         return canvasRepo.findByUser(u);
     }
-
     //genera un nom si el usuari no ha asignat un nom a el canvas.
     public String generarNom(String nameCanvas) {
         //a la hora de guardar hem de anar alerta que no es repetesqui el numero si
@@ -92,8 +100,6 @@ public class CanvasServices {
             throw new NotYourCanvasException("No eres el propietario de este Canvas!");
         }
     }
-
-
      */
     public CanvasVersionDTO getCanvasToModify(int id, String emailSessionUser) throws NotYourCanvasException {
         //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.

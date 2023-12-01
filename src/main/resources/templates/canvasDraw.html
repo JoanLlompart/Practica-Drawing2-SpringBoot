@@ -43,6 +43,7 @@
         <span class="slider round"></span>
     </label>
     <br>
+
     <form id="drawForm" action="/canvasDraw" method="post">
         <p>Opcions:</p>
         <select id="selectorFigura">
@@ -55,6 +56,14 @@
         <button id="guardarDibuix" type="submit">Guardar</button>
         <input type="hidden" id="figuresData" name="figuresData">
         <input type="hidden" id="strokesData" name="strokesData">
+        <br>
+        <div>
+            <p>Quieres que sea Publico?</p> <!--Afegir una info per especificar a l'usuari que es que sigui public-->
+            <label class="switch">
+                <input type="checkbox" id="toggleVisibility" name="isPublic">
+                <span class="slider round"></span>
+            </label>
+        </div>
         <br>
         <p>Nombre:</p>
         <label for="nomDibuix"></label>

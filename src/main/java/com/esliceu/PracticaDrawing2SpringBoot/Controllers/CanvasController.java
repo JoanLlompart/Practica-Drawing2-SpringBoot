@@ -24,7 +24,7 @@ public class CanvasController {
         //session.setAttribute("name", name);
         String nomSesion = (String)session.getAttribute("name");
         model.addAttribute("name", nomSesion);
-        printSession(session);
+        //printSession(session);
         return "canvasDraw"; // nombre de la vista Thymeleaf
     }
     @PostMapping("/canvasDraw")
@@ -47,7 +47,11 @@ public class CanvasController {
             nameCanvas = canvasServices.generarNom(nameCanvas);
         }
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
-        canvasServices.newCanvas(strokJson, figureJson, email, nameCanvas);
+
+        String esPub=req.getParameter("isPublic");
+
+        System.out.println("Valkor de si es public o no -> " + esPub);
+        canvasServices.newCanvas(strokJson, figureJson, email, nameCanvas,esPub);
         return "canvasDraw";
     }
     private void printSession(HttpSession session) {
