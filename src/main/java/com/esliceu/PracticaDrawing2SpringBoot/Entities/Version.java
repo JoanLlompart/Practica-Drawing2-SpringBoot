@@ -1,7 +1,8 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Entities;
 
 import javax.persistence.Column;
-import java.util.Date;
+import java.time.Instant;
+
 
 
 public class Version {
@@ -12,13 +13,14 @@ public class Version {
     private String figures;
     @Column(name = "strokesJSON")
     private String strokes;
-    private Date dateLastModified;
+    private Instant dateLastModified;
     private String user_email;
 
     public Version() {
 
     }
-    public Version(int idVersion, int idDraw, int numberObject, String figures, String strokes, Date dateLastModified, String user_email) {
+
+    public Version(int idVersion, int idDraw, int numberObject, String figures, String strokes, Instant dateLastModified, String user_email) {
         this.idVersion = idVersion;
         this.idDraw = idDraw;
         this.numberObject = numberObject;
@@ -39,6 +41,14 @@ public class Version {
                 ", dateLastModified=" + dateLastModified +
                 ", user_email='" + user_email + '\'' +
                 '}';
+    }
+
+    public Instant getDateLastModified() {
+        return dateLastModified;
+    }
+
+    public void setDateLastModified(Instant dateLastModified) {
+        this.dateLastModified = dateLastModified;
     }
 
     public int getIdVersion() {
@@ -81,13 +91,7 @@ public class Version {
         this.strokes = strokes;
     }
 
-    public Date getDateLastModified() {
-        return dateLastModified;
-    }
 
-    public void setDateLastModified(Date dateLastModified) {
-        this.dateLastModified = dateLastModified;
-    }
 
     public String getUser_email() {
         return user_email;

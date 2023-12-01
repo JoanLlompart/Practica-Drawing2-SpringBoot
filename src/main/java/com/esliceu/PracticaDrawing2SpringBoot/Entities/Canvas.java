@@ -1,13 +1,14 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Entities;
 
 import javax.persistence.Column;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 public class Canvas {
     private int idObjectes;
     private String nameCanvas;
     private String user_email;
-    private Date dataCreacio;
+    private Instant dataCreacio;
     boolean trash;
     @Column(name = "public")
     boolean publicDraw;
@@ -15,7 +16,7 @@ public class Canvas {
     public Canvas () {
     }
 
-    public Canvas(int idObjectes, String nameCanvas, String user_email, Date dataCreacio, boolean trash, boolean publicDraw) {
+    public Canvas(int idObjectes, String nameCanvas, String user_email, Instant dataCreacio, boolean trash, boolean publicDraw) {
         this.idObjectes = idObjectes;
         this.nameCanvas = nameCanvas;
         this.user_email = user_email;
@@ -60,11 +61,11 @@ public class Canvas {
         this.user_email = user_email;
     }
 
-    public Date getDataCreacio() {
+    public Instant getDataCreacio() {
         return dataCreacio;
     }
 
-    public void setDataCreacio(Date dataCreacio) {
+    public void setDataCreacio(Instant dataCreacio) {
         this.dataCreacio = dataCreacio;
     }
 

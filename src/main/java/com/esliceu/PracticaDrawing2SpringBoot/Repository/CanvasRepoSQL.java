@@ -10,9 +10,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 @Repository
 public class CanvasRepoSQL implements CanvasRepo{
@@ -60,11 +62,25 @@ public class CanvasRepoSQL implements CanvasRepo{
             return jdbcTemplate.query(selectAllCanvasQuery, (resultSet, i) -> {
                 int canvasId = resultSet.getInt("idObjectes");
                 String nameCanvas = resultSet.getString("nameCanvas");
-                Date dataCreacio = resultSet.getTimestamp("dataCreacio");
+                //Instant dataCreacio = resultSet.getTimestamp("dataCreacio").toInstant();
                 String userEmail = resultSet.getString("user_email");
                 String figuresJSON = resultSet.getString("figuresJSON");
                 String strokesJSON = resultSet.getString("strokesJSON");
-                Date dateLastModified = resultSet.getTimestamp("dateLastModified");
+                //Instant dateLastModified = resultSet.getTimestamp("dateLastModified").toInstant();
+
+                Instant dataCreacio = null;
+                Timestamp dataCreacioTimestamp = resultSet.getTimestamp("dataCreacio");
+                if (dataCreacioTimestamp != null) {
+                    dataCreacio = dataCreacioTimestamp.toInstant();
+                }
+
+                Instant dateLastModified = null;
+                Timestamp dateLastModifiedTimestamp = resultSet.getTimestamp("dateLastModified");
+                if (dateLastModifiedTimestamp != null) {
+                    dateLastModified = dateLastModifiedTimestamp.toInstant();
+                }
+
+
 
                 // Crear objetos Canvas y Version y almacenarlos en un array de objetos
                 Canvas canvas = new Canvas();
@@ -130,18 +146,32 @@ public class CanvasRepoSQL implements CanvasRepo{
                 "ORDER BY v.dateLastModified DESC " + // Ordenar por la fecha de modificación más reciente
                 "LIMIT 1"; // Agafa nomes el registre de la darrera versio.
             return jdbcTemplate.queryForObject(selectSQL, new Object[]{id}, (resultSet, i) -> {
+                Instant dataCreacio = null;
+                Timestamp dataCreacioTimestamp = resultSet.getTimestamp("dataCreacio");
+                if (dataCreacioTimestamp != null) {
+                    dataCreacio = dataCreacioTimestamp.toInstant();
+                }
+
+                Instant dateLastModified = null;
+                Timestamp dateLastModifiedTimestamp = resultSet.getTimestamp("dateLastModified");
+                if (dateLastModifiedTimestamp != null) {
+                    dateLastModified = dateLastModifiedTimestamp.toInstant();
+                }
+
                 Canvas canvas = new Canvas();
                 canvas.setIdObjectes(id);
                 canvas.setNameCanvas(resultSet.getString("nameCanvas"));
-                canvas.setDataCreacio(resultSet.getTimestamp("dataCreacio"));
+                //Instant dataCreacio = resultSet.getTimestamp("dataCreacio").toInstant();
+                canvas.setDataCreacio(dataCreacio);
                 canvas.setUser_email(resultSet.getString("user_email"));
 
                 Version version = new Version();
                 version.setFigures(resultSet.getString("figuresJSON"));
                 version.setStrokes(resultSet.getString("strokesJSON"));
-                version.setDateLastModified(resultSet.getTimestamp("dateLastModified"));
+                //Instant dateLastModified = resultSet.getTimestamp("dateLastModified").toInstant();
 
-                // Asignar la versión al lienzo
+                // Convertir Timestamp a Instant
+                version.setDateLastModified(dateLastModified);
                 List<Object> canvasAndVersion = new ArrayList<>();
                 canvasAndVersion.add(canvas);
                 canvasAndVersion.add(version);

@@ -9,7 +9,6 @@ import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -86,8 +85,8 @@ public class CanvasServices {
         canvasVersionDTO.setStrokes(v.getStrokes());
         canvasVersionDTO.setNumberObject(v.getNumberObject());
         canvasVersionDTO.setVersion(v.getIdVersion());
-        canvasVersionDTO.setDataCreacio((Date) c.getDataCreacio());
-        canvasVersionDTO.setDateLastModified((Date) v.getDateLastModified());
+        canvasVersionDTO.setDataCreacio( c.getDataCreacio());
+        canvasVersionDTO.setDateLastModified(v.getDateLastModified());
         canvasVersionDTO.setUser_email(c.getUser_email());
         canvasVersionDTO.setIdObjectes(c.getIdObjectes());
         //canvasVersionDTO.setTrash(c.isTrash());
@@ -116,12 +115,12 @@ public class CanvasServices {
             canvasVersionDTO.setIdObjectes(canvas.getIdObjectes());
             canvasVersionDTO.setNameCanvas(canvas.getNameCanvas());
             canvasVersionDTO.setUser_email(canvas.getUser_email());
-            canvasVersionDTO.setDataCreacio((Date) canvas.getDataCreacio()); // Convierte LocalDateTime a Date
+            canvasVersionDTO.setDataCreacio(canvas.getDataCreacio()); // Convierte LocalDateTime a Date
             canvasVersionDTO.setNumberObject(version.getNumberObject());
             canvasVersionDTO.setFigures(version.getFigures());
             canvasVersionDTO.setStrokes(version.getStrokes());
             canvasVersionDTO.setTrash(canvas.isTrash());
-            canvasVersionDTO.setDateLastModified((Date) version.getDateLastModified()); // Convierte LocalDateTime a Date
+            canvasVersionDTO.setDateLastModified( version.getDateLastModified()); // Convierte LocalDateTime a Date
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }
@@ -154,8 +153,8 @@ public class CanvasServices {
         canvasVersionDTO.setStrokes(v.getStrokes());
         canvasVersionDTO.setNumberObject(v.getNumberObject());
         canvasVersionDTO.setVersion(v.getIdVersion());
-        canvasVersionDTO.setDataCreacio((Date) c.getDataCreacio());
-        canvasVersionDTO.setDateLastModified((Date) v.getDateLastModified());
+        canvasVersionDTO.setDataCreacio(c.getDataCreacio());
+        canvasVersionDTO.setDateLastModified(v.getDateLastModified());
         canvasVersionDTO.setUser_email(c.getUser_email());
         canvasVersionDTO.setIdObjectes(c.getIdObjectes());
 

@@ -3,26 +3,28 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import java.sql.Date;
+import java.time.Instant;
+
 @Component
 public class CanvasVersionDTO {
     private int idObjectes;
     private String nameCanvas;
 
     private String user_email;
-    private Date dataCreacio;
+    private Instant dataCreacio;
     private int numberObject;
     @Column(name = "figuresJSON")
     String figures;
     @Column(name = "strokesJSON")
     String strokes;
     boolean trash;
-    private Date dateLastModified;
+    private Instant dateLastModified;
     private int version;
 
     public CanvasVersionDTO() {
 
     }
-    public CanvasVersionDTO(int idObjectes, String nameCanvas, String user_email, Date dataCreacio, int numberObject, String figures, String strokes, boolean trash, Date dateLastModified, int version) {
+    public CanvasVersionDTO(int idObjectes, String nameCanvas, String user_email, Instant dataCreacio, int numberObject, String figures, String strokes, boolean trash, Instant dateLastModified, int version) {
         this.idObjectes = idObjectes;
         this.nameCanvas = nameCanvas;
         this.user_email = user_email;
@@ -75,11 +77,11 @@ public class CanvasVersionDTO {
         this.user_email = user_email;
     }
 
-    public Date getDataCreacio() {
+    public Instant getDataCreacio() {
         return dataCreacio;
     }
 
-    public void setDataCreacio(Date dataCreacio) {
+    public void setDataCreacio(Instant dataCreacio) {
         this.dataCreacio = dataCreacio;
     }
 
@@ -115,11 +117,11 @@ public class CanvasVersionDTO {
         this.trash = trash;
     }
 
-    public Date getDateLastModified() {
+    public Instant getDateLastModified() {
         return dateLastModified;
     }
 
-    public void setDateLastModified(Date dateLastModified) {
+    public void setDateLastModified(Instant dateLastModified) {
         this.dateLastModified = dateLastModified;
     }
 
