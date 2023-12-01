@@ -57,6 +57,16 @@ public class CanvasServices {
         System.out.println("No se ha pogut eliminar canvas amb id " + idDelete);
         return false;
     }
+    public boolean sendToTrash(int idCanvasTrash,String email) {
+        //Amb el id i el correu de de la sessio si es el canvas de el propietari es mandara a la paperera marcannt en la base de dades
+        // trash com a true.
+        if (canvasRepo.goToTrash(idCanvasTrash,email)) {
+            System.out.println("Mandant a paperera el  canvas amb id " + idCanvasTrash);
+            return true;
+        }
+        System.out.println("No se ha pogut mandar a la papelera el canvas amb id " + idCanvasTrash);
+        return false;
+    }
     /*
     public Canvas getCanvasToModify(int id,String emailSessionUser) throws NotYourCanvasException {
         //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.

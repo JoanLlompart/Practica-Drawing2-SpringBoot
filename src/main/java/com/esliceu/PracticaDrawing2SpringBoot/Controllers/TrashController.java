@@ -35,7 +35,7 @@ public class TrashController {
         model.addAttribute("name", name);
         return "trash";
     }
-    @PostMapping("/trash")
+ /*   @PostMapping("/trash")
     public String deleteCanvas(@RequestParam("id") int id, HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
@@ -44,4 +44,6 @@ public class TrashController {
         }
         return "redirect:/trash";
     }
+
+  */
 }

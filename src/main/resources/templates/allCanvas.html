@@ -57,6 +57,10 @@
                         <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
                         <button type="submit" class="modify" th:if="${canvas.getUser_email == email}">Modificar</button>
                     </form>
+                    <form th:action="@{/trash}" method="post">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                        <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Enviar papelera</button>
+                    </form>
                 </div>
             </td>
         </tr>

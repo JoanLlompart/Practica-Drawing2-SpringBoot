@@ -42,12 +42,26 @@ public class AllCanvasController {
         model.addAttribute("name", name);
         return "allCanvas";
     }
+    /*
     @PostMapping("/allCanvas")
     public String deleteCanvas(@RequestParam("id") int id, HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
         if (!canvasServices.deleteCanvasById(id, email)) {
             //TODO
+        }
+        return "redirect:/allCanvas";
+    }
+
+     */
+
+
+    @PostMapping("/trash")
+    public String sendToTrash(@RequestParam("id") int id, HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        userService.setEmail(email);
+        if (!canvasServices.sendToTrash(id, email)) {
+
         }
         return "redirect:/allCanvas";
     }

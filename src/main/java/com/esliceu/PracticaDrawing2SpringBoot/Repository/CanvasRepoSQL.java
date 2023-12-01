@@ -117,6 +117,20 @@ public class CanvasRepoSQL implements CanvasRepo{
             }
              */
     }
+    @Override
+    public boolean goToTrash(int idCanvas, String emailSessio) {
+        //si es manda a la paperera si es public deixara de ser ho i tambe se posara amb false.
+        String sql = "UPDATE Canvas SET trash = true, public = false " +
+                "WHERE idObjectes = ? AND user_email = ?";
+        try {
+            int columnesCambiades = jdbcTemplate.update(sql, idCanvas, emailSessio);
+            // Retorna true si se han actualitzat els camps correctament.
+            return columnesCambiades > 0;
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            return false;
+        }
+    }
 
     @Transactional
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
