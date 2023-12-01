@@ -56,7 +56,7 @@ public class CanvasRepoSQL implements CanvasRepo{
         String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
                 "FROM Canvas c " +
                 "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
-                "WHERE c.trash = false "+
+                "WHERE c.trash = false AND c.public = true "+
                 "ORDER BY c.idObjectes, v.dateLastModified DESC";
 
         try {
