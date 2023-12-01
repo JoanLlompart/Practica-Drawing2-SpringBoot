@@ -151,9 +151,8 @@ public class CanvasRepoSQL implements CanvasRepo{
         //Nomes valid per guardar el canvas per primer pic, si no se actualitzara la data de creacio per ara.
         try {
             // Insertar un nuevo Canvas
-            String insertCanvasQuery = "INSERT INTO Canvas (nameCanvas, dataCreacio, user_email, trash) VALUES (?, NOW(), ?, ?)";
-            jdbcTemplate.update(insertCanvasQuery, canvas.getNameCanvas(), canvas.getUser_email(), canvas.isTrash());
-
+            String insertCanvasQuery = "INSERT INTO Canvas (nameCanvas, dataCreacio, user_email, trash, public) VALUES (?, NOW(), ?, ?,?)";
+            jdbcTemplate.update(insertCanvasQuery, canvas.getNameCanvas(), canvas.getUser_email(), canvas.isTrash(),canvas.isPublicDraw());
             // Obtener el ID del Canvas insertado
             Integer canvasId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 

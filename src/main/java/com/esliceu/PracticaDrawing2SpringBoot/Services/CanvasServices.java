@@ -41,7 +41,7 @@ public class CanvasServices {
             //parsearObjectes(strokesJson,figureJson);
             canvasRepo.saveCanvas(canvas,strokesJson,figureJson);
         } catch (Exception e) {
-            System.err.println("Error en el al fer el nou canvas a CanvasService" + e.getMessage());
+            System.err.println("Error en el al fer el nou canvas a CanvasService" + e.getMessage() + e.getLocalizedMessage() + e.getCause());
         }
     }
     public List<Canvas> showMyCanvas(String email) {
