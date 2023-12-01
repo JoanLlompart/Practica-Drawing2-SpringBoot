@@ -24,7 +24,8 @@ public class TrashController {
     public String showAllCanvas(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         String name = userService.getNameOfUser(email);
-        List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas();
+
+        List<CanvasVersionDTO> listCanvas = canvasServices.showMyTrash();
      /*   for (CanvasVersionDTO c : listCanvas) {
             System.out.println(c.toString());
         }

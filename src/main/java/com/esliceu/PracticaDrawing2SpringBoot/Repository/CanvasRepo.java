@@ -17,5 +17,6 @@ public interface CanvasRepo {
     void saveCanvas(Canvas canvas,String strokesJson, String figureJson);
     //Canvas getCanvasById(int id);
     List<Object>  getCanvasById(int id);
+    List<Object[]> showMyTrash(String emailSessio);
 
 }

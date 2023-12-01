@@ -94,11 +94,11 @@ public class CanvasRepoSQL implements CanvasRepo{
                 version.setStrokes(strokesJSON);
                 version.setDateLastModified(dateLastModified);
 
-                // Devolver un array de objetos con el Canvas y la Version asociada
+                // Toran un array de objectes amb el Canvas i la Version asociada
                 return new Object[]{canvas, version};
             });
         } catch (EmptyResultDataAccessException e) {
-            return Collections.emptyList(); // Manejar el caso en que no se encuentren lienzos
+            return Collections.emptyList();
         }
     }
 
@@ -215,6 +215,51 @@ public class CanvasRepoSQL implements CanvasRepo{
 
               */
             });
+    }
+    @Override
+    public List<Object[]> showMyTrash(String emailSessio) {
+        String selectMyTrashQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
+                "FROM Canvas c " +
+                "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
+                "WHERE c.user_email = ? AND c.trash = true " + //filtra els Canvas de el email de la sessio i que estiguin a la papelera.
+                "ORDER BY c.idObjectes, v.dateLastModified DESC";
+        try {
+            return jdbcTemplate.query(selectMyTrashQuery, new Object[]{emailSessio}, (resultSet, i) -> {
+                int canvasId = resultSet.getInt("idObjectes");
+                String nameCanvas = resultSet.getString("nameCanvas");
+                String userEmail = resultSet.getString("user_email");
+                String figuresJSON = resultSet.getString("figuresJSON");
+                String strokesJSON = resultSet.getString("strokesJSON");
 
+                Instant dataCreacio = null;
+                Timestamp dataCreacioTimestamp = resultSet.getTimestamp("dataCreacio");
+                if (dataCreacioTimestamp != null) {
+                    dataCreacio = dataCreacioTimestamp.toInstant();
+                }
+
+                Instant dateLastModified = null;
+                Timestamp dateLastModifiedTimestamp = resultSet.getTimestamp("dateLastModified");
+                if (dateLastModifiedTimestamp != null) {
+                    dateLastModified = dateLastModifiedTimestamp.toInstant();
+                }
+
+                // Crear intancies Canvas i Version i les guarda en un array de object
+                Canvas canvas = new Canvas();
+                canvas.setIdObjectes(canvasId);
+                canvas.setNameCanvas(nameCanvas);
+                canvas.setDataCreacio(dataCreacio);
+                canvas.setUser_email(userEmail);
+
+                Version version = new Version();
+                version.setFigures(figuresJSON);
+                version.setStrokes(strokesJSON);
+                version.setDateLastModified(dateLastModified);
+
+                // Toran un array de objectes amb el Canvas i la Version asociada
+                return new Object[]{canvas, version};
+            });
+        } catch (EmptyResultDataAccessException e) {
+            return Collections.emptyList();
+        }
     }
 }

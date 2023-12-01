@@ -173,4 +173,7 @@ public class CanvasServices {
         return canvasVersionDTO;
     }
 
+    public List<CanvasVersionDTO> showMyTrash() {
+        return null;
+    }
 }
