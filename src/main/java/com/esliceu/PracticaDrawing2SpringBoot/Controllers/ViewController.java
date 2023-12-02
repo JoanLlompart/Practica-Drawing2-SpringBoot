@@ -1,5 +1,6 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
 
+import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasPermissionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
@@ -26,6 +27,8 @@ public class ViewController {
     UserService userService;
     @Autowired
     PermissionService permissionService;
+    @Autowired
+    CanvasPermissionDTO canvasPermissionDTO;
     @GetMapping("/viewCanvas")
     public String viewCanvas(@RequestParam("id") int idObjectes,
                              @RequestParam("nameCanvas") String nameCanvas,
@@ -34,8 +37,10 @@ public class ViewController {
         //Canvas canvas = canvasServices.getCanvas(idObjectes,email);
         CanvasVersionDTO canvasVersionDTO= canvasServices.getVersion(idObjectes,email);
         List<User> usersList=userService.allUsersExceptUserSession(email);
-        model.addAttribute("allUsers", usersList);
 
+        System.out.println("ID DE EL VIEWDTO" + canvasVersionDTO.getIdObjectes());
+
+        model.addAttribute("allUsers", usersList);
         String nameUser=(String) session.getAttribute("name");
         model.addAttribute("llistaFigureJson", canvasVersionDTO.getFigures());
         model.addAttribute("llistaStroke", canvasVersionDTO.getStrokes());
@@ -43,24 +48,22 @@ public class ViewController {
         model.addAttribute(nameUser);
         return "viewCanvas";
     }
-
   /*  @PostMapping("/viewCanvas")
     public String postViewCanvas(HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService. setEmail(email);
         return "viewCanvas";
     }
-
    */
-
     @PostMapping("/viewCanvas")
     public String postViewCanvas(@RequestParam("id") int id, // Recibiendo el parámetro "id" enviado desde la solicitud fetch
                                  @RequestParam("nameCanvas") String nameCanvas, // Recibiendo el parámetro "nameCanvas" enviado desde la solicitud fetch
                                  HttpSession session) {
         String email = (String) session.getAttribute("email");
+        //email de el propietari
+        canvasPermissionDTO.setOwner_email(email);
 
         userService.setEmail(email); // Por ejemplo, establecer el email en el servicio de usuario
-
         return "viewCanvas";
     }
     /*
@@ -78,6 +81,8 @@ public class ViewController {
         return "viewCanvas";
     }
      */
+
+
     @PostMapping("/viewCanvas/write")
     public String writePermission(@RequestParam("id") int id,
                                   @RequestParam("nameCanvas") String nameCanvas,
@@ -96,6 +101,8 @@ public class ViewController {
         permissionService.getPermission();
         return "viewCanvas";
     }
+
+
 
 
 
