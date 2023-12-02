@@ -99,6 +99,34 @@ console.log(listFigure);
 const listStrokes = JSON.parse(strokesJSON.value);
 console.log(listStrokes.value);
 
+
+const render = () => {
+    const ul = document.querySelector("#liFigures");
+    ul.innerHTML = "";
+    drawingData.figures.forEach((item, i) => {
+        // Es una figura
+        ul.innerHTML += `<li>${item.type}
+        <button id="${i}" onclick="removeFigure(${i})">x</button>
+        </li>`;
+    });
+    drawingData.strokes.forEach((stoke, i) => {
+        // Es un trazo (stroke)
+        ul.innerHTML += `<li>Stroke
+        <button id="${i}" onclick="removeStroke(${i})">x</button>
+        </li>`;
+    });
+};
+const removeFigure = (i) => {
+    drawingData.figures.splice(i, 1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    render();
+};
+const removeStroke = (i) => {
+    drawingData.strokes.splice(i, 1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    render();
+};
+
 // Definim la clase Figure.
 class Drawing {
     constructor(figures, strokes, name) {
@@ -135,32 +163,6 @@ const drawingData = new Drawing();
 drawingData.addFigure(listFigure);
 drawingData.addStroke(listStrokes);
 
-const render = () => {
-    const ul = document.querySelector("#liFigures");
-    ul.innerHTML = "";
-    drawingData.figures.forEach((item, i) => {
-        // Es una figura
-        ul.innerHTML += `<li>${item.type}
-        <button id="${i}" onclick="removeFigure(${i})">x</button>
-        </li>`;
-    });
-    drawingData.strokes.forEach((stoke, i) => {
-        // Es un trazo (stroke)
-        ul.innerHTML += `<li>Stroke
-        <button id="${i}" onclick="removeStroke(${i})">x</button>
-        </li>`;
-    });
-};
-const removeFigure = (i) => {
-    drawingData.figures.splice(i, 1);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    render();
-};
-const removeStroke = (i) => {
-    drawingData.strokes.splice(i, 1);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    render();
-};
 
 
 
