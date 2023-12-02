@@ -61,13 +61,19 @@ public class ViewController {
     public String postViewCanvas(@RequestBody Permission permission,
                                  HttpSession session) {
         String email = (String) session.getAttribute("email");
+
         canvasPermissionDTO.setPermissionType(permission.getPermissionType());
-        System.out.println("permis de " + canvasPermissionDTO.getPermissionType());
-        //email de el propietari
-        System.out.println("id canvas" +canvasPermissionDTO.getIdCanvas());
+      //  System.out.println("permis de " + canvasPermissionDTO.getPermissionType());
+        //System.out.println("id canvas" +canvasPermissionDTO.getIdCanvas());
+
+        System.out.println(permission.getUser_email()+ "pem?");
         canvasPermissionDTO.setOwner_email(email);
+        canvasPermissionDTO.setUser_email(permission.getUser_email());
+
         userService.setEmail(email);
         boolean permisOk=permissionService.givePermission(canvasPermissionDTO);
+
+
         if (permisOk) {
             //Mensatge de exit
         } else {

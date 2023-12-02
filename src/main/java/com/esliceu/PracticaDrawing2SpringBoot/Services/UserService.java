@@ -5,9 +5,7 @@ import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 @Service
 public class UserService {
     private String email;
@@ -43,30 +41,24 @@ public class UserService {
         System.out.println("getName of user");
         return u.getName();
     }
-
     public UserRepo getUserRepo() {
         return userRepo;
     }
-
     public void setUserRepo(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public List<User> allUsersExceptUserSession(String email) {
         return userRepo.findAllUsersExceptUserSession(email);
     }

@@ -18,7 +18,6 @@ public class CanvasServices {
     UserRepo userRepo;
     @Autowired
     CanvasVersionDTO canvasVersionDTO;
-
     public void newCanvas(String strokesJson, String figureJson, String email, String nameCanvas, String esPub) {
 
         try {

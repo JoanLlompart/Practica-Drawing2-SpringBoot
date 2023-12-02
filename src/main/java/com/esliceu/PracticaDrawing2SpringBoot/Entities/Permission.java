@@ -11,7 +11,6 @@ public class Permission {
         this.user_email = user_email;
         this.permissionType = permissionType;
     }
-
     @Override
     public String toString() {
         return "Permission{" +

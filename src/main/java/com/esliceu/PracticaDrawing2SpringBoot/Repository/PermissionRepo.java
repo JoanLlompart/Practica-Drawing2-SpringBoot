@@ -3,5 +3,5 @@ package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Permission;
 
 public interface PermissionRepo {
-    boolean getPermission(Permission permission);
+    boolean getPermission(Permission permission,String owner_email);
 }
