@@ -67,6 +67,12 @@ public class ViewController {
         System.out.println("id canvas" +canvasPermissionDTO.getIdCanvas());
         canvasPermissionDTO.setOwner_email(email);
         userService.setEmail(email);
+        boolean permisOk=permissionService.givePermission(canvasPermissionDTO);
+        if (permisOk) {
+            //Mensatge de exit
+        } else {
+            //exception tornara.
+        }
         return "viewCanvas";
     }
     /*

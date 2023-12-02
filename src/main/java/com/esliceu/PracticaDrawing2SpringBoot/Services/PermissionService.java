@@ -1,47 +1,32 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Services;
 
 
+import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasPermissionDTO;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Permission;
+import com.esliceu.PracticaDrawing2SpringBoot.Repository.PermissionRepo;
+import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PermissionService {
-   private String user_email;
-   private String permissionType;
-   private int idCanvas;
+  @Autowired
+    CanvasPermissionDTO canvasPermissionDTO;
+  @Autowired
+    PermissionRepo permissionRepo;
+  @Autowired
+    UserRepo userRepo;
 
-   public PermissionService(){}
-
-    public PermissionService(String user_email, String permissionType, int idCanvas) {
-        this.user_email = user_email;
-        this.permissionType = permissionType;
-        this.idCanvas = idCanvas;
+    public PermissionService(CanvasPermissionDTO canvasPermissionDTO) {
+        this.canvasPermissionDTO = canvasPermissionDTO;
     }
 
-    public int getIdCanvas() {
-        return idCanvas;
-    }
 
-    public void setIdCanvas(int idCanvas) {
-        this.idCanvas = idCanvas;
-    }
-
-    public String getPermissionType() {
-        return permissionType;
-    }
-
-    public void setPermissionType(String permissionType) {
-        this.permissionType = permissionType;
-    }
-
-    public String getUser_email() {
-        return user_email;
-    }
-
-    public void setUser_email(String user_email) {
-        this.user_email = user_email;
-    }
-
-    public void getPermission() {
+    public boolean givePermission(CanvasPermissionDTO canvasPermissionDTO) {
+        Permission p = new Permission();
+        p.setUser_email(canvasPermissionDTO.getUser_email());
+        p.setIdCanvas(canvasPermissionDTO.getIdCanvas());
+        p.setPermissionType(canvasPermissionDTO.getPermissionType());
+        return permissionRepo.getPermission(p);
     }
 }
