@@ -6,6 +6,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private String email;
@@ -65,4 +67,7 @@ public class UserService {
         this.password = password;
     }
 
+    public List<User> allUsersExceptUserSession(String email) {
+        return userRepo.findAllUsersExceptUserSession(email);
+    }
 }

@@ -40,19 +40,21 @@
             <th>Nombre</th>
             <th>Permisos</th>
         </tr>
-        <tr th:each="canvas : ${allCanvas}">
-            <td th:text="${canvas.nameCanvas}"></td>
-            <td th:text="${canvas.getUser_email()}"></td>
+        <tr th:each="user : ${allUsers}">
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.getName()}"></td>
             <td>
                 <div>
                     <form th:action="@{/viewCanvas/read}" method="get">
-                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                    <!--   <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <input type="hidden" name="user_email" th:value="${canvas.nameCanvas}" readonly />
+                        --> 
                         <button type="submit" class="read">Lectura</button>
                     </form>
                     <form th:action="@{/viewCanvas/write}" method="get">
+                        <!--
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
-                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
+                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly /> --> 
                         <button type="submit" class="write">Escritura</button>
                     </form>
                 </div>

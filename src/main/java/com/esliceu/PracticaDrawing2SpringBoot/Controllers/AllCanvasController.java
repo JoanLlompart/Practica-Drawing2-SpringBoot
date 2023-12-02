@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 @Controller
@@ -29,14 +28,12 @@ public class AllCanvasController {
         //session.setAttribute("name", name);
         System.out.println("antes de petar");
         List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas(email);
-
        /* for (CanvasVersionDTO c : listCanvas) {
             System.out.println("ID OBEJCTEEES : ");
             System.out.println(c.getIdObjectes());
         }
 
         */
-
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);
@@ -54,8 +51,6 @@ public class AllCanvasController {
     }
 
      */
-
-
     @PostMapping("/trash")
     public String sendToTrash(@RequestParam("id") int id, HttpSession session) {
         String email = (String) session.getAttribute("email");

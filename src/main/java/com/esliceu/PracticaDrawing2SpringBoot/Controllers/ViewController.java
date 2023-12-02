@@ -2,6 +2,7 @@ package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
 
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.PermissionService;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.UserService;
@@ -14,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class ViewController {
@@ -30,6 +33,9 @@ public class ViewController {
         String email = (String) session.getAttribute("email");
         //Canvas canvas = canvasServices.getCanvas(idObjectes,email);
         CanvasVersionDTO canvasVersionDTO= canvasServices.getVersion(idObjectes,email);
+        List<User> usersList=userService.allUsersExceptUserSession(email);
+        model.addAttribute("allUsers", usersList);
+
         String nameUser=(String) session.getAttribute("name");
         model.addAttribute("llistaFigureJson", canvasVersionDTO.getFigures());
         model.addAttribute("llistaStroke", canvasVersionDTO.getStrokes());
@@ -59,7 +65,6 @@ public class ViewController {
         permissionService.setUser_email(email,);
         return "viewCanvas";
     }
-
      */
     @PostMapping("/viewCanvas/write")
     public String writePermission(@RequestParam("id") int id,

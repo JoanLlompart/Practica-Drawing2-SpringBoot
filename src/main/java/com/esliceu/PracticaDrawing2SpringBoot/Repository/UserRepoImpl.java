@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Repository
-public class UserRepoImpl implements UserRepo {
+public class UserRepoImpl {
     //@Autowired
     static List<User> usuaris = new ArrayList<>();
     public boolean save(User user) {
@@ -48,6 +48,12 @@ public class UserRepoImpl implements UserRepo {
         }
         return null;
     }
+
+
+    public List<User> findAllUsers(String emailSession) {
+        return null;
+    }
+
     /*
     @Override
     public boolean isPasswordOfUser(User user, String pasword) {
@@ -59,7 +65,7 @@ public class UserRepoImpl implements UserRepo {
         return false;
     }
      */
-    @Override
+
     public User initSession(String email, String password) {
         for(User user : usuaris) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {

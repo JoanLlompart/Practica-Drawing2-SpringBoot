@@ -38,6 +38,20 @@ public class UserRepoImplSQL implements UserRepo  {
         }
     }
 
+    @Override
+    public List<User> findAllUsersExceptUserSession(String emailSession) {
+        try {
+            String sql = "SELECT * FROM user WHERE email <> ?";
+            return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(User.class), emailSession);
+        } catch (EmptyResultDataAccessException e) {
+            System.err.println("No se ha encontrado el usuario");
+            System.out.println(e.getLocalizedMessage()+ e.getCause());
+            return null;
+        }
+    }
+
+
+
 /*
     public boolean isPasswordOfUser(User user, String pasword) {
         try {
