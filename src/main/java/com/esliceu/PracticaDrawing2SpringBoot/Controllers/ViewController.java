@@ -44,13 +44,25 @@ public class ViewController {
         return "viewCanvas";
     }
 
-    @PostMapping("/viewCanvas")
+  /*  @PostMapping("/viewCanvas")
     public String postViewCanvas(HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService. setEmail(email);
         return "viewCanvas";
     }
 
+   */
+
+    @PostMapping("/viewCanvas")
+    public String postViewCanvas(@RequestParam("id") int id, // Recibiendo el parámetro "id" enviado desde la solicitud fetch
+                                 @RequestParam("nameCanvas") String nameCanvas, // Recibiendo el parámetro "nameCanvas" enviado desde la solicitud fetch
+                                 HttpSession session) {
+        String email = (String) session.getAttribute("email");
+
+        userService.setEmail(email); // Por ejemplo, establecer el email en el servicio de usuario
+
+        return "viewCanvas";
+    }
     /*
     @PostMapping("/viewCanvas/write")
     public String writePermission(HttpSession session) {
