@@ -3,6 +3,7 @@ package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasPermissionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Permission;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.PermissionService;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -56,14 +58,14 @@ public class ViewController {
     }
    */
     @PostMapping("/viewCanvas")
-    public String postViewCanvas(@RequestParam("id") int id, // Recibiendo el parámetro "id" enviado desde la solicitud fetch
-                                 @RequestParam("nameCanvas") String nameCanvas, // Recibiendo el parámetro "nameCanvas" enviado desde la solicitud fetch
+    public String postViewCanvas(@RequestBody Permission permission, // Recibiendo el parámetro "nameCanvas" enviado desde la solicitud fetch
                                  HttpSession session) {
         String email = (String) session.getAttribute("email");
+        canvasPermissionDTO.setPermissionType(permission.getPermissionType());
+        System.out.println("permis de " + canvasPermissionDTO.getPermissionType());
         //email de el propietari
         canvasPermissionDTO.setOwner_email(email);
-
-        userService.setEmail(email); // Por ejemplo, establecer el email en el servicio de usuario
+        userService.setEmail(email);
         return "viewCanvas";
     }
     /*
@@ -83,12 +85,17 @@ public class ViewController {
      */
 
 
+
+    /*
     @PostMapping("/viewCanvas/write")
     public String writePermission(@RequestParam("id") int id,
-                                  @RequestParam("nameCanvas") String nameCanvas,
+                                  @RequestParam("nameCanvas") String user_email,
                                   HttpSession session) {
         String email = (String) session.getAttribute("email");
         permissionService.setUser_email(email);
+        canvasPermissionDTO.setUser_email(user_email);
+        System.out.println("User owner : " + canvasPermissionDTO.getOwner_email());
+        System.out.println("User email : " + canvasPermissionDTO.getUser_email());
         return "viewCanvas";
     }
 
@@ -97,10 +104,14 @@ public class ViewController {
                                  @RequestParam("user_email") String user_email,
                                  HttpSession session) {
         String email = (String) session.getAttribute("email");
-        permissionService.setUser_email(email);
-        permissionService.getPermission();
+        canvasPermissionDTO.setOwner_email(email);
+        canvasPermissionDTO.setUser_email(user_email);
+        //permissionService.setUser_email(email);
+        //permissionService.getPermission();
         return "viewCanvas";
     }
+
+     */
 
 
 

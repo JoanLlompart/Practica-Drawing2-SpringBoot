@@ -45,9 +45,8 @@
             <td th:text="${user.getName()}"></td>
             <td>
                 <div>
-                    <button type="button" class="read" onclick="sendReadRequest(${user.id}, '${user.name}')">Lectura</button>
-                    <button type="button" class="write" onclick="sendWriteRequest(${user.id}, '${user.name}')">Escritura</button>
-            </div>
+                    <button type="button" class="read" onclick="sendPermissionRequest('${user.email}', 'lectura')">Lectura</button>
+                    <button type="button" class="write" onclick="sendPermissionRequest('${user.email}', 'escritura')">Escritura</button>
                 </div>
             </td>
         </tr>
