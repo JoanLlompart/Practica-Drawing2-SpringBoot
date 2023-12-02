@@ -40,8 +40,8 @@ public class ViewController {
         CanvasVersionDTO canvasVersionDTO= canvasServices.getVersion(idObjectes,email);
         List<User> usersList=userService.allUsersExceptUserSession(email);
 
-        System.out.println("ID DE EL VIEWDTO" + canvasVersionDTO.getIdObjectes());
-
+       // System.out.println("ID DE EL VIEWDTO" + canvasVersionDTO.getIdObjectes());
+        canvasPermissionDTO.setIdCanvas(idObjectes);
         model.addAttribute("allUsers", usersList);
         String nameUser=(String) session.getAttribute("name");
         model.addAttribute("llistaFigureJson", canvasVersionDTO.getFigures());
@@ -58,12 +58,13 @@ public class ViewController {
     }
    */
     @PostMapping("/viewCanvas")
-    public String postViewCanvas(@RequestBody Permission permission, // Recibiendo el parámetro "nameCanvas" enviado desde la solicitud fetch
+    public String postViewCanvas(@RequestBody Permission permission,
                                  HttpSession session) {
         String email = (String) session.getAttribute("email");
         canvasPermissionDTO.setPermissionType(permission.getPermissionType());
         System.out.println("permis de " + canvasPermissionDTO.getPermissionType());
         //email de el propietari
+        System.out.println("id canvas" +canvasPermissionDTO.getIdCanvas());
         canvasPermissionDTO.setOwner_email(email);
         userService.setEmail(email);
         return "viewCanvas";
