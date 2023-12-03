@@ -52,9 +52,9 @@ public class LoginController {
                 }
                 session.setAttribute("loginAttempts", loginAttempts);
                 model.addAttribute("missatgeError", "No se ha pogut fer el login");
-                return "login"; // nombre del archivo JSP asociado (login.jsp)
+                return "login";
             }
-        } else if (loginAttempts >= 3 && (System.currentTimeMillis() - lastFailedLoginTime) > 60000) {
+        } else if (loginAttempts >= 3 && (System.currentTimeMillis() - lastFailedLoginTime) < 60000) {
             loginAttempts = 1;
             session.setAttribute("loginAttempts", loginAttempts);
             userInPause = false;
@@ -62,11 +62,11 @@ public class LoginController {
             userInPause = true;
         }
         if (userInPause) {
-            model.addAttribute("missatgeError", "Has pasat el nombre maxim de intents. Per tornar a provar has de esperar 1 minut.");
-            return "login"; // nombre del archivo JSP asociado (login.jsp)
+            model.addAttribute("missatgeErrorAttempts", "Has pasat el nombre maxim de intents. Per tornar a provar has de esperar 1 minut.");
+            return "login";
         } else {
             session.setAttribute("lastFailedLoginTime", System.currentTimeMillis());
-            return "login"; // nombre del archivo JSP asociado (login.jsp)
+            return "login";
         }
     }
 }
