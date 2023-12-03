@@ -52,6 +52,45 @@
         }
         */
 
+
+/*
+function confirmDeleteCanvas(canvasId) {
+        if (confirm("¿Estás seguro de que quieres borrar el canvas?")) {
+            deleteCanvas(canvasId);
+        } else {
+            // El usuario canceló la eliminación
+            console.log("Eliminación cancelada.");
+        }
+    }
+
+    function deleteCanvas(canvasId) {
+        fetch('/trash/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: canvasId })
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log("Canvas eliminado correctamente.");
+                // Realiza aquí cualquier otra acción después de eliminar el canvas
+            } else {
+                console.error("Error al eliminar el canvas.");
+                // Maneja el caso de error al eliminar el canvas
+            }
+        })
+        .catch(error => {
+            console.error("Error al eliminar el canvas:", error);
+            // Maneja errores de red u otros errores
+        });
+    }
+    */
+
+        function confirmDelete() {
+            return confirm("¿Estás seguro de que quieres borrar el canvas definitivamente ? ");
+        }
+        
         function sendPermissionRequest(permissionType, button) {
             var email = button.parentNode.parentNode.parentNode.firstElementChild.innerText; // Obtiene el correo electrónico de la primera columna
             console.log('Email:', email, 'Permission:', permissionType);

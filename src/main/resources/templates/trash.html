@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Papelera</title>
     <link rel="stylesheet" href="/css/showCanvas.css">
 </head>
+
 <body>
     <header>
         <div class="header">
@@ -42,11 +42,18 @@
             <td th:text="${canvas.getUser_email()}"></td>
             <td>
                 <div>
+                    <!--
                     <form th:action="@{/trash/delete}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Delete</button>
                     </form>
-                    <form th:action="@{/trash/exitTrash}" method="post">
+                -->
+                <form th:action="@{/trash/delete}" method="post" onsubmit="return confirmDelete()">
+                    <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                    <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Delete</button>
+                </form>
+                
+                <form th:action="@{/trash/exitTrash}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <button type="submit" class="exitTrash" th:if="${canvas.getUser_email == email}">Treure de la paperera.</button>
                     </form>
@@ -54,6 +61,6 @@
             </td>
         </tr>
     </table>
+    <script src="/js/fetch.js"></script>
 </body>
-
 </html>
