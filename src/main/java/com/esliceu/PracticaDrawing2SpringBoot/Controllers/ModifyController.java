@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ModifyController {
     @Autowired
     CanvasServices canvasServices;
-
     @Autowired
     CanvasVersionDTO canvasVersionDTO;
     @Autowired
