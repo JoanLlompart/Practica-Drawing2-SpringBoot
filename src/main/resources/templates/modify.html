@@ -35,47 +35,52 @@
 -->
     <input type="hidden" id="llistaFigureJson" name="llistaFigureJson" th:value="${llistaFigureJson}" />
     <input type="hidden" id="llistaStroke" name="llistaStroke" th:value="${llistaStroke}" />
-    
-    <div class="contenedor">
-        <canvas id="lienzo" width="800" height="550"></canvas>
-        <section class="listObjects">
-            <h2>Llista d'objectes</h2>
-            <ul id="liFigures"></ul>
-        </section>
+
+    <div class="drawing-container">
+        <div class="canvasArea">
+            <canvas id="lienzo" width="800" height="550"></canvas>
+        </div>
+        <div class="contenedor">
+            <section class="listObjects">
+                <h2>Llista d'objectes</h2>
+                <ul id="liFigures"></ul>
+            </section>
+        </div>
     </div>
     <br>
-    <p>Dibujar</p>
-    <label class="switch">
-        <input type="checkbox" id="toggleDibuixar">
-        <span class="slider round"></span>
-    </label>
-    <br>
-    <form id="drawForm" action="/canvasDraw" method="post">
-        <p>Opcions:</p>
-        <select id="selectorFigura">
-            <option value="sinSeleccionar">Selecciona una Figura</option>
-            <option value="circulo">Círculo</option>
-            <option value="cuadrado">Cuadrado</option>
-            <option value="triangle">Triángulo</option>
-            <option value="estrella">Estrella</option>
-        </select>
-        <button id="guardarDibuix" type="submit">Guardar</button>
-        <input type="hidden" id="figuresData" name="figuresData">
-        <input type="hidden" id="strokesData" name="strokesData">
+    <div class="dataContainer">
+        <p>Dibujar</p>
+        <label class="switch">
+            <input type="checkbox" id="toggleDibuixar">
+            <span class="slider round"></span>
+        </label>
         <br>
-        <p>Nombre:</p>
-        <label for="nomDibuix"></label>
-        <input type="text" id="nomDibuix" name="nomDibuix">
-        <br>
-        <p>Color:</p>
-        <input type="color" name="color" id="color" value="#000000">
-        <br>
-        Relleno de la figura<input type="checkbox" id="rellenoFigura" name="rellenoFigura" value="false">
-        <br>
-        <label for="tamaño">Tamaño de los elementos</label>
-        <input type="range" id="tamaño" name="tamaño" min="1" max="200" value="50">
-    </form>
-
+        <form id="drawForm" action="/canvasDraw" method="post">
+            <p>Opcions:</p>
+            <select id="selectorFigura">
+                <option value="sinSeleccionar">Selecciona una Figura</option>
+                <option value="circulo">Círculo</option>
+                <option value="cuadrado">Cuadrado</option>
+                <option value="triangle">Triángulo</option>
+                <option value="estrella">Estrella</option>
+            </select>
+            <button id="guardarDibuix" type="submit">Guardar</button>
+            <input type="hidden" id="figuresData" name="figuresData">
+            <input type="hidden" id="strokesData" name="strokesData">
+            <br>
+            <p>Nombre:</p>
+            <label for="nomDibuix"></label>
+            <input type="text" id="nomDibuix" name="nomDibuix">
+            <br>
+            <p>Color:</p>
+            <input type="color" name="color" id="color" value="#000000">
+            <br>
+            Relleno de la figura<input type="checkbox" id="rellenoFigura" name="rellenoFigura" value="false">
+            <br>
+            <label for="tamaño">Tamaño de los elementos</label>
+            <input type="range" id="tamaño" name="tamaño" min="1" max="200" value="50">
+        </form>
+    </div>
     <script src="js/modify.js"></script>
 </body>
 

@@ -9,7 +9,6 @@ import java.time.Instant;
 public class CanvasVersionDTO {
     private int idObjectes;
     private String nameCanvas;
-
     private String user_email;
     private Instant dataCreacio;
     private int numberObject;

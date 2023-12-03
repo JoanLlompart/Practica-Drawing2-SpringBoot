@@ -9,8 +9,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -34,6 +32,7 @@ public class CanvasRepoSQL implements CanvasRepo{
             return null;
         }
     }
+
 
 
     @Override
