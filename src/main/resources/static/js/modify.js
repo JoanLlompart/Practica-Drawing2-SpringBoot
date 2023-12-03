@@ -1,19 +1,16 @@
+//guarda el element dins un contexte.
+// cerca el elemenent que te el selector de canvas
 const canvas = document.getElementById("lienzo");
 const ctx = canvas.getContext("2d");
 const figuresJSON = document.getElementById("llistaFigureJson");
 const strokesJSON = document.getElementById("llistaStroke");
-
 //guardam el tipus de seleccio que ha fet el usuari
 const figura = document.getElementById("selectorFigura");
 //const dibuix = document.getElementById("btnDibuixar");
 const dibuix = document.getElementById("toggleDibuixar");
-
-
-const borrarDibuix = document.getElementById("borrarLienzo");
 const saveDraw = document.getElementById("guardarDibuix");
 const sizeSelect = document.getElementById("tamaño");
 const nameDraw = document.getElementById("name");
-
 //si se ha seleccionat rellenar els poligons
 const isFilled = document.getElementById("rellenoFigura");
 //color que elegeix el usuari
@@ -25,16 +22,22 @@ let activaPintar = false;
 // Guarda los puntos que va pintando
 let punts = [];
 
-
+// Función para cargar figuras y trazos desde JSON al canvas
+function cargarFigurasYTrazos() {
+    const figuras = JSON.parse(figuresJSON.value);
+    const strokes = JSON.parse(strokesJSON.value);
+    
 
 const pintar = (listStrokes) => {
     listStrokes.forEach(stroke => {
         const { puntos, color, size } = stroke;
+
         ctx.beginPath();
         ctx.strokeStyle = color;
         ctx.lineWidth = size;
         // Comensam a dibuixar per la posicio 0.
         ctx.moveTo(puntos[0].x, puntos[0].y);
+
         // Dibuixa la linea punt per punt recorrent el array
         for (let i = 1; i < puntos.length; i++) {
             ctx.lineTo(puntos[i].x, puntos[i].y);
@@ -43,6 +46,9 @@ const pintar = (listStrokes) => {
         ctx.stroke();
     });
 };
+
+pintar(strokes);
+
 const dibuixarFigure = (figures) => {
     // Itera sobre la llista de figures i dibuixa cada una de ellas.
     figures.forEach(figure => {
@@ -116,41 +122,26 @@ const dibuixarFigure = (figures) => {
         }
     });
 };
-console.log(figuresJSON);
-console.log(strokesJSON);
-//convertim a la llista de figure a una llista de objectes Figure
-const listFigure = JSON.parse(figuresJSON.value);
-console.log(listFigure);
-const listStrokes = JSON.parse(strokesJSON.value);
-console.log(listStrokes.value);
+    dibuixarFigure(figuras);
 
 
-const render = () => {
-    const ul = document.querySelector("#liFigures");
-    ul.innerHTML = "";
-    drawingData.figures.forEach((item, i) => {
-        // Es una figura
-        ul.innerHTML += `<li>${item.type}
-        <button id="${i}" onclick="removeFigure(${i})">x</button>
-        </li>`;
-    });
-    drawingData.strokes.forEach((stoke, i) => {
-        // Es un trazo (stroke)
-        ul.innerHTML += `<li>Stroke
-        <button id="${i}" onclick="removeStroke(${i})">x</button>
-        </li>`;
-    });
-};
-const removeFigure = (i) => {
-    drawingData.figures.splice(i, 1);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    render();
-};
-const removeStroke = (i) => {
-    drawingData.strokes.splice(i, 1);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    render();
-};
+    
+    // Luego de cargar las figuras y trazos, habilitar la funcionalidad de dibujo
+    activaPintar = true;
+}
+
+// Llamada para cargar figuras y trazos al principio
+cargarFigurasYTrazos();
+
+// Ahora, el evento de dibujo solo será activado después de cargar los datos desde JSON
+// Escucha el evento click en el canvas para permitir dibujar después de cargar
+canvas.addEventListener("click", (event) => {
+    if (activaPintar) {
+        dibuixarFigure(event);
+    }
+});
+
+
 
 // Definim la clase Figure.
 class Drawing {
@@ -183,18 +174,132 @@ class Drawing {
         render(this.strokes);//proba
     }
 }
-
+//cream la instancia de la clase Draw que guardara els dibuixos.
 const drawingData = new Drawing();
-drawingData.addFigure(listFigure);
-drawingData.addStroke(listStrokes);
+const render = () => {
+    const ul = document.querySelector("#liFigures");
+    ul.innerHTML = "";
+    drawingData.figures.forEach((item, i) => {
+        // Es una figura
+        ul.innerHTML += `<li>${item.type}
+        <button id="${i}" onclick="removeFigure(${i})">x</button>
+        </li>`;
+    });
+    drawingData.strokes.forEach((stoke, i) => {
+        // Es un trazo (stroke)
+        ul.innerHTML += `<li>Stroke
+        <button id="${i}" onclick="removeStroke(${i})">x</button>
+        </li>`;
+    });
+};
+const removeFigure = (i) => {
+    drawingData.figures.splice(i, 1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    render();
+};
+const removeStroke = (i) => {
+    drawingData.strokes.splice(i, 1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    render();
+};
+
+const pintar = (cursorX, cursorY) => {
+    if (activaPintar && figura.value === "sinSeleccionar") {
+        ctx.beginPath();
+        ctx.moveTo(cursorX, cursorY);
+        ctx.lineWidth = sizeSelect.value;
+        ctx.strokeStyle = colorElegit.value;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.lineTo(cursorX, cursorY);
+        ctx.stroke();
+        //ptoba
+        //ctx.closePath();
+    } else {
+        figura.value = "sinSeleccionar";
+    }
+}
 
 
+const dibuixarFigure = (event) => {
+    if (!activaPintar && figura.value !== "sinSeleccionar") {
+        //var figure = new Figure(figura.value,colorElegit.value,isFilled.value,sizeSelect.value);
+        ctx.beginPath();
+        ctx.strokeStyle = colorElegit.value;
+        //ctx.lineWidth = sizeSelect.value;
+        ctx.lineWidth = 2;
+        let centerX = event.offsetX;
+        let centerY = event.offsetY;
+        //console.log("x" + centerX + "y" + centerY);
+        //si se ha de rellenar sera true i se li asignara el color que ha seleccionat
+        if (isFilled.value) {
+            ctx.fillStyle = colorElegit.value;
+        } else {
+            ctx.fillStyle = "transparent";
+        }
 
-
-dibuixarFigure(listFigure);
-pintar(listStrokes);
-
-//proba que fallara segur
+        switch (figura.value) {
+            case "cuadrado":
+                const halfSize = sizeSelect.value / 2; // Mitat de el tamany de el costat
+                //let centerX = event.offsetX;
+                //let centerY = event.offsetY;
+                // Dibuixa un quadrat desde el centre de on feim click
+                ctx.rect(centerX - halfSize, centerY - halfSize, sizeSelect.value, sizeSelect.value);
+                if (isFilled.checked) {
+                    ctx.fill(); // Rellena el quadrat si es necesari
+                } else {
+                    ctx.stroke(); // Dibuixa el contorn del quadrat
+                }
+                break;
+            case "circulo":
+                let radi = sizeSelect.value / 2;
+                ctx.arc(centerX, centerY, radi, 0, 2 * Math.PI);
+                if (isFilled.checked) {
+                    ctx.fill(); // Rellena el cercle si es necesari
+                } else {
+                    ctx.stroke(); // Dibuixa el contorn del cercle
+                }
+                break;
+            case "triangle":
+                ctx.moveTo(centerX, centerY - sizeSelect.value / 2);
+                ctx.lineTo(centerX + sizeSelect.value / 2, centerY + sizeSelect.value / 2);
+                ctx.lineTo(centerX - sizeSelect.value / 2, centerY + sizeSelect.value / 2);
+                ctx.closePath();
+                if (isFilled.checked) {
+                    ctx.fill();
+                } else {
+                    ctx.stroke();
+                }
+                break;
+            case "estrella":
+                let radiExtern = sizeSelect.value / 2;
+                //let radiInterior = radiExtern * 0.4; 
+                let radiIntern = radiExtern * 0.4;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY - radiExtern);
+                for (let i = 0; i <= 14; i++) {
+                    const radio = i % 2 === 0 ? radiExtern : radiIntern;
+                    const angle = (Math.PI / 7) * i;
+                    const x = centerX + radio * Math.sin(angle);
+                    const y = centerY - radio * Math.cos(angle);
+                    ctx.lineTo(x, y);
+                }
+                if (isFilled.checked) {
+                    ctx.fillStyle = colorElegit.value;
+                    ctx.fill(); // Rellena la estrella si es necesari
+                } else {
+                    ctx.strokeStyle = colorElegit.value;
+                    ctx.stroke(); // Dibuixa nomes la forma sense rellenar la estrella
+                }
+                break;
+            case "sinSeleccionar":
+            default:
+                break;
+        }
+        //afegim les dades de la figura a la instancia de Drawing
+        drawingData.addFigure(figura.value, colorElegit.value, isFilled.checked, sizeSelect.value, centerX, centerY);
+    }
+}
 
 const mouseDown = (event) => {
     if (activaPintar) {
@@ -231,7 +336,6 @@ saveDraw.addEventListener("click", () => {
     const figuresJson = drawingData.getFiguresJSON();
     const strokesJson = drawingData.getStrokesJSON();
 
-    //FALTA CAMBIAR EL JSP PER POSAR DOS HIDDEN
     document.getElementById("figuresData").value = figuresJson;
     document.getElementById("strokesData").value = strokesJson;
 
@@ -250,13 +354,6 @@ dibuix.addEventListener("change", (event) => {
     // Activa la capacidad de dibuixar cuando el toggle switch esté activado
     activaPintar = event.target.checked;
 });
-
-/*
-dibuix.addEventListener("click", (event) => {
-    // Activa la capacidad de dibuixar en fer  clic en el botó "Dibuixar"
-    activaPintar = !activaPintar;
-});
-*/
 
 canvas.addEventListener("mouseout", () => {
     console.log("mouseout");
