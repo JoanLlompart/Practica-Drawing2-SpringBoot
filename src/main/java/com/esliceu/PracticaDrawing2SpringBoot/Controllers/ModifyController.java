@@ -92,6 +92,4 @@ public class ModifyController {
         canvasServices.newCanvas(strokJson, figureJson, email, nameCanvas,esPub);
         return "canvasDraw";
     }
-
-
 }
