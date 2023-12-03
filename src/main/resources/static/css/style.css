@@ -138,11 +138,33 @@ input:not(:checked)+.slider:after {
     color: white;
     left: 60%;
 }
-
+/*
 .contenedor {
     display: flex;
 
 }
+*/
+.drawing-container {
+    display: flex; /* Utiliza flexbox */
+}
+
+.canvasArea {
+    width: 800px; /* Ancho fijo */
+    height: 550px; /* Altura fija */
+    flex-shrink: 0; /* Evita que se reduzca */
+    padding: 10px;
+}
+
+.contenedor {
+    margin-left: 80px;
+    flex-grow: 1; /* Ocupa el espacio restante */
+}
+.dataContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
 
 canvas {
     float: left;

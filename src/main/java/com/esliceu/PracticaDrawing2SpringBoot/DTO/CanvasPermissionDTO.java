@@ -38,4 +38,14 @@ public class CanvasPermissionDTO {
     public void setOwner_email(String owner_email) {
         this.owner_email = owner_email;
     }
+
+    @Override
+    public String toString() {
+        return "CanvasPermissionDTO{" +
+                "idCanvas=" + idCanvas +
+                ", permissionType='" + permissionType + '\'' +
+                ", user_email='" + user_email + '\'' +
+                ", owner_email='" + owner_email + '\'' +
+                '}';
+    }
 }

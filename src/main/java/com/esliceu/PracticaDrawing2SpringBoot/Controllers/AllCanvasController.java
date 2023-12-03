@@ -32,13 +32,13 @@ public class AllCanvasController {
             System.out.println("ID OBEJCTEEES : ");
             System.out.println(c.getIdObjectes());
         }
-
         */
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);
         return "allCanvas";
     }
+
     /*
     @PostMapping("/allCanvas")
     public String deleteCanvas(@RequestParam("id") int id, HttpSession session) {
