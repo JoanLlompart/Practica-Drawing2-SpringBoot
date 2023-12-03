@@ -11,6 +11,7 @@ public interface UserRepo {
 
     //boolean isPasswordOfUser(User user, String pasword);
 
-    List<User> findAllUsersExceptUserSession(String emailSession);
+    //List<User> findAllUsersExceptUserSession(String emailSession);
+    List<User> findAllUsersExceptUserSession(String emailSession,int idObjectes);
     User initSession(String email,String password);
 }

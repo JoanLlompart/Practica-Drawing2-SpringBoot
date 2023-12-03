@@ -59,7 +59,16 @@ public class UserService {
     public void setPassword(String password) {
         this.password = password;
     }
-    public List<User> allUsersExceptUserSession(String email) {
+   /*public List<User> allUsersExceptUserSession(String email) {
         return userRepo.findAllUsersExceptUserSession(email);
     }
+
+    */
+
+
+
+    public List<User> allUsersExceptUserSession(String email, int idObjectes) {
+        return userRepo.findAllUsersExceptUserSession(email,idObjectes);
+    }
+
 }

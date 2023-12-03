@@ -38,11 +38,34 @@ public class UserRepoImplSQL implements UserRepo  {
         }
     }
 
+    /*
     @Override
     public List<User> findAllUsersExceptUserSession(String emailSession) {
         try {
-            String sql = "SELECT * FROM user WHERE email <> ?";
-            return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(User.class), emailSession);
+            String sqlUsers = "SELECT * FROM user WHERE email <> ?";
+            return jdbcTemplate.query(sqlUsers,new BeanPropertyRowMapper<>(User.class), emailSession);
+        } catch (EmptyResultDataAccessException e) {
+            System.err.println("No se ha encontrado el usuario");
+            System.out.println(e.getLocalizedMessage()+ e.getCause());
+            return null;
+        }
+    }
+
+     */
+
+
+    @Override
+    public List<User> findAllUsersExceptUserSession(String emailSession, int idObjectes) {
+        try {
+            String sqlOwner = "SELECT user_email FROM Canvas WHERE idObjectes = ?";
+
+            String emailOwner = jdbcTemplate.queryForObject(sqlOwner, new Object[]{idObjectes}, String.class);
+            if (emailOwner.equals(emailSession)) {
+                String sqlUsers = "SELECT * FROM user WHERE email <> ?";
+                return jdbcTemplate.query(sqlUsers,new BeanPropertyRowMapper<>(User.class) ,emailSession);
+            } else {
+                return null;
+            }
         } catch (EmptyResultDataAccessException e) {
             System.err.println("No se ha encontrado el usuario");
             System.out.println(e.getLocalizedMessage()+ e.getCause());
@@ -51,8 +74,8 @@ public class UserRepoImplSQL implements UserRepo  {
     }
 
 
-
 /*
+
     public boolean isPasswordOfUser(User user, String pasword) {
         try {
             String sql = "SELECT password FROM user WHERE email = ?";

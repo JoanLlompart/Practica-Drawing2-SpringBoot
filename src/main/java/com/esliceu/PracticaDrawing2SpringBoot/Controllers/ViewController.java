@@ -38,8 +38,8 @@ public class ViewController {
         String email = (String) session.getAttribute("email");
         //Canvas canvas = canvasServices.getCanvas(idObjectes,email);
         CanvasVersionDTO canvasVersionDTO= canvasServices.getVersion(idObjectes,email);
-        List<User> usersList=userService.allUsersExceptUserSession(email);
-
+        //List<User> usersList=userService.allUsersExceptUserSession(email);
+        List<User> usersList=userService.allUsersExceptUserSession(email,idObjectes);
        // System.out.println("ID DE EL VIEWDTO" + canvasVersionDTO.getIdObjectes());
         canvasPermissionDTO.setIdCanvas(idObjectes);
         model.addAttribute("allUsers", usersList);
