@@ -21,9 +21,12 @@ let activaPintar = false;
 // Guarda los puntos que va pintando
 let punts = [];
 // Función para cargar figuras y trazos desde JSON al canvas
+
+const figuras = JSON.parse(figuresJSON.value);
+const strokes = JSON.parse(strokesJSON.value);
 function cargarFigurasYTrazos() {
-    const figuras = JSON.parse(figuresJSON.value);
-    const strokes = JSON.parse(strokesJSON.value);
+    //const figuras = JSON.parse(figuresJSON.value);
+   // const strokes = JSON.parse(strokesJSON.value);
     
 
 const pintar = (listStrokes) => {
@@ -143,8 +146,8 @@ canvas.addEventListener("click", (event) => {
 class Drawing {
     constructor(figures, strokes, name) {
         this.name = name; //guardam el nom.
-        this.figures = []; // Guarda les dades de les figures
-        this.strokes = []; // Guarda les dades de els dibuixos a ma alçada.
+        this.figures = figures; // Guarda les dades de les figures
+        this.strokes = strokes; // Guarda les dades de els dibuixos a ma alçada.
     }
     addFigure(type, color, rellenoFigura, size, centerX, centerY) {
         this.figures.push({ type, color, rellenoFigura, size, centerX, centerY });
@@ -171,7 +174,7 @@ class Drawing {
     }
 }
 //cream la instancia de la clase Draw que guardara els dibuixos.
-const drawingData = new Drawing();
+const drawingData = new Drawing(figuras,strokes,nameDraw);
 const render = () => {
     const ul = document.querySelector("#liFigures");
     ul.innerHTML = "";
