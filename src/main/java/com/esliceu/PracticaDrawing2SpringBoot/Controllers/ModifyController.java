@@ -45,7 +45,6 @@ public class ModifyController {
             model.addAttribute("errorMessage", message);
             return "errorNotYourCanvas";
         }
-
        /* try {
             Canvas canvas = canvasServices.getCanvasToModify(idObjectes, email);
             String nameUser = (String) session.getAttribute("name");

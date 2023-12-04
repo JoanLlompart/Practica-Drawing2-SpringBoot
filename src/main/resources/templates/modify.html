@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
     <header>
         <div class="header">
@@ -68,9 +66,13 @@
             <input type="hidden" id="figuresData" name="figuresData">
             <input type="hidden" id="strokesData" name="strokesData">
             <br>
-            <p>Nombre:</p>
+            <!--  <p>Nombre:</p>
             <label for="nomDibuix"></label>
             <input type="text" id="nomDibuix" name="nomDibuix">
+            -->
+            <p>Nombre:</p>
+            <label for="nomDibuix"></label>
+            <input type="text" id="nomDibuix" name="nomDibuix" th:value="${nameCanvas}">
             <br>
             <p>Color:</p>
             <input type="color" name="color" id="color" value="#000000">

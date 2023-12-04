@@ -18,10 +18,8 @@ const colorElegit = document.getElementById("color");
 
 //variable per sebre si es pot pintar o no.
 let activaPintar = false;
-
 // Guarda los puntos que va pintando
 let punts = [];
-
 // Función para cargar figuras y trazos desde JSON al canvas
 function cargarFigurasYTrazos() {
     const figuras = JSON.parse(figuresJSON.value);
@@ -46,9 +44,7 @@ const pintar = (listStrokes) => {
         ctx.stroke();
     });
 };
-
 pintar(strokes);
-
 const dibuixarFigure = (figures) => {
     // Itera sobre la llista de figures i dibuixa cada una de ellas.
     figures.forEach(figure => {
