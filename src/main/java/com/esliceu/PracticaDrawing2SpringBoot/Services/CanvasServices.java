@@ -165,7 +165,6 @@ public class CanvasServices {
         List<Object> list =canvasRepo.getCanvasById(id);
         Canvas c = (Canvas) list.get(0);
         Version v = (Version) list.get(1);
-
         canvasVersionDTO.setNameCanvas(c.getNameCanvas());
         canvasVersionDTO.setFigures(v.getFigures());
         canvasVersionDTO.setStrokes(v.getStrokes());
@@ -175,9 +174,7 @@ public class CanvasServices {
         canvasVersionDTO.setDateLastModified(v.getDateLastModified());
         canvasVersionDTO.setUser_email(c.getUser_email());
         canvasVersionDTO.setIdObjectes(c.getIdObjectes());
-
         System.out.println("Probant que torna la llista de objectes " +c);
-        //return canvasRepo.getCanvasById(id);
         return canvasVersionDTO;
     }
 

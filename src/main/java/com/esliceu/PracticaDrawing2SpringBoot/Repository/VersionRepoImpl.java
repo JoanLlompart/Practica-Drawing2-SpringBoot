@@ -1,8 +1,10 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
+import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 @Repository
 public class VersionRepoImpl implements VersionRepo{
     @Autowired
@@ -26,4 +28,31 @@ public class VersionRepoImpl implements VersionRepo{
             throw new RuntimeException("Error al crear la nova versio", e);
         }
     }
+
+    /*
+    @Override
+    public boolean newVersionOfCanvas(String nameCanvas, Version version) {
+        try {
+            String sqlPermissionCheck = "SELECT COUNT(*) FROM Permission WHERE idCanvas = ? AND user_email = ? AND permissionType = 'W'";
+            int permissionCount = jdbcTemplate.queryForObject(sqlPermissionCheck, Integer.class, version.getIdDraw(), version.getUser_email());
+
+            if (permissionCount > 0) {
+                // El usuario tiene permisos, realizar la inserción de la versión
+                String sqlInsertVersion = "INSERT INTO Version (idDraw, figuresJSON, strokesJSON, dateLastModified, user_email, numberObject) VALUES (?, ?, ?, NOW(), ?, ?)";
+                jdbcTemplate.update(sqlInsertVersion, version.getIdDraw(), version.getFigures(), version.getStrokes(), version.getUser_email(),version.getNumberObject());
+                // Actualizar el nombre del Canvas en la tabla Canvas
+                String sqlUpdateCanvasName = "UPDATE Canvas SET nameCanvas = ? WHERE idObjectes = ?";
+                jdbcTemplate.update(sqlUpdateCanvasName, nameCanvas, version.getIdDraw());
+                return true;
+            } else {
+               throw new NotYourCanvasException("No tens permis per modificar el canvas");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error al crear la nova versio", e);
+        }
+    }
+
+     */
+
+
 }
