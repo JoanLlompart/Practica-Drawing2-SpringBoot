@@ -12,13 +12,11 @@ public class VersionService {
     CanvasVersionDTO canvasVersionDTO;
     @Autowired
     VersionRepo versionRepo;
-    Version version;
-
     public boolean newVersionCanvas(CanvasVersionDTO canvasVersionDTO) {
         try {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
             this.canvasVersionDTO = canvasVersionDTO;
-            this.version = version;
+            Version version = new Version();
             System.out.println("Service");
             System.out.println(canvasVersionDTO.toString());
             //Ara cream asignam els atributs a la clase version.
@@ -36,7 +34,6 @@ public class VersionService {
             System.out.println(e.getCause()+ e.getLocalizedMessage());
             return false;
         }
-
     }
 
 }
