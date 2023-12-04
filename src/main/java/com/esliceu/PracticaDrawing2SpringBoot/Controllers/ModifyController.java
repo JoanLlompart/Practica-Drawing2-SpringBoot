@@ -93,6 +93,10 @@ public class ModifyController {
         }
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
 
+        System.out.println(canvasVersionDTO.toString());
+
+
+        //versionService.newVersion(email,canvasVersionDTO);
         //return "redirect:/canvasDraw";
         return "canvasDraw";
     }
