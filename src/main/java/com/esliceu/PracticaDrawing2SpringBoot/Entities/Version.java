@@ -1,9 +1,6 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Entities;
-
 import javax.persistence.Column;
 import java.time.Instant;
-
-
 
 public class Version {
     private int idVersion;
@@ -17,7 +14,6 @@ public class Version {
     private String user_email;
 
     public Version() {
-
     }
 
     public Version(int idVersion, int idDraw, int numberObject, String figures, String strokes, Instant dateLastModified, String user_email) {
