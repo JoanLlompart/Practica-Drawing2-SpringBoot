@@ -32,9 +32,6 @@ public class CanvasRepoSQL implements CanvasRepo{
             return null;
         }
     }
-
-
-
     @Override
     public List<Object[]> showAllCanvas(String sessionEmail) {
         String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
@@ -43,7 +40,6 @@ public class CanvasRepoSQL implements CanvasRepo{
                 "WHERE ((c.trash = false AND c.public = true) OR (c.user_email = ? AND c.public = false)) " +
                 "AND c.trash = false " +
                 "ORDER BY c.idObjectes, v.dateLastModified DESC";
-
         try {
             return jdbcTemplate.query(selectAllCanvasQuery, new Object[]{sessionEmail}, (resultSet, i) -> {
                 int canvasId = resultSet.getInt("idObjectes");
@@ -53,7 +49,6 @@ public class CanvasRepoSQL implements CanvasRepo{
                 String figuresJSON = resultSet.getString("figuresJSON");
                 String strokesJSON = resultSet.getString("strokesJSON");
                 //Instant dateLastModified = resultSet.getTimestamp("dateLastModified").toInstant();
-
                 Instant dataCreacio = null;
                 Timestamp dataCreacioTimestamp = resultSet.getTimestamp("dataCreacio");
                 if (dataCreacioTimestamp != null) {
