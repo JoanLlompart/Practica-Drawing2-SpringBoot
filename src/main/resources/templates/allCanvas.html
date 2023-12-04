@@ -64,6 +64,12 @@
             </td>
         </tr>
     </table>
+    <div th:if="${message}" class="message-ok">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${message}" class="message-error">
+        <p th:text="${message}"></p>
+    </div>
 </body>
 
 </html>

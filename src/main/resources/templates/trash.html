@@ -21,6 +21,13 @@
         </div>
     </header>
     <h1>Papelera de [[${name}]]</h1>
+    <!-- 
+    <div th:if="${message}" class="message-ok">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${message}" class="message-error">
+        <p th:text="${message}"></p>
+    </div> -->
     <table>
         <tr>
             <th>IdCanvas</th>
@@ -55,7 +62,7 @@
                 
                 <form th:action="@{/trash/exitTrash}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
-                        <button type="submit" class="exitTrash" th:if="${canvas.getUser_email == email}">Treure de la paperera.</button>
+                        <button type="submit" class="exitTrash" th:if="${canvas.getUser_email == email}">Sacar de la papelera.</button>
                     </form>
                 </div>
             </td>

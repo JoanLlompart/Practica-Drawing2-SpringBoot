@@ -44,6 +44,7 @@ public class ViewController {
         canvasPermissionDTO.setIdCanvas(idObjectes);
         model.addAttribute("allUsers", usersList);
         String nameUser=(String) session.getAttribute("name");
+        model.addAttribute("name",nameUser);
         model.addAttribute("llistaFigureJson", canvasVersionDTO.getFigures());
         model.addAttribute("llistaStroke", canvasVersionDTO.getStrokes());
         model.addAttribute("nameCanvas", nameCanvas);

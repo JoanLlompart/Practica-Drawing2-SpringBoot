@@ -36,19 +36,25 @@ public class TrashController {
     }
 
     @PostMapping("/trash/delete")
-    public String deleteCanvas(@RequestParam("id") int id, HttpSession session) {
+    public String deleteCanvas(@RequestParam("id") int id, HttpSession session,Model model) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
         if (!canvasServices.deleteCanvasById(id, email)) {
             //TODO
+            model.addAttribute("message","Error: No se ha eliminar el Canvas!");
+        }else {
+            model.addAttribute("message","Canvas eliminado con exito!");
         }
         return "redirect:/trash";
     }
     @PostMapping("/trash/exitTrash")
-    public String recoverCanvas(@RequestParam("id") int id, HttpSession session) {
+    public String recoverCanvas(@RequestParam("id") int id, HttpSession session,Model model) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
         if (!canvasServices.sendOutToTrash(id, email)) {
+            model.addAttribute("message","Error: No se ha podido sacar el Canvas de la papelera!");
+        } else {
+            model.addAttribute("message","Canvas recuperado de la papelera");
         }
         return "redirect:/allCanvas";
     }

@@ -1,5 +1,4 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
-
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
-
 @Controller
 public class AllCanvasController {
     @Autowired
@@ -50,11 +48,13 @@ public class AllCanvasController {
     }
      */
     @PostMapping("/trash")
-    public String sendToTrash(@RequestParam("id") int id, HttpSession session) {
+    public String sendToTrash(@RequestParam("id") int id, HttpSession session,Model model) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
         if (!canvasServices.sendToTrash(id, email)) {
-
+            //model.addAttribute("message","No se ha podido borrar");
+        } else {
+           // model.addAttribute("message","Canvas eliminado con exito!");
         }
         return "redirect:/allCanvas";
     }

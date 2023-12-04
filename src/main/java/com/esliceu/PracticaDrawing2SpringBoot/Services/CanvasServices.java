@@ -127,7 +127,6 @@ public class CanvasServices {
     public List<CanvasVersionDTO> showAllCanvas(String email) {
         List<Object[]> listOb = canvasRepo.showAllCanvas(email);
         List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
-
         for (Object[] objects : listOb) {
             Canvas canvas = (Canvas) objects[0];
             Version version = (Version) objects[1];

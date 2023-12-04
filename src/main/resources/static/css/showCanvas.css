@@ -160,3 +160,10 @@ h2 {
 .exitTrash:hover {
     background-color: #80f80f;
 }
+
+.message-ok {
+    color:rgb(99, 190, 14);
+}
+.message-error {
+    color:red;
+}
