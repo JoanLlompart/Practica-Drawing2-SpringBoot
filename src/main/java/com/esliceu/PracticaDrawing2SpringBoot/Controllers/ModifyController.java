@@ -92,12 +92,15 @@ public class ModifyController {
             nameCanvas = canvasServices.generarNom(nameCanvas);
         }
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
-
+        //Actualitzam els valors de la nova versio i el nous JSON
+        canvasVersionDTO.setStrokes(strokJson);
+        canvasVersionDTO.setFigures(figureJson);
         System.out.println(canvasVersionDTO.toString());
-
-
-        //versionService.newVersion(email,canvasVersionDTO);
-        //return "redirect:/canvasDraw";
+        if(versionService.newVersionCanvas(canvasVersionDTO)) {
+            System.out.println("Se ha actualitzat correctament");
+        } else {
+            System.out.println("No se ha pogut crear la nova versio");
+        }
         return "canvasDraw";
     }
 }
