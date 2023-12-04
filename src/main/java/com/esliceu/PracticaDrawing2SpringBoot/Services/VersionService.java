@@ -6,6 +6,8 @@ import com.esliceu.PracticaDrawing2SpringBoot.Repository.VersionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VersionService {
     @Autowired
@@ -34,6 +36,9 @@ public class VersionService {
             System.out.println(e.getCause()+ e.getLocalizedMessage());
             return false;
         }
+    }
+    public List<Version> getAllVersion(int idObjectes) {
+        return versionRepo.getVersionsByIdDraw(idObjectes);
     }
 
 }

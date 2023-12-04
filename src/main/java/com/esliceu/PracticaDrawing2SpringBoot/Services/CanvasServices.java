@@ -132,7 +132,6 @@ public class CanvasServices {
         for (Object[] objects : listOb) {
             Canvas canvas = (Canvas) objects[0];
             Version version = (Version) objects[1];
-
             CanvasVersionDTO canvasVersionDTO = new CanvasVersionDTO();
             canvasVersionDTO.setIdObjectes(canvas.getIdObjectes());
             canvasVersionDTO.setNameCanvas(canvas.getNameCanvas());

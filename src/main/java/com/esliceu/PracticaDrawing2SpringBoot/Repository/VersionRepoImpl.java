@@ -1,12 +1,17 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.concurrent.RecursiveTask;
+
 @Repository
-public class VersionRepoImpl implements VersionRepo{
+public class VersionRepoImpl implements VersionRepo {
     @Autowired
     JdbcTemplate jdbcTemplate;
     @Override
@@ -28,7 +33,17 @@ public class VersionRepoImpl implements VersionRepo{
             throw new RuntimeException("Error al crear la nova versio", e);
         }
     }
-
+    @Override
+    public List<Version> getVersionsByIdDraw(int idDraw) {
+        try {
+            String query = "SELECT * FROM Version WHERE idDraw = ?";
+            List<Version> versionList= jdbcTemplate.query(query,
+                    new BeanPropertyRowMapper<>(Version.class),idDraw);
+            return versionList;
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener las versiones de idDraw " + idDraw, e);
+        }
+}
     /*
     @Override
     public boolean newVersionOfCanvas(String nameCanvas, Version version) {
@@ -51,8 +66,5 @@ public class VersionRepoImpl implements VersionRepo{
             throw new RuntimeException("Error al crear la nova versio", e);
         }
     }
-
      */
-
-
 }
