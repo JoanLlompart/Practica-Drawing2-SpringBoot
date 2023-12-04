@@ -38,7 +38,6 @@ public class AllCanvasController {
         model.addAttribute("name", name);
         return "allCanvas";
     }
-
     /*
     @PostMapping("/allCanvas")
     public String deleteCanvas(@RequestParam("id") int id, HttpSession session) {
@@ -49,7 +48,6 @@ public class AllCanvasController {
         }
         return "redirect:/allCanvas";
     }
-
      */
     @PostMapping("/trash")
     public String sendToTrash(@RequestParam("id") int id, HttpSession session) {

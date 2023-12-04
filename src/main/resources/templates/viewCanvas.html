@@ -33,7 +33,7 @@
     <input type="hidden" id="llistaFigureJson" name="llistaFigureJson" th:value="${llistaFigureJson}" />
     <input type="hidden" id="llistaStroke" name="llistaStroke" th:value="${llistaStroke}" />
     <canvas id="lienzo" width="800" height="550"></canvas>
-    <table>
+    <table  th:if="${not #lists.isEmpty(allUsers)}">
         <tr>
             <th>Email</th>
             <th>Nombre</th>

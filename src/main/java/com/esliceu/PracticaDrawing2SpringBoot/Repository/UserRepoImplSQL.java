@@ -37,23 +37,6 @@ public class UserRepoImplSQL implements UserRepo  {
             return null;
         }
     }
-
-    /*
-    @Override
-    public List<User> findAllUsersExceptUserSession(String emailSession) {
-        try {
-            String sqlUsers = "SELECT * FROM user WHERE email <> ?";
-            return jdbcTemplate.query(sqlUsers,new BeanPropertyRowMapper<>(User.class), emailSession);
-        } catch (EmptyResultDataAccessException e) {
-            System.err.println("No se ha encontrado el usuario");
-            System.out.println(e.getLocalizedMessage()+ e.getCause());
-            return null;
-        }
-    }
-
-     */
-
-
     @Override
     public List<User> findAllUsersExceptUserSession(String emailSession, int idObjectes) {
         try {
