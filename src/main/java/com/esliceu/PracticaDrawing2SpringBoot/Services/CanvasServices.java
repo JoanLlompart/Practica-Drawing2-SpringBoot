@@ -136,12 +136,12 @@ public class CanvasServices {
             canvasVersionDTO.setIdObjectes(canvas.getIdObjectes());
             canvasVersionDTO.setNameCanvas(canvas.getNameCanvas());
             canvasVersionDTO.setUser_email(canvas.getUser_email());
-            canvasVersionDTO.setDataCreacio(canvas.getDataCreacio()); // Convierte LocalDateTime a Date
+            canvasVersionDTO.setDataCreacio(canvas.getDataCreacio());
             canvasVersionDTO.setNumberObject(version.getNumberObject());
             canvasVersionDTO.setFigures(version.getFigures());
             canvasVersionDTO.setStrokes(version.getStrokes());
             canvasVersionDTO.setTrash(canvas.isTrash());
-            canvasVersionDTO.setDateLastModified( version.getDateLastModified()); // Convierte LocalDateTime a Date
+            canvasVersionDTO.setDateLastModified( version.getDateLastModified());
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }
@@ -192,7 +192,7 @@ public class CanvasServices {
             canvasVersionDTO.setFigures(version.getFigures());
             canvasVersionDTO.setStrokes(version.getStrokes());
             canvasVersionDTO.setTrash(canvas.isTrash());
-            canvasVersionDTO.setDateLastModified( version.getDateLastModified());
+            canvasVersionDTO.setDateLastModified(version.getDateLastModified());
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }

@@ -38,7 +38,6 @@ public class Version {
                 ", user_email='" + user_email + '\'' +
                 '}';
     }
-
     public Instant getDateLastModified() {
         return dateLastModified;
     }
