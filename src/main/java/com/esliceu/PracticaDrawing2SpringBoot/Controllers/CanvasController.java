@@ -36,7 +36,9 @@ public class CanvasController {
         System.out.println("Figuras amb json " + figureJson);
         if (strokJson.equals("[]") && figureJson.equals("[]")) {
             System.err.println("Error no hi ha contingut a aquest canvas");
-            throw new RuntimeException();
+            return "CanvasDraw";
+            //throw new RuntimeException();
+
         }
         String nameCanvas = req.getParameter("nomDibuix");
         //si el user no ha posat un nom se asigna automaticament.
