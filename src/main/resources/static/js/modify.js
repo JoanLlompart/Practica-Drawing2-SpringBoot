@@ -15,7 +15,6 @@ const nameDraw = document.getElementById("name");
 const isFilled = document.getElementById("rellenoFigura");
 //color que elegeix el usuari
 const colorElegit = document.getElementById("color");
-
 //variable per sebre si es pot pintar o no.
 let activaPintar = false;
 // Guarda los puntos que va pintando
