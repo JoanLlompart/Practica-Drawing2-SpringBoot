@@ -5,6 +5,7 @@ import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Permission;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.PermissionService;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.UserService;
@@ -44,7 +45,9 @@ public class ViewController {
         List<User> usersList=userService.allUsersExceptUserSession(email,idObjectes);
        // System.out.println("ID DE EL VIEWDTO" + canvasVersionDTO.getIdObjectes());
         canvasPermissionDTO.setIdCanvas(idObjectes);
-        versionService.getAllVersion(idObjectes);
+        //todo: falta poder elegir la versio.
+        List<Version> versionList = versionService.getAllVersion(idObjectes);
+
         model.addAttribute("allUsers", usersList);
         String nameUser=(String) session.getAttribute("name");
         model.addAttribute("name",nameUser);

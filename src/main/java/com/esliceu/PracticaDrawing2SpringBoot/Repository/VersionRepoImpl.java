@@ -27,10 +27,10 @@ public class VersionRepoImpl implements VersionRepo {
             int idCanvas = jdbcTemplate.queryForObject(canvasQuery, Integer.class, version.getIdDraw(), version.getUser_email());
             if (idCanvas > 0) { // Si se encuentra una coincidencia en Canvas
                 String insertQuery = "INSERT INTO Version (idDraw, figuresJSON, strokesJSON, dateLastModified, user_email, numberObject) " +
-                        "VALUES (?, ?, ?, ?, ?, ?)";
+                        "VALUES (?, ?, ?, NOW(), ?, ?)";
                 // Ejecutar la consulta de inserción
                 int rowsAffected = jdbcTemplate.update(insertQuery, version.getIdDraw(), version.getFigures(), version.getStrokes(),
-                        version.getDateLastModified(), version.getUser_email(), version.getNumberObject());
+                        version.getUser_email(), version.getNumberObject());
                 return rowsAffected > 0;
             } else {
                 return false;
@@ -75,7 +75,6 @@ public class VersionRepoImpl implements VersionRepo {
                 version.setStrokes(rs.getString("strokesJSON"));
                 version.setNumberObject(rs.getInt("numberObject"));
                 version.setUser_email(rs.getString("user_email"));
-
                 // Convertir java.sql.Date a java.time.Instant
                 Instant dateLastModified = null;
                 Timestamp dateLastModifiedTimestamp = rs.getTimestamp("dateLastModified");

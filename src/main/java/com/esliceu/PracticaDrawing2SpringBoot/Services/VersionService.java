@@ -19,7 +19,6 @@ public class VersionService {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
             this.canvasVersionDTO = canvasVersionDTO;
             Version version = new Version();
-            System.out.println("Service");
             System.out.println(canvasVersionDTO.toString());
             //Ara cream asignam els atributs a la clase version.
             version.setIdDraw(canvasVersionDTO.getIdObjectes());

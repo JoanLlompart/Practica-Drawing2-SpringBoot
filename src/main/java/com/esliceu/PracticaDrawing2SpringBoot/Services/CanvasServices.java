@@ -145,8 +145,8 @@ public class CanvasServices {
             canvasVersionDTO.setDateLastModified( version.getDateLastModified());
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
-            System.out.println("idObjectes" + canvasVersionDTOList);
         }
+
         return canvasVersionDTOList;
     }
 

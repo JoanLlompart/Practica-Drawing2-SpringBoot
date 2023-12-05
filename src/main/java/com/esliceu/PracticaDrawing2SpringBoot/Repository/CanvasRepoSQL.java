@@ -166,7 +166,6 @@ public class CanvasRepoSQL implements CanvasRepo{
                 if (dateLastModifiedTimestamp != null) {
                     dateLastModified = dateLastModifiedTimestamp.toInstant();
                 }
-
                 Canvas canvas = new Canvas();
                 canvas.setIdObjectes(id);
                 canvas.setNameCanvas(resultSet.getString("nameCanvas"));
