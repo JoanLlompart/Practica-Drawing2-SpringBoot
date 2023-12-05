@@ -75,8 +75,8 @@ public class VersionRepoImpl implements VersionRepo {
                 version.setStrokes(rs.getString("strokesJSON"));
                 version.setNumberObject(rs.getInt("numberObject"));
                 version.setUser_email(rs.getString("user_email"));
-                // Convertir java.sql.Date a java.time.Instant
 
+                // Convertir java.sql.Date a java.time.Instant
                 Instant dateLastModified = null;
                 Timestamp dateLastModifiedTimestamp = rs.getTimestamp("dateLastModified");
                 if (dateLastModifiedTimestamp != null) {
@@ -92,8 +92,6 @@ public class VersionRepoImpl implements VersionRepo {
             return Collections.emptyList();
         }
     }
-
-
 
 
 

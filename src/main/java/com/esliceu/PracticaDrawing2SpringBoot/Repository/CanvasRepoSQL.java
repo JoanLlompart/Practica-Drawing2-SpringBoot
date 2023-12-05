@@ -1,5 +1,6 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Permission;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.TakeCanvasException;
@@ -34,7 +35,7 @@ public class CanvasRepoSQL implements CanvasRepo{
     }
     @Override
     public List<Object[]> showAllCanvas(String sessionEmail) {
-        String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
+       String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
                 "FROM Canvas c " +
                 "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
                 "WHERE ((c.trash = false AND c.public = true) OR (c.user_email = ? AND c.public = false)) " +
@@ -71,6 +72,7 @@ public class CanvasRepoSQL implements CanvasRepo{
                 version.setFigures(figuresJSON);
                 version.setStrokes(strokesJSON);
                 version.setDateLastModified(dateLastModified);
+                Permission p = new Permission();
 
                 // Toran un array de objectes amb el Canvas i la Version asociada
                 return new Object[]{canvas, version};

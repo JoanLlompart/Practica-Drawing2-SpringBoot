@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class CanvasServices {
     @Autowired
@@ -144,9 +145,27 @@ public class CanvasServices {
             canvasVersionDTO.setDateLastModified( version.getDateLastModified());
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
+            System.out.println("idObjectes" + canvasVersionDTOList);
         }
         return canvasVersionDTOList;
     }
+
+    /*
+    public List<CanvasVersionDTO> showAllCanvasCanBeSee(String email) {
+        List<CanvasVersionDTO> listAll = showAllCanvas(email);
+        List<CanvasVersionDTO> canvasPermissionlist = getCanvasHavePermission(email);
+        listAll.addAll(canvasPermissionlist);
+        return listAll;
+    }
+
+
+    private List<CanvasVersionDTO> getCanvasHavePermission(String email) {
+         canvasRepo.showCanvasHavePermission(email);
+         return null;
+    }
+
+     */
+
     /*
     public List<Canvas> showAllCanvas() {
         return canvasRepo.showAllCanvas();

@@ -31,6 +31,7 @@ public class AllCanvasController {
             System.out.println(c.getIdObjectes());
         }
         */
+        if (listCanvas.isEmpty()) System.out.println("Llista buida");
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);
