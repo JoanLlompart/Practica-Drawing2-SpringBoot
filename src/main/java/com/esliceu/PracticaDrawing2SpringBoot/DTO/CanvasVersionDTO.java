@@ -1,6 +1,5 @@
 package com.esliceu.PracticaDrawing2SpringBoot.DTO;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.Column;
 import java.sql.Date;
 import java.time.Instant;
@@ -13,17 +12,19 @@ public class CanvasVersionDTO {
     private Instant dataCreacio;
     private int numberObject;
     @Column(name = "figuresJSON")
-    String figures;
+    private String figures;
     @Column(name = "strokesJSON")
-    String strokes;
-    boolean trash;
+    private String strokes;
+    private boolean trash;
     private Instant dateLastModified;
     private int version;
-
+    private boolean isPublic;
     public CanvasVersionDTO() {
 
     }
-    public CanvasVersionDTO(int idObjectes, String nameCanvas, String user_email, Instant dataCreacio, int numberObject, String figures, String strokes, boolean trash, Instant dateLastModified, int version) {
+    public CanvasVersionDTO(int idObjectes, String nameCanvas, String user_email, Instant dataCreacio,
+                            int numberObject, String figures, String strokes, boolean trash, Instant dateLastModified,
+                            int version, boolean isPublic) {
         this.idObjectes = idObjectes;
         this.nameCanvas = nameCanvas;
         this.user_email = user_email;
@@ -34,6 +35,7 @@ public class CanvasVersionDTO {
         this.trash = trash;
         this.dateLastModified = dateLastModified;
         this.version = version;
+        this.isPublic = isPublic;
     }
 
     @Override
@@ -49,7 +51,16 @@ public class CanvasVersionDTO {
                 ", trash=" + trash +
                 ", dateLastModified=" + dateLastModified +
                 ", version=" + version +
+                ", isPublic=" + isPublic +
                 '}';
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 
     public int getIdObjectes() {

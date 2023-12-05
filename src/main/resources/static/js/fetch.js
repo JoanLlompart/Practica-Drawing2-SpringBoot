@@ -86,7 +86,6 @@ function confirmDeleteCanvas(canvasId) {
         });
     }
     */
-
         function confirmDelete() {
             return confirm("¿Estás seguro de que quieres borrar el canvas definitivamente ? ");
         }

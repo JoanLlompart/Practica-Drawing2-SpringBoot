@@ -99,7 +99,6 @@ public class CanvasServices {
     }
 
      */
-
     public CanvasVersionDTO getCanvasToModify(int id, String emailSessionUser) throws NotYourCanvasException {
         //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.
         List<Object> canvasVersionList = canvasRepo.getCanvasById(id);
@@ -146,10 +145,8 @@ public class CanvasServices {
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }
-
         return canvasVersionDTOList;
     }
-
     /*
     public List<CanvasVersionDTO> showAllCanvasCanBeSee(String email) {
         List<CanvasVersionDTO> listAll = showAllCanvas(email);
@@ -195,7 +192,6 @@ public class CanvasServices {
         System.out.println("Probant que torna la llista de objectes " +c);
         return canvasVersionDTO;
     }
-
     public List<CanvasVersionDTO> showMyTrash(String emailSession) {
         List<Object[]> listOb = canvasRepo.showMyTrash(emailSession);
         List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();

@@ -66,6 +66,13 @@
             <input type="hidden" id="figuresData" name="figuresData">
             <input type="hidden" id="strokesData" name="strokesData">
             <br>
+            <div>
+                <p>Quieres que sea Publico?</p> <!--Afegir una info per especificar a l'usuari que es que sigui public-->
+                <label class="switch">
+                    <input type="checkbox" id="toggleVisibility" name="isPublic">
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <!--  <p>Nombre:</p>
             <label for="nomDibuix"></label>
             <input type="text" id="nomDibuix" name="nomDibuix">
@@ -84,5 +91,6 @@
         </form>
     </div>
     <script src="js/modify.js"></script>
+    <script src="/js/localStorage.js"></script>
 </body>
 </html>

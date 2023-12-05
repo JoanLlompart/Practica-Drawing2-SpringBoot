@@ -20,7 +20,7 @@ public class VersionRepoImpl implements VersionRepo {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Override
+  /*  @Override
     public boolean newVersionOfCanvas(String nameCanvas, Version version) {
         try {
             String canvasQuery = "SELECT idObjectes FROM Canvas WHERE idObjectes = ? AND user_email = ?";
@@ -39,6 +39,8 @@ public class VersionRepoImpl implements VersionRepo {
             throw new RuntimeException("Error al crear la nova versio", e);
         }
     }
+
+   */
 
     /*
     @Override
@@ -92,32 +94,65 @@ public class VersionRepoImpl implements VersionRepo {
         }
     }
 
-
-
-
-
-
-    /*
     @Override
-    public boolean newVersionOfCanvas(String nameCanvas, Version version) {
-        try {
-            String sqlPermissionCheck = "SELECT COUNT(*) FROM Permission WHERE idCanvas = ? AND user_email = ? AND permissionType = 'W'";
-            int permissionCount = jdbcTemplate.queryForObject(sqlPermissionCheck, Integer.class, version.getIdDraw(), version.getUser_email());
+    public boolean verifyUserCanWrite(Version version) {
+        String sql = "SELECT COUNT(*) " +
+                "FROM Permission AS p " +
+                "WHERE " +
+                "    (p.user_email = ? AND p.idCanvas = ? AND p.permissionType = 'W') " +
+                "    OR " +
+                "    ( " +
+                "        p.user_email = ? " +
+                "        AND p.idCanvas = ? " +
+                "        AND EXISTS ( " +
+                "            SELECT 1 " +
+                "            FROM Canvas AS c " +
+                "            WHERE c.idObjectes = ? AND c.user_email = ? " +
+                "        ) " +
+                "    )";
 
+        int permisCount = jdbcTemplate.queryForObject(sql, Integer.class, version.getUser_email(),
+                version.getIdDraw(),version.getUser_email(),version.getIdDraw(),version.getIdDraw(),version.getUser_email());
+        if (permisCount > 0) {
+            //El usuari o be es el propietario o te permis per editar el dibuix.
+            return true;
+        } else {
+            //No te permisos per per realitzar modificacions
+            return false;
+        }
+    }
+
+
+    @Override
+    public boolean newVersionOfCanvas(String nameCanvas, Version version, boolean isPublic) {
+        /*
+            String sqlPermissionCheck = "SELECT COUNT(*) " +
+                    "FROM Permission AS p " +
+                    "WHERE p.user_email = ? " +
+                    "    AND p.idCanvas = ? " +
+                    "    AND p.permissionType = 'W'";
+            //String sqlPermissionCheck = "SELECT COUNT(*) FROM Permission WHERE idCanvas = ? AND user_email = ? ";
+
+            //int permissionCount = jdbcTemplate.queryForObject(sqlPermissionCheck, Integer.class, version.getIdDraw(), version.getUser_email());
+            int permissionCount = jdbcTemplate.queryForObject(sqlPermissionCheck, Integer.class, version.getUser_email(),
+                    version.getIdDraw());
             if (permissionCount > 0) {
+        */
+                try {
                 // El usuario tiene permisos, realizar la inserción de la versión
                 String sqlInsertVersion = "INSERT INTO Version (idDraw, figuresJSON, strokesJSON, dateLastModified, user_email, numberObject) VALUES (?, ?, ?, NOW(), ?, ?)";
-                jdbcTemplate.update(sqlInsertVersion, version.getIdDraw(), version.getFigures(), version.getStrokes(), version.getUser_email(),version.getNumberObject());
+                jdbcTemplate.update(sqlInsertVersion, version.getIdDraw(), version.getFigures(), version.getStrokes(), version.getUser_email(), version.getNumberObject());
                 // Actualizar el nombre del Canvas en la tabla Canvas
                 String sqlUpdateCanvasName = "UPDATE Canvas SET nameCanvas = ? WHERE idObjectes = ?";
                 jdbcTemplate.update(sqlUpdateCanvasName, nameCanvas, version.getIdDraw());
-                return true;
-            } else {
-               throw new NotYourCanvasException("No tens permis per modificar el canvas");
+         /*   } else {
+                throw new NotYourCanvasException("No tens permis per modificar el canvas");
             }
+          */
         } catch (Exception e) {
             throw new RuntimeException("Error al crear la nova versio", e);
         }
+        return true;
     }
-     */
+
 }

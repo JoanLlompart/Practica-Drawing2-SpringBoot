@@ -14,10 +14,16 @@ public class VersionService {
     CanvasVersionDTO canvasVersionDTO;
     @Autowired
     VersionRepo versionRepo;
-    public boolean newVersionCanvas(CanvasVersionDTO canvasVersionDTO) {
+    public boolean newVersionCanvas(CanvasVersionDTO canvasVersionDTO,String isPub) {
         try {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
             this.canvasVersionDTO = canvasVersionDTO;
+            if (isPub == null) {
+                canvasVersionDTO.setPublic(false);
+            }else if (isPub.equals("on")) {
+                canvasVersionDTO.setPublic(true);
+            }
+
             Version version = new Version();
             System.out.println(canvasVersionDTO.toString());
             //Ara cream asignam els atributs a la clase version.
@@ -29,12 +35,16 @@ public class VersionService {
             version.setNumberObject(canvasVersionDTO.getNumberObject());
             version.setUser_email(canvasVersionDTO.getUser_email());
             String nameCanvas = canvasVersionDTO.getNameCanvas();
+            boolean isPublic = canvasVersionDTO.isPublic();
             //Pasam tots els parametres de Version i el nameCanvas a la funcio de newVersionOfCanvas
-            return versionRepo.newVersionOfCanvas(nameCanvas, version);
+            // return versionRepo.newVersionOfCanvas(nameCanvas, version);
+            if (versionRepo.verifyUserCanWrite(version)) {
+                return versionRepo.newVersionOfCanvas(nameCanvas, version,isPublic);
+            }
         }catch (Exception e) {
             System.out.println(e.getCause()+ e.getLocalizedMessage());
-            return false;
         }
+        return false;
     }
     public List<Version> getAllVersion(int idObjectes) {
         return versionRepo.getVersionsByIdDraw(idObjectes);

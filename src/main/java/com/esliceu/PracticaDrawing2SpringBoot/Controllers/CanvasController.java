@@ -38,7 +38,6 @@ public class CanvasController {
             System.err.println("Error no hi ha contingut a aquest canvas");
             return "CanvasDraw";
             //throw new RuntimeException();
-
         }
         String nameCanvas = req.getParameter("nomDibuix");
         //si el user no ha posat un nom se asigna automaticament.

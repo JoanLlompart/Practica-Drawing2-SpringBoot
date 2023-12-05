@@ -73,6 +73,7 @@ public class ModifyController {
     public String saveCanvas(@RequestParam("strokesData") String strokJson,
                              @RequestParam("figuresData") String figureJson,
                              @RequestParam("nomDibuix") String nameCanvas,
+                             HttpServletRequest req,
                              HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
@@ -91,12 +92,14 @@ public class ModifyController {
         if (nameCanvas == null || nameCanvas.isEmpty()) {
             nameCanvas = canvasServices.generarNom(nameCanvas);
         }
+
+        String isPub = req.getParameter("isPublic");
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
         //Actualitzam els valors de la nova versio i el nous JSON
         canvasVersionDTO.setStrokes(strokJson);
         canvasVersionDTO.setFigures(figureJson);
         System.out.println(canvasVersionDTO.toString());
-        if(versionService.newVersionCanvas(canvasVersionDTO)) {
+        if(versionService.newVersionCanvas(canvasVersionDTO,isPub)) {
             System.out.println("Se ha actualitzat correctament");
         } else {
             System.out.println("No se ha pogut crear la nova versio");
