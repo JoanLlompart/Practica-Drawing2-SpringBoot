@@ -126,8 +126,6 @@ public class CanvasRepoSQL implements CanvasRepo{
             return false;
         }
     }
-
-
     @Transactional
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
         //Nomes valid per guardar el canvas per primer pic, si no se actualitzara la data de creacio per ara.

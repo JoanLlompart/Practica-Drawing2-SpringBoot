@@ -40,11 +40,13 @@ public class VersionService {
             // return versionRepo.newVersionOfCanvas(nameCanvas, version);
             if (versionRepo.verifyUserCanWrite(version)) {
                 return versionRepo.newVersionOfCanvas(nameCanvas, version,isPublic);
+            } else {
+                return false;
             }
         }catch (Exception e) {
             System.out.println(e.getCause()+ e.getLocalizedMessage());
+            throw new RuntimeException();
         }
-        return false;
     }
     public List<Version> getAllVersion(int idObjectes) {
         return versionRepo.getVersionsByIdDraw(idObjectes);
