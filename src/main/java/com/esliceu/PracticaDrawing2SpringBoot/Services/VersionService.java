@@ -23,7 +23,6 @@ public class VersionService {
             }else if (isPub.equals("on")) {
                 canvasVersionDTO.setPublic(true);
             }
-
             Version version = new Version();
             System.out.println(canvasVersionDTO.toString());
             //Ara cream asignam els atributs a la clase version.
