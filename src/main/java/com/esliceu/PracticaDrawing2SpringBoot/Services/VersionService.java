@@ -41,7 +41,7 @@ public class VersionService {
             //Pasam tots els parametres de Version i el nameCanvas a la funcio de newVersionOfCanvas
             // return versionRepo.newVersionOfCanvas(nameCanvas, version);
             if (versionRepo.verifyUserCanWrite(version)) {
-                if (compareVersionChange()) {
+                if (compareVersionChange(version,nameCanvas,isPublic)) {
                     return versionRepo.newVersionOfCanvas(nameCanvas, version,isPublic);
                 } else {
                     System.out.println("No se ha modificado el Canvas");
@@ -56,11 +56,57 @@ public class VersionService {
             throw new RuntimeException();
         }
     }
+
+
+
     public List<Version> getAllVersion(int idObjectes) {
         //if (versionRepo.verifyUserCanRead())
         return versionRepo.getVersionsByIdDraw(idObjectes);
     }
-    public boolean compareVersionChange() {
+    public boolean compareVersionChange(Version version,String nameCanvas, boolean isPublic) {
+        //Agafar la darrera Versio de el dibuix amb aquest id i la comparam els json.
+        int idCanvas =version.getIdDraw();
+
+        String nameCanvasNew=nameCanvas;
+
+        //Comproba el nameCanvas actual en la base de dades per mirar si ha cambiat
+        String nameCanvasOld = versionRepo.getNameCanvasById(idCanvas);
+        Version vOld=versionRepo.getLastVersionByCanvasId(idCanvas);
+
+        System.out.println(vOld.toString());
+
+        String strokOld = vOld.getStrokes();
+        System.out.println("Strokes old" + strokOld);
+        String figuresOld = vOld.getFigures();
+        System.out.println("figures Old " + figuresOld);
+
+        String strokesNew = version.getStrokes();
+        System.out.println("Strokes nou "+strokesNew);
+        String figuresNew = version.getFigures();
+        System.out.println("FIGURES NEW " + figuresNew);
+
+        //boolean strokesJson = compareJSONContent(vOld.getStrokes(),canvasVersionDTO.getStrokes());
+        //System.out.println("Strokes han cambiat ?? " + strokesJson);
+
+        //boolean figuresJson = compareJSONContent(vOld.getFigures(),canvasVersionDTO.getFigures());
+        //System.out.println("Figures ha cambiat ? " + figuresJson);
+
+        boolean  strokesJson= strokesNew.equals(strokOld);
+        boolean figuresJson = figuresNew.equals(figuresOld);
+
+        System.out.println("boolean figures" + figuresJson);
+        if (!figuresJson || !strokesJson) { //falta el nom
+            //Todo: falta compara la visibilitat
+            System.out.println("Els Json han cambiat");
+            //Si els Json han cambiat guardam la nova versio a la base de dades.
+            return true;
+        }
+        //Tenir en compte si el boolean de Public ha cambiat i tambe comparar els dos json a la vegada if s1.equals(s2) and ...
+        return false;
+    }
+
+    /*
+    public boolean compareVersionChange(Version version,String nameCanvas, boolean isPublic) {
         //Agafar la darrera Versio de el dibuix amb aquest id i la comparam els json.
         int idCanvas = canvasVersionDTO.getIdObjectes();
         String nameCanvasNew=canvasVersionDTO.getNameCanvas();
@@ -90,6 +136,7 @@ public class VersionService {
         boolean  strokesJson= strokesNew.equals(strokOld);
         boolean figuresJson = figuresNew.equals(figuresOld);
 
+        System.out.println("boolean figures" + figuresJson);
         if (!figuresJson || !strokesJson) { //falta el nom
             //Todo: falta compara la visibilitat
             System.out.println("Els Json han cambiat");
@@ -99,6 +146,8 @@ public class VersionService {
         //Tenir en compte si el boolean de Public ha cambiat i tambe comparar els dos json a la vegada if s1.equals(s2) and ...
         return false;
     }
+     */
+
 
 
    /* public static boolean compareJSONContent(String json1, String json2) {

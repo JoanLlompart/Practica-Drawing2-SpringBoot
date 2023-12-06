@@ -122,6 +122,8 @@ public class ModifyController {
         System.out.println("Id de el canvas" + canvasVersionDTO.getIdObjectes());
         String strokJson = modifyCanvasVersionDTO.getStrokesData();
         String figureJson = modifyCanvasVersionDTO.getFiguresData();
+        System.out.println("---------ModifyController--------");
+        System.out.println(figureJson);
         String nameCanvas = modifyCanvasVersionDTO.getNameCanvas();
         String isPub = modifyCanvasVersionDTO.getIsPublic();
 
