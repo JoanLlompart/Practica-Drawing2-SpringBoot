@@ -238,4 +238,20 @@ public class CanvasRepoSQL implements CanvasRepo{
             return Collections.emptyList();
         }
     }
+
+    @Override
+    public Canvas compareStatusCanvas(int idCanvas) {
+        String sql = "SELECT * FROM Canvas WHERE idObjectes=?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{idCanvas}, (rs, rowNum) -> {
+            Canvas canvas = new Canvas();
+            canvas.setPublicDraw(rs.getBoolean("public"));
+            canvas.setTrash(rs.getBoolean("trash"));
+            canvas.setNameCanvas("nameCanvas");
+            Timestamp timestamp=rs.getTimestamp("dataCreacio");
+            canvas.setDataCreacio(Instant.ofEpochMilli(timestamp.getTime()));
+            System.out.println("Instant time : " + canvas.getDataCreacio());
+            canvas.setUser_email(rs.getString("user_email"));
+            return canvas;
+        });
+    }
 }

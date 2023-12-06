@@ -1,7 +1,9 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Services;
 
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
+import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepo;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.VersionRepo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +18,9 @@ public class VersionService {
     CanvasVersionDTO canvasVersionDTO;
     @Autowired
     VersionRepo versionRepo;
+
+    @Autowired
+    CanvasRepo canvasRepo;
     public boolean newVersionCanvas(CanvasVersionDTO canvasVersionDTO,String isPub) {
         try {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
@@ -70,10 +75,15 @@ public class VersionService {
         String nameCanvasNew=nameCanvas;
 
         //Comproba el nameCanvas actual en la base de dades per mirar si ha cambiat
-        String nameCanvasOld = versionRepo.getNameCanvasById(idCanvas);
+        //String nameCanvasOld = versionRepo.getNameCanvasById(idCanvas);
         Version vOld=versionRepo.getLastVersionByCanvasId(idCanvas);
+       // System.out.println(vOld.toString());
 
-        System.out.println(vOld.toString());
+        Canvas c =canvasRepo.compareStatusCanvas(idCanvas);
+        String nameCanvasOld = c.getNameCanvas();
+        boolean publicOld = c.isPublicDraw();
+
+        boolean publicChange = publicOld == isPublic;
 
         String strokOld = vOld.getStrokes();
         System.out.println("Strokes old" + strokOld);
@@ -93,9 +103,10 @@ public class VersionService {
 
         boolean  strokesJson= strokesNew.equals(strokOld);
         boolean figuresJson = figuresNew.equals(figuresOld);
+        boolean nameCanv = nameCanvasNew.equals(nameCanvasOld);
 
         System.out.println("boolean figures" + figuresJson);
-        if (!figuresJson || !strokesJson) { //falta el nom
+        if (!figuresJson || !strokesJson || !nameCanv || !publicChange) { //falta el nom
             //Todo: falta compara la visibilitat
             System.out.println("Els Json han cambiat");
             //Si els Json han cambiat guardam la nova versio a la base de dades.

@@ -73,6 +73,8 @@ const guardarDatos = () => {
 const figuresData = document.getElementById('llistaFigureJson').value;
 const strokesData = document.getElementById('llistaStroke').value;
 
+console.log("figuresData" + figuresData);
+console.log("strokesData "+ strokesData);
 // Datos adicionales que quieras enviar
 const nameCanvas = document.getElementById('nomDibuix').value;
 const isPublic = document.getElementById('toggleVisibility').checked;
@@ -84,7 +86,7 @@ const data = {
     nomDibuix: nameCanvas,
     isPublic: isPublic
 };
-
+console.log(data);
 // Realizar la solicitud POST al servidor
 fetch('/modify', {
     method: 'POST',

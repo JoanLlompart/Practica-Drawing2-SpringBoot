@@ -1,4 +1,5 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface VersionRepo {
     Version getLastVersionByCanvasId(int idCanvas);
 
     String getNameCanvasById(int idCanvas);
+
 }

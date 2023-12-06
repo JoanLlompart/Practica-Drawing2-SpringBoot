@@ -1,5 +1,6 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

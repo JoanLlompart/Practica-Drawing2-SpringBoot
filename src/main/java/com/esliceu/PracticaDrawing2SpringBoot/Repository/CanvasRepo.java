@@ -16,5 +16,8 @@ public interface CanvasRepo {
     List<Object>  getCanvasById(int id);
     List<Object[]> showMyTrash(String emailSessio);
 
+    Canvas compareStatusCanvas(int idCanvas);
+
+
     //List<Object[]> showCanvasHavePermission(String email);
 }
