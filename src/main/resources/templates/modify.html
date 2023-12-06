@@ -53,7 +53,9 @@
             <span class="slider round"></span>
         </label>
         <br>
-        <form id="drawForm" action="/modify" method="post">
+        <section>
+
+        
             <p>Opcions:</p>
             <select id="selectorFigura">
                 <option value="sinSeleccionar">Selecciona una Figura</option>
@@ -62,9 +64,10 @@
                 <option value="triangle">Triángulo</option>
                 <option value="estrella">Estrella</option>
             </select>
-            <button id="guardarDibuix" type="submit">Guardar</button>
+            <button id="guardarDibuix" >Guardar</button>
             <input type="hidden" id="figuresData" name="figuresData">
             <input type="hidden" id="strokesData" name="strokesData">
+        
             <br>
             <div>
                 <p>Quieres que sea Publico?</p> <!--Afegir una info per especificar a l'usuari que es que sigui public-->
@@ -88,9 +91,11 @@
             <br>
             <label for="tamaño">Tamaño de los elementos</label>
             <input type="range" id="tamaño" name="tamaño" min="1" max="200" value="50">
-        </form>
+        </section>
     </div>
     <script src="js/modify.js"></script>
     <script src="/js/localStorage.js"></script>
+    <script src="/js/fetchModify.js"></script>
+
 </body>
 </html>

@@ -330,6 +330,8 @@ canvas.addEventListener("mousedown", mouseDown);
 canvas.addEventListener("mouseup", mouseUp);
 canvas.addEventListener("click", dibuixarFigure);
 
+//comentar per probar fetch
+/* 
 saveDraw.addEventListener("click", () => {
     const figuresJson = drawingData.getFiguresJSON();
     const strokesJson = drawingData.getStrokesJSON();
@@ -345,6 +347,7 @@ saveDraw.addEventListener("click", () => {
     console.log("Strokes JSON:", strokesJson);
 });
 
+*/
 
 // Asocia el botó "Dibujar" amb la función de activar el pintar
 //dibuix.addEventListener("click", activarDibuix);
