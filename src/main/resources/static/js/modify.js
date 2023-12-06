@@ -21,6 +21,10 @@ let activaPintar = false;
 let punts = [];
 // Función para cargar figuras y trazos desde JSON al canvas
 
+//temporitzador.
+let timerId;
+
+
 const figuras = JSON.parse(figuresJSON.value);
 const strokes = JSON.parse(strokesJSON.value);
 function cargarFigurasYTrazos() {
@@ -330,8 +334,14 @@ canvas.addEventListener("mousedown", mouseDown);
 canvas.addEventListener("mouseup", mouseUp);
 canvas.addEventListener("click", dibuixarFigure);
 
+
+
+
+
+
+
 //comentar per probar fetch
-/* 
+/*
 saveDraw.addEventListener("click", () => {
     const figuresJson = drawingData.getFiguresJSON();
     const strokesJson = drawingData.getStrokesJSON();
@@ -346,8 +356,86 @@ saveDraw.addEventListener("click", () => {
     console.log("Figures JSON:", figuresJson);
     console.log("Strokes JSON:", strokesJson);
 });
-
 */
+
+//ptoba de Fetch
+
+
+canvas.addEventListener("mouseout", () => {
+    console.log("mouseout");
+
+    // Si el temporizador está activo (previene múltiples temporizadores)
+    if (timerId) {
+        clearTimeout(timerId);
+    }
+
+    // Iniciar un temporizador para guardar después de 20 segundos
+    timerId = setTimeout(() => {
+        console.log("Han pasado 20 segundos desde mouseout, guardando los datos...");
+        guardarDatos(); // Esta función debería contener tu lógica para enviar los datos al servidor
+    }, 20000); // 20 segundos (20000 milisegundos)
+});
+
+// Cancelar el temporizador si el usuario regresa al canvas antes de 20 segundos
+canvas.addEventListener("mouseenter", () => {
+    if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+    }
+});
+
+const guardarDatos = () => {
+    //const figuresJson = drawingData.getFiguresJSON();
+    //const strokesJson = drawingData.getStrokesJSON();
+    const figuresJson = drawingData.getFiguresJSON();
+    const strokesJson = drawingData.getStrokesJSON();
+
+
+    document.getElementById("figuresData").value = figuresJson;
+    document.getElementById("strokesData").value = strokesJson;
+
+    console.log(figuresJSON);
+    console.log(strokesJSON);
+    const data = {
+        figuresData: figuresJson,
+        strokesData: strokesJson
+    };
+
+    fetch('/modify', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al enviar los datos al servidor');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Datos enviados correctamente:', data);
+    })
+    .catch(error => {
+        console.error('Error al enviar datos:', error);
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Asocia el botó "Dibujar" amb la función de activar el pintar
 //dibuix.addEventListener("click", activarDibuix);

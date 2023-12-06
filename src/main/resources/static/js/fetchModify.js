@@ -1,4 +1,4 @@
-const saveButton = document.createElement('guardarDibuix');
+/*const saveButton = document.createElement('guardarDibuix');
 // Event listener para el botón de guardar
 saveButton.addEventListener("click", () => {
     console.log("Save button")
@@ -40,3 +40,43 @@ async function saveFigures() {
             showMessage('Error al realizar la solicitud: ' + error.message, false);
     }
 }
+*/
+// Obtener los datos que deseas enviar al servidor
+const figuresData = document.getElementById('llistaFigureJson').value;
+const strokesData = document.getElementById('llistaStroke').value;
+
+// Datos adicionales que quieras enviar
+const nombreCanvas = document.getElementById('nomDibuix').value;
+const isPublico = document.getElementById('toggleVisibility').checked;
+
+// Crear el objeto con los datos a enviar
+const data = {
+    strokesData: strokesData,
+    figuresData: figuresData,
+    nomDibuix: nameCanvas,
+    isPublic: isPublic
+};
+
+// Realizar la solicitud POST al servidor
+fetch('/modify', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json' // Especificar el tipo de contenido como JSON
+    },
+    body: JSON.stringify(data) // Convertir el objeto a JSON
+})
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al enviar los datos al servidor');
+        }
+        return response.json(); // Si el servidor responde con JSON, parsea la respuesta
+    })
+    .then(data => {
+        // Manejar la respuesta del servidor si es necesario
+        console.log('Datos enviados correctamente:', data);
+    })
+    .catch(error => {
+        // Manejar cualquier error que ocurra durante la solicitud
+        console.error('Error al enviar datos:', error);
+    });
+

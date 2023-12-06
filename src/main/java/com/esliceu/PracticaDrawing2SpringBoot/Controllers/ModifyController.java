@@ -1,6 +1,7 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
 
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
+import com.esliceu.PracticaDrawing2SpringBoot.DTO.ModifyCanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.CanvasServices;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -33,7 +35,6 @@ public class ModifyController {
         String email = (String) session.getAttribute("email");
         try {
            canvasVersionDTO = canvasServices.getCanvasToModify(idObjectes, email);
-
             String nameUser = (String) session.getAttribute("name");
             //System.out.println("print figures" + canvasVersionDTO.getFigures());
             //System.out.println("print strokes" + canvasVersionDTO.getStrokes());
@@ -69,6 +70,7 @@ public class ModifyController {
 
         */
     }
+    /*
     @PostMapping("/modify")
     public String saveCanvas(@RequestParam("strokesData") String strokJson,
                              @RequestParam("figuresData") String figureJson,
@@ -105,5 +107,53 @@ public class ModifyController {
             System.out.println("No se ha pogut crear la nova versio");
         }
         return "canvasDraw";
+    }
+
+     */
+
+
+
+    @PostMapping("/modify")
+    public String saveCanvas(@RequestBody ModifyCanvasVersionDTO modifyCanvasVersionDTO,
+                             HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        userService.setEmail(email);
+
+        System.out.println("Id de el canvas" + canvasVersionDTO.getIdObjectes());
+        String strokJson = modifyCanvasVersionDTO.getStrokesData();
+        String figureJson = modifyCanvasVersionDTO.getFiguresData();
+        String nameCanvas = modifyCanvasVersionDTO.getNameCanvas();
+        String isPub = modifyCanvasVersionDTO.getIsPublic();
+
+
+        if (strokJson.equals("[]") && figureJson.equals("[]")) {
+            System.err.println("Error no hi ha contingut a aquest canvas");
+            throw new RuntimeException();
+        }
+        // String nameCanvas = req.getParameter("nomDibuix");
+        //si el user no ha posat un nom se asigna automaticament.
+        System.out.println("Nom" + nameCanvas);
+        if (nameCanvas == null || nameCanvas.isEmpty()) {
+            nameCanvas = canvasServices.generarNom(nameCanvas);
+        }
+
+        //String isPub = req.getParameter("isPublic");
+
+        System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
+        //Actualitzam els valors de la nova versio i el nous JSON
+        canvasVersionDTO.setStrokes(strokJson);
+        canvasVersionDTO.setFigures(figureJson);
+
+        System.out.println(canvasVersionDTO.toString());
+
+        if(versionService.newVersionCanvas(canvasVersionDTO,isPub)) {
+            System.out.println("Se ha actualitzat correctament");
+            return "Se ha creat una nova versio de el canvas";
+        } else {
+
+            System.out.println("No se ha pogut crear la nova versio");
+            return "Datos no recibidos correctamente";
+        }
+       // return "canvasDraw";
     }
 }
