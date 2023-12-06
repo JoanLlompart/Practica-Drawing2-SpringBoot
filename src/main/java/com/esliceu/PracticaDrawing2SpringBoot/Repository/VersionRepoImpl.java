@@ -93,39 +93,12 @@ public class VersionRepoImpl implements VersionRepo {
             return Collections.emptyList();
         }
     }
-
     @Override
     public boolean verifyUserCanWrite(Version version) {
-        System.out.println("userEmail" + version.getUser_email());
-        System.out.println("idCanvas" + version.getIdDraw());
-
-       /* String sql = "SELECT COUNT(*) " +
-                "FROM Permission AS p " +
-                "WHERE " +
-                "    (p.user_email = ? AND p.idCanvas = ? AND p.permissionType = 'W') " +
-                "    OR " +
-                "    ( " +
-                "        p.user_email = ? " +
-                "        AND p.idCanvas = ? " +
-                "        AND EXISTS ( " +
-                "            SELECT 1 " +
-                "            FROM Canvas AS c " +
-                "            WHERE c.idObjectes = ? AND c.user_email = ? " +
-                "        ) " +
-                "    )";
-        int permisCount = jdbcTemplate.queryForObject(sql, Integer.class, version.getUser_email(),
-                version.getIdDraw(),version.getUser_email(),version.getIdDraw(),version.getIdDraw(),version.getUser_email());
-
-        */
-
         String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE permissionType ='W' AND idCanvas=? AND user_email= ?";
-        int permisCount = jdbcTemplate.queryForObject(sqlPermission,Integer.class,version.getIdDraw(),version.getUser_email());
-        System.out.println("permisCount primera " + permisCount);
-
+        int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), version.getUser_email());
         String slqOwner = "SELECT COUNT(*) FROM Canvas WHERE idObjectes =? AND user_email= ? AND trash =false";
-        permisCount = jdbcTemplate.queryForObject(slqOwner,Integer.class,version.getIdDraw(),version.getUser_email());
-
-        System.out.println("permisCount Fi" + permisCount);
+        permisCount = jdbcTemplate.queryForObject(slqOwner, Integer.class, version.getIdDraw(), version.getUser_email());
         if (permisCount > 0) {
             //El usuari o be es el propietario o te permis per editar el dibuix.
             System.out.println("te permis");
@@ -155,7 +128,7 @@ public class VersionRepoImpl implements VersionRepo {
                 "        ) " +
                 "    )";
         int permisCount = jdbcTemplate.queryForObject(sql, Integer.class, version.getUser_email(),
-                version.getIdDraw(),version.getUser_email(),version.getIdDraw(),version.getIdDraw(),version.getUser_email());
+                version.getIdDraw(), version.getUser_email(), version.getIdDraw(), version.getIdDraw(), version.getUser_email());
         if (permisCount > 0) {
             //El usuari o be es el propietario o te permis per editar el dibuix.
             return true;
@@ -164,6 +137,7 @@ public class VersionRepoImpl implements VersionRepo {
             return false;
         }
     }
+
     @Override
     public boolean newVersionOfCanvas(String nameCanvas, Version version, boolean isPublic) {
         /*
@@ -179,21 +153,17 @@ public class VersionRepoImpl implements VersionRepo {
                     version.getIdDraw());
             if (permissionCount > 0) {
         */
-                try {
-                // El usuario tiene permisos, realizar la inserción de la versión
-                String sqlInsertVersion = "INSERT INTO Version (idDraw, figuresJSON, strokesJSON, dateLastModified, user_email, numberObject) VALUES (?, ?, ?, NOW(), ?, ?)";
-                jdbcTemplate.update(sqlInsertVersion, version.getIdDraw(), version.getFigures(), version.getStrokes(), version.getUser_email(), version.getNumberObject());
-                // Actualizar el nombre del Canvas en la tabla Canvas
-                String sqlUpdateCanvasName = "UPDATE Canvas SET nameCanvas = ? WHERE idObjectes = ?";
-                jdbcTemplate.update(sqlUpdateCanvasName, nameCanvas, version.getIdDraw());
-         /*   } else {
-                throw new NotYourCanvasException("No tens permis per modificar el canvas");
-            }
-          */
+        try {
+            // El usuario tiene permisos, realizar la inserción de la versión
+            String sqlInsertVersion = "INSERT INTO Version (idDraw, figuresJSON, strokesJSON, dateLastModified, user_email, numberObject) VALUES (?, ?, ?, NOW(), ?, ?)";
+            jdbcTemplate.update(sqlInsertVersion, version.getIdDraw(), version.getFigures(), version.getStrokes(), version.getUser_email(), version.getNumberObject());
+            // Actualizar el nombre del Canvas en la tabla Canvas
+            String sqlUpdateCanvasName = "UPDATE Canvas SET nameCanvas = ? WHERE idObjectes = ?";
+            jdbcTemplate.update(sqlUpdateCanvasName, nameCanvas, version.getIdDraw());
+            return true;
+
         } catch (Exception e) {
             throw new RuntimeException("Error al crear la nova versio", e);
         }
-        return true;
     }
-
 }

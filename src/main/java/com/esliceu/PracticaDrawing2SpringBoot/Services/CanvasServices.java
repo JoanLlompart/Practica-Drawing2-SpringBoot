@@ -141,7 +141,7 @@ public class CanvasServices {
             canvasVersionDTO.setFigures(version.getFigures());
             canvasVersionDTO.setStrokes(version.getStrokes());
             canvasVersionDTO.setTrash(canvas.isTrash());
-            canvasVersionDTO.setDateLastModified( version.getDateLastModified());
+            canvasVersionDTO.setDateLastModified(version.getDateLastModified());
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }
