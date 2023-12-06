@@ -23,6 +23,7 @@ public class VersionService {
             }else if (isPub.equals("on")) {
                 canvasVersionDTO.setPublic(true);
             }
+            System.out.println("public? " +canvasVersionDTO.isPublic());
             Version version = new Version();
             System.out.println(canvasVersionDTO.toString());
             //Ara cream asignam els atributs a la clase version.
@@ -40,6 +41,7 @@ public class VersionService {
             if (versionRepo.verifyUserCanWrite(version)) {
                 return versionRepo.newVersionOfCanvas(nameCanvas, version,isPublic);
             } else {
+                System.out.println("Fallo en Version Services");
                 return false;
             }
         }catch (Exception e) {

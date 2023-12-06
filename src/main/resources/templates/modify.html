@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Modificar Canvas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" sizes="180x180" href="/src/main/resources/static/favicon_package_v0-2/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="/src/main/resources/static/favicon_package_v0-2/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_package_v0-2/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon_package_v0-2/favicon-16x16.png">
     <link rel="manifest" href="/favicon_package_v0-2/site.webmanifest">
@@ -16,6 +18,7 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <header>
         <div class="header">
@@ -54,6 +57,14 @@
             </section>
         </div>
     </div>
+
+    <!-- Mensajes de éxito o error 
+        <p>¡Se ha creado una nueva versión del canvas!</p>
+    </div>
+    <div th:if="${message-error}">
+        <p>Error: Datos no recibidos correctamente</p>
+    </div>
+-->
     <br>
     <div class="dataContainer">
         <p>Dibujar</p>
@@ -64,7 +75,7 @@
         <br>
         <section>
 
-        
+
             <p>Opcions:</p>
             <select id="selectorFigura">
                 <option value="sinSeleccionar">Selecciona una Figura</option>
@@ -73,13 +84,14 @@
                 <option value="triangle">Triángulo</option>
                 <option value="estrella">Estrella</option>
             </select>
-            <button id="guardarDibuix" >Guardar</button>
+            <button id="guardarDibuix">Guardar</button>
             <input type="hidden" id="figuresData" name="figuresData">
             <input type="hidden" id="strokesData" name="strokesData">
-        
+
             <br>
             <div>
-                <p>Quieres que sea Publico?</p> <!--Afegir una info per especificar a l'usuari que es que sigui public-->
+                <p>Quieres que sea Publico?</p>
+                <!--Afegir una info per especificar a l'usuari que es que sigui public-->
                 <label class="switch">
                     <input type="checkbox" id="toggleVisibility" name="isPublic">
                     <span class="slider round"></span>
@@ -104,7 +116,8 @@
     </div>
     <script src="js/modify.js"></script>
     <script src="/js/localStorage.js"></script>
-   <!-- <script src="/js/fetchModify.js"></script>-->
+    <script src="/js/fetchModify.js"></script>
 
 </body>
+
 </html>

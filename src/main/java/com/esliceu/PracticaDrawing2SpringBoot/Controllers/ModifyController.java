@@ -115,7 +115,7 @@ public class ModifyController {
 
     @PostMapping("/modify")
     public String saveCanvas(@RequestBody ModifyCanvasVersionDTO modifyCanvasVersionDTO,
-                             HttpSession session) {
+                             HttpSession session,Model model) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
 
@@ -138,22 +138,21 @@ public class ModifyController {
         }
 
         //String isPub = req.getParameter("isPublic");
-
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
         //Actualitzam els valors de la nova versio i el nous JSON
         canvasVersionDTO.setStrokes(strokJson);
         canvasVersionDTO.setFigures(figureJson);
-
         System.out.println(canvasVersionDTO.toString());
 
         if(versionService.newVersionCanvas(canvasVersionDTO,isPub)) {
             System.out.println("Se ha actualitzat correctament");
-            return "Se ha creat una nova versio de el canvas";
+           // model.addAttribute("message-ok",true);
+           // return "Se ha creat una nova versio de el canvas";
         } else {
-
             System.out.println("No se ha pogut crear la nova versio");
-            return "Datos no recibidos correctamente";
+            //model.addAttribute("message-error",true);
+            //return "Datos no recibidos correctamente";
         }
-       // return "canvasDraw";
+        return "modify";
     }
 }

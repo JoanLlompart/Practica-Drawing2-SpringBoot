@@ -41,13 +41,41 @@ async function saveFigures() {
     }
 }
 */
+
+
+
+canvas.addEventListener("mouseout", () => {
+    console.log("mouseout");
+
+    // Si el temporizador está activo (previene múltiples temporizadores)
+    if (timerId) {
+        clearTimeout(timerId);
+    }
+
+    // Iniciar un temporizador para guardar después de 20 segundos
+    timerId = setTimeout(() => {
+        console.log("Han pasado 20 segundos desde mouseout, guardando los datos...");
+        guardarDatos(); // Esta función debería contener tu lógica para enviar los datos al servidor
+    }, 10000); // 20 segundos (20000 milisegundos)
+});
+
+// Cancelar el temporizador si el usuario regresa al canvas antes de 20 segundos
+canvas.addEventListener("mouseenter", () => {
+    if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+    }
+});
+
+
+const guardarDatos = () => {
 // Obtener los datos que deseas enviar al servidor
 const figuresData = document.getElementById('llistaFigureJson').value;
 const strokesData = document.getElementById('llistaStroke').value;
 
 // Datos adicionales que quieras enviar
-const nombreCanvas = document.getElementById('nomDibuix').value;
-const isPublico = document.getElementById('toggleVisibility').checked;
+const nameCanvas = document.getElementById('nomDibuix').value;
+const isPublic = document.getElementById('toggleVisibility').checked;
 
 // Crear el objeto con los datos a enviar
 const data = {
@@ -79,4 +107,4 @@ fetch('/modify', {
         // Manejar cualquier error que ocurra durante la solicitud
         console.error('Error al enviar datos:', error);
     });
-
+};

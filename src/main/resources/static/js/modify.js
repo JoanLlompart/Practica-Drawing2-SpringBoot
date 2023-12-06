@@ -360,6 +360,7 @@ saveDraw.addEventListener("click", () => {
 
 //ptoba de Fetch
 
+/*
 
 canvas.addEventListener("mouseout", () => {
     console.log("mouseout");
@@ -373,7 +374,7 @@ canvas.addEventListener("mouseout", () => {
     timerId = setTimeout(() => {
         console.log("Han pasado 20 segundos desde mouseout, guardando los datos...");
         guardarDatos(); // Esta función debería contener tu lógica para enviar los datos al servidor
-    }, 20000); // 20 segundos (20000 milisegundos)
+    }, 10000); // 20 segundos (20000 milisegundos)
 });
 
 // Cancelar el temporizador si el usuario regresa al canvas antes de 20 segundos
@@ -385,43 +386,44 @@ canvas.addEventListener("mouseenter", () => {
 });
 
 const guardarDatos = () => {
-    //const figuresJson = drawingData.getFiguresJSON();
-    //const strokesJson = drawingData.getStrokesJSON();
-    const figuresJson = drawingData.getFiguresJSON();
-    const strokesJson = drawingData.getStrokesJSON();
+    const figuresData = document.getElementById('llistaFigureJson').value;
+const strokesData = document.getElementById('llistaStroke').value;
 
+// Datos adicionales que quieras enviar
+const nameCanvas = document.getElementById('nomDibuix').value;
+const isPublic = document.getElementById('toggleVisibility').checked;
 
-    document.getElementById("figuresData").value = figuresJson;
-    document.getElementById("strokesData").value = strokesJson;
-
-    console.log(figuresJSON);
-    console.log(strokesJSON);
-    const data = {
-        figuresData: figuresJson,
-        strokesData: strokesJson
-    };
-
-    fetch('/modify', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
+// Crear el objeto con los datos a enviar
+const data = {
+    strokesData: strokesData,
+    figuresData: figuresData,
+    nomDibuix: nameCanvas,
+    isPublic: isPublic
+};
+// Realizar la solicitud POST al servidor
+fetch('/modify', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json' // Especificar el tipo de contenido como JSON
+    },
+    body: JSON.stringify(data) // Convertir el objeto a JSON
+})
     .then(response => {
         if (!response.ok) {
             throw new Error('Error al enviar los datos al servidor');
         }
-        return response.json();
+        return response.json(); // Si el servidor responde con JSON, parsea la respuesta
     })
     .then(data => {
+        // Manejar la respuesta del servidor si es necesario
         console.log('Datos enviados correctamente:', data);
     })
     .catch(error => {
+        // Manejar cualquier error que ocurra durante la solicitud
         console.error('Error al enviar datos:', error);
     });
 };
-
+*/
 
 
 
