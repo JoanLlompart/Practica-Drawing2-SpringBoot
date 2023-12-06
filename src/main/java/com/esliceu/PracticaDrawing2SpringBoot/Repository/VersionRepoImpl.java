@@ -73,6 +73,7 @@ public class VersionRepoImpl implements VersionRepo {
                 version.setStrokes(rs.getString("strokesJSON"));
                 version.setNumberObject(rs.getInt("numberObject"));
                 version.setUser_email(rs.getString("user_email"));
+
                 // Convertir java.sql.Date a java.time.Instant
                 Instant dateLastModified = null;
                 Timestamp dateLastModifiedTimestamp = rs.getTimestamp("dateLastModified");
@@ -140,21 +141,6 @@ public class VersionRepoImpl implements VersionRepo {
             return version;
         });
     }
-    /*
-    @Override
-    public Version getLastVersionByCanvasId(int idCanvas) {
-        try {
-            String sql ="SELECT * FROM Version WHERE idDraw = ? " +
-                    "AND dateLastModified = (SELECT MAX(dateLastModified) FROM Version WHERE idDraw = ?)";
-            return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(Version.class),idCanvas,idCanvas);
-        }catch (Exception e) {
-            System.out.println("Last version failet in VersionRepo");
-            throw new RuntimeException();
-        }
-    }
-
-     */
-
 
 
     @Override
