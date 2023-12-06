@@ -113,27 +113,17 @@ public class VersionRepoImpl implements VersionRepo {
 
     @Override
     public boolean verifyUserCanRead(Version version) {
-        String sql = "SELECT COUNT(*) " +
-                "FROM Permission AS p " +
-                "WHERE " +
-                "    (p.user_email = ? AND p.idCanvas = ? AND p.permissionType = 'R') " +
-                "    OR " +
-                "    ( " +
-                "        p.user_email = ? " +
-                "        AND p.idCanvas = ? " +
-                "        AND EXISTS ( " +
-                "            SELECT 1 " +
-                "            FROM Canvas AS c " +
-                "            WHERE c.idObjectes = ? AND c.user_email = ? " +
-                "        ) " +
-                "    )";
-        int permisCount = jdbcTemplate.queryForObject(sql, Integer.class, version.getUser_email(),
-                version.getIdDraw(), version.getUser_email(), version.getIdDraw(), version.getIdDraw(), version.getUser_email());
+        String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE permissionType ='R' AND idCanvas=? AND user_email= ?";
+        int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), version.getUser_email());
+        String slqOwner = "SELECT COUNT(*) FROM Canvas WHERE idObjectes =? AND user_email= ? AND trash =false";
+        permisCount = jdbcTemplate.queryForObject(slqOwner, Integer.class, version.getIdDraw(), version.getUser_email());
         if (permisCount > 0) {
-            //El usuari o be es el propietario o te permis per editar el dibuix.
+            //El usuari o be es el propietario o te permis per visualitzar el dibuix.
+            System.out.println("te permis de Lectura");
             return true;
         } else {
-            //No te permisos per veure el dibuix
+            System.out.println("No te permis de Escritura");
+            //No te permisos per per realitzar Visualitzar el canvas
             return false;
         }
     }

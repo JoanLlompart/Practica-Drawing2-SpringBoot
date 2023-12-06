@@ -50,6 +50,7 @@ public class VersionService {
         }
     }
     public List<Version> getAllVersion(int idObjectes) {
+        //if (versionRepo.verifyUserCanRead())
         return versionRepo.getVersionsByIdDraw(idObjectes);
     }
 
