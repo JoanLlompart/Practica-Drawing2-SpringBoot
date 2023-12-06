@@ -1,11 +1,8 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 
-import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
-import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +10,6 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.RecursiveTask;
 
 @Repository
 public class VersionRepoImpl implements VersionRepo {
@@ -126,6 +122,24 @@ public class VersionRepoImpl implements VersionRepo {
         }
     }
 
+    @Override
+    public Version getLastVersionByCanvasId(int idCanvas) {
+        String sql = "SELECT * FROM Version WHERE idDraw = ? AND dateLastModified = (SELECT MAX(dateLastModified) FROM Version WHERE idDraw = ?)";
+        return jdbcTemplate.queryForObject(sql, new Object[]{idCanvas, idCanvas}, (rs, rowNum) -> {
+            Version version = new Version();
+            version.setIdVersion(rs.getInt("idVersion"));
+            version.setIdDraw(rs.getInt("idDraw"));
+            version.setFigures(rs.getString("figuresJSON"));
+            version.setStrokes(rs.getString("strokesJSON"));
+
+            Timestamp timestamp=rs.getTimestamp("dateLastModified");
+            version.setDateLastModified(Instant.ofEpochMilli(timestamp.getTime()));
+            System.out.println("Instant time : " + version.getDateLastModified());
+            version.setNumberObject(rs.getInt("numberObject"));
+            version.setUser_email(rs.getString("user_email"));
+            return version;
+        });
+    }
     /*
     @Override
     public Version getLastVersionByCanvasId(int idCanvas) {
@@ -141,21 +155,7 @@ public class VersionRepoImpl implements VersionRepo {
 
      */
 
-    public Version getLastVersionById(int id) {
-        String sql = "SELECT * FROM Version WHERE idDraw = ? AND dateLastModified = (SELECT MAX(dateLastModified) FROM Version WHERE idDraw = ?)";
 
-        return jdbcTemplate.queryForObject(sql, new Object[]{id, id}, (rs, rowNum) -> {
-            Version version = new Version();
-            version.setIdVersion(rs.getInt("idVersion"));
-            version.setIdDraw(rs.getInt("idDraw"));
-            version.setFigures(rs.getString("figuresJSON"));
-            version.setStrokes(rs.getString("strokesJSON"));
-            version.setDateLastModified(rs.getDate("dateLastModified"));
-            version.setNumberObject(rs.getInt("numberObject"));
-            version.setUser_email(rs.getString("user_email"));
-            return version;
-        });
-    }
 
     @Override
     public String getNameCanvasById(int idCanvas) {
