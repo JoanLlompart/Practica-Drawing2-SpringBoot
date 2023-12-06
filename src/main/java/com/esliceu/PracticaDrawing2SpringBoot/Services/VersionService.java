@@ -39,7 +39,12 @@ public class VersionService {
             //Pasam tots els parametres de Version i el nameCanvas a la funcio de newVersionOfCanvas
             // return versionRepo.newVersionOfCanvas(nameCanvas, version);
             if (versionRepo.verifyUserCanWrite(version)) {
-                return versionRepo.newVersionOfCanvas(nameCanvas, version,isPublic);
+                if (compareVersionChange()) {
+                    return versionRepo.newVersionOfCanvas(nameCanvas, version,isPublic);
+                } else {
+                    System.out.println("No se ha modificado el Canvas");
+                    return false;
+                }
             } else {
                 System.out.println("Fallo en Version Services");
                 return false;
@@ -52,6 +57,19 @@ public class VersionService {
     public List<Version> getAllVersion(int idObjectes) {
         //if (versionRepo.verifyUserCanRead())
         return versionRepo.getVersionsByIdDraw(idObjectes);
+    }
+    public boolean compareVersionChange() {
+        //Agafar la darrera Versio de el dibuix amb aquest id i la comparam els json.
+        int idCanvas = canvasVersionDTO.getIdObjectes();
+        String nameCanvasNew=canvasVersionDTO.getNameCanvas();
+
+        //Comproba el nameCanvas actual en la base de dades per mirar si ha cambiat
+        String nameCanvasOld = versionRepo.getNameCanvasById(idCanvas);
+        Version vOld=versionRepo.getLastVersionByCanvasId(idCanvas);
+        //if ()
+
+
+        return false;
     }
 
 }

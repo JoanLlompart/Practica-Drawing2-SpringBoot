@@ -109,8 +109,6 @@ public class VersionRepoImpl implements VersionRepo {
             return false;
         }
     }
-
-
     @Override
     public boolean verifyUserCanRead(Version version) {
         String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE permissionType ='R' AND idCanvas=? AND user_email= ?";
@@ -126,6 +124,24 @@ public class VersionRepoImpl implements VersionRepo {
             //No te permisos per per realitzar Visualitzar el canvas
             return false;
         }
+    }
+
+    @Override
+    public Version getLastVersionByCanvasId(int idCanvas) {
+        try {
+            String sql ="SELECT * FROM Version WHERE idDraw = ? " +
+                    "AND dateLastModified = (SELECT MAX(dateLastModified) FROM Version WHERE idDraw = ?)";
+            return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(Version.class),idCanvas,idCanvas);
+        }catch (Exception e) {
+            System.out.println("Last version failet in VersionRepo");
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public String getNameCanvasById(int idCanvas) {
+        String sql = "SELECT nameCanvas FROM Canvas WHERE idObjectes = ?;";
+        return jdbcTemplate.queryForObject(sql,String.class,idCanvas);
     }
 
     @Override

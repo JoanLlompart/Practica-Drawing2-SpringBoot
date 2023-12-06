@@ -7,4 +7,7 @@ public interface VersionRepo {
     List<Version> getVersionsByIdDraw(int idDraw);
     boolean verifyUserCanWrite(Version version);
     boolean verifyUserCanRead(Version version);
+    Version getLastVersionByCanvasId(int idCanvas);
+
+    String getNameCanvasById(int idCanvas);
 }
