@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db:3306
--- Tiempo de generación: 06-12-2023 a las 14:29:54
+-- Tiempo de generación: 06-12-2023 a las 14:37:19
 -- Versión del servidor: 5.7.44
 -- Versión de PHP: 8.2.8
 
@@ -30,7 +30,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `Canvas` (
   `idObjectes` int(11) NOT NULL,
   `nameCanvas` varchar(255) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
   `dataCreacio` datetime DEFAULT CURRENT_TIMESTAMP,
   `user_email` varchar(255) NOT NULL,
   `trash` tinyint(1) DEFAULT NULL,
@@ -41,9 +40,9 @@ CREATE TABLE `Canvas` (
 -- Volcado de datos para la tabla `Canvas`
 --
 
-INSERT INTO `Canvas` (`idObjectes`, `nameCanvas`, `user_id`, `dataCreacio`, `user_email`, `trash`, `public`) VALUES
-(103, 'Image72587', NULL, '2023-12-06 14:09:45', 'joan@gmail.com', 0, 0),
-(104, 'Image3239', NULL, '2023-12-06 14:12:50', 'claudia@gmail.com', 0, 1);
+INSERT INTO `Canvas` (`idObjectes`, `nameCanvas`, `dataCreacio`, `user_email`, `trash`, `public`) VALUES
+(103, 'Image72587', '2023-12-06 14:09:45', 'joan@gmail.com', 0, 0),
+(104, 'Image3239', '2023-12-06 14:12:50', 'claudia@gmail.com', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +111,8 @@ INSERT INTO `Version` (`idVersion`, `idDraw`, `figuresJSON`, `strokesJSON`, `dat
 (89, 103, '[{\"type\":\"cuadrado\",\"color\":\"#060ddb\",\"rellenoFigura\":false,\"size\":\"67\",\"centerX\":418,\"centerY\":86},{\"type\":\"cuadrado\",\"color\":\"#060ddb\",\"rellenoFigura\":false,\"size\":\"67\",\"centerX\":555,\"centerY\":99}]', '[{\"puntos\":[{\"x\":96,\"y\":312},{\"x\":97,\"y\":313},{\"x\":97,\"y\":318},{\"x\":97,\"y\":330},{\"x\":99,\"y\":349},{\"x\":104,\"y\":373},{\"x\":110,\"y\":395},{\"x\":115,\"y\":413},{\"x\":121,\"y\":431},{\"x\":128,\"y\":445},{\"x\":133,\"y\":454},{\"x\":138,\"y\":459},{\"x\":143,\"y\":462},{\"x\":149,\"y\":464},{\"x\":157,\"y\":464},{\"x\":173,\"y\":464},{\"x\":198,\"y\":462},{\"x\":239,\"y\":453},{\"x\":283,\"y\":439},{\"x\":323,\"y\":420},{\"x\":365,\"y\":396},{\"x\":394,\"y\":374},{\"x\":412,\"y\":354},{\"x\":422,\"y\":336},{\"x\":426,\"y\":316},{\"x\":427,\"y\":294},{\"x\":427,\"y\":272},{\"x\":427,\"y\":249},{\"x\":428,\"y\":232},{\"x\":428,\"y\":221},{\"x\":428,\"y\":214},{\"x\":427,\"y\":212},{\"x\":425,\"y\":211},{\"x\":421,\"y\":211},{\"x\":415,\"y\":211},{\"x\":404,\"y\":211},{\"x\":389,\"y\":211},{\"x\":370,\"y\":210},{\"x\":350,\"y\":210},{\"x\":326,\"y\":212},{\"x\":300,\"y\":220},{\"x\":280,\"y\":230},{\"x\":262,\"y\":240},{\"x\":246,\"y\":250},{\"x\":235,\"y\":260},{\"x\":227,\"y\":269},{\"x\":222,\"y\":277},{\"x\":220,\"y\":286},{\"x\":218,\"y\":296},{\"x\":218,\"y\":307},{\"x\":220,\"y\":320},{\"x\":227,\"y\":337},{\"x\":236,\"y\":354},{\"x\":248,\"y\":369},{\"x\":262,\"y\":384},{\"x\":281,\"y\":397},{\"x\":306,\"y\":409},{\"x\":335,\"y\":418},{\"x\":371,\"y\":425},{\"x\":415,\"y\":428},{\"x\":470,\"y\":427},{\"x\":523,\"y\":422},{\"x\":569,\"y\":414},{\"x\":608,\"y\":407},{\"x\":634,\"y\":401},{\"x\":651,\"y\":397},{\"x\":660,\"y\":395},{\"x\":663,\"y\":394},{\"x\":665,\"y\":393},{\"x\":665,\"y\":393},{\"x\":665,\"y\":393},{\"x\":665,\"y\":393},{\"x\":664,\"y\":393},{\"x\":663,\"y\":392}],\"color\":\"#dbc906\",\"size\":\"67\"}]', '2023-12-06 14:09:45', 'joan@gmail.com', 1),
 (90, 104, '[{\"type\":\"estrella\",\"color\":\"#c1cd18\",\"rellenoFigura\":false,\"size\":\"200\",\"centerX\":374,\"centerY\":211}]', '[]', '2023-12-06 14:12:50', 'claudia@gmail.com', 1),
 (91, 103, '[{\"type\":\"cuadrado\",\"color\":\"#060ddb\",\"rellenoFigura\":false,\"size\":\"67\",\"centerX\":418,\"centerY\":86},{\"type\":\"cuadrado\",\"color\":\"#060ddb\",\"rellenoFigura\":false,\"size\":\"67\",\"centerX\":555,\"centerY\":99}]', '[{\"puntos\":[{\"x\":96,\"y\":312},{\"x\":97,\"y\":313},{\"x\":97,\"y\":318},{\"x\":97,\"y\":330},{\"x\":99,\"y\":349},{\"x\":104,\"y\":373},{\"x\":110,\"y\":395},{\"x\":115,\"y\":413},{\"x\":121,\"y\":431},{\"x\":128,\"y\":445},{\"x\":133,\"y\":454},{\"x\":138,\"y\":459},{\"x\":143,\"y\":462},{\"x\":149,\"y\":464},{\"x\":157,\"y\":464},{\"x\":173,\"y\":464},{\"x\":198,\"y\":462},{\"x\":239,\"y\":453},{\"x\":283,\"y\":439},{\"x\":323,\"y\":420},{\"x\":365,\"y\":396},{\"x\":394,\"y\":374},{\"x\":412,\"y\":354},{\"x\":422,\"y\":336},{\"x\":426,\"y\":316},{\"x\":427,\"y\":294},{\"x\":427,\"y\":272},{\"x\":427,\"y\":249},{\"x\":428,\"y\":232},{\"x\":428,\"y\":221},{\"x\":428,\"y\":214},{\"x\":427,\"y\":212},{\"x\":425,\"y\":211},{\"x\":421,\"y\":211},{\"x\":415,\"y\":211},{\"x\":404,\"y\":211},{\"x\":389,\"y\":211},{\"x\":370,\"y\":210},{\"x\":350,\"y\":210},{\"x\":326,\"y\":212},{\"x\":300,\"y\":220},{\"x\":280,\"y\":230},{\"x\":262,\"y\":240},{\"x\":246,\"y\":250},{\"x\":235,\"y\":260},{\"x\":227,\"y\":269},{\"x\":222,\"y\":277},{\"x\":220,\"y\":286},{\"x\":218,\"y\":296},{\"x\":218,\"y\":307},{\"x\":220,\"y\":320},{\"x\":227,\"y\":337},{\"x\":236,\"y\":354},{\"x\":248,\"y\":369},{\"x\":262,\"y\":384},{\"x\":281,\"y\":397},{\"x\":306,\"y\":409},{\"x\":335,\"y\":418},{\"x\":371,\"y\":425},{\"x\":415,\"y\":428},{\"x\":470,\"y\":427},{\"x\":523,\"y\":422},{\"x\":569,\"y\":414},{\"x\":608,\"y\":407},{\"x\":634,\"y\":401},{\"x\":651,\"y\":397},{\"x\":660,\"y\":395},{\"x\":663,\"y\":394},{\"x\":665,\"y\":393},{\"x\":665,\"y\":393},{\"x\":665,\"y\":393},{\"x\":665,\"y\":393},{\"x\":664,\"y\":393},{\"x\":663,\"y\":392}],\"color\":\"#dbc906\",\"size\":\"67\"}]', '2023-12-06 14:16:58', 'joan@gmail.com', 0),
-(92, 104, '[{\"type\":\"estrella\",\"color\":\"#c1cd18\",\"rellenoFigura\":false,\"size\":\"200\",\"centerX\":374,\"centerY\":211}]', '[]', '2023-12-06 14:28:32', 'claudia@gmail.com', 0);
+(92, 104, '[{\"type\":\"estrella\",\"color\":\"#c1cd18\",\"rellenoFigura\":false,\"size\":\"200\",\"centerX\":374,\"centerY\":211}]', '[]', '2023-12-06 14:28:32', 'claudia@gmail.com', 0),
+(93, 104, '[{\"type\":\"estrella\",\"color\":\"#c1cd18\",\"rellenoFigura\":false,\"size\":\"200\",\"centerX\":374,\"centerY\":211}]', '[]', '2023-12-06 14:37:18', 'claudia@gmail.com', 0);
 
 --
 -- Índices para tablas volcadas
@@ -123,7 +123,6 @@ INSERT INTO `Version` (`idVersion`, `idDraw`, `figuresJSON`, `strokesJSON`, `dat
 --
 ALTER TABLE `Canvas`
   ADD PRIMARY KEY (`idObjectes`),
-  ADD KEY `user_id` (`user_id`),
   ADD KEY `user_email` (`user_email`);
 
 --
@@ -169,7 +168,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `Version`
 --
 ALTER TABLE `Version`
-  MODIFY `idVersion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `idVersion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- Restricciones para tablas volcadas
@@ -179,7 +178,6 @@ ALTER TABLE `Version`
 -- Filtros para la tabla `Canvas`
 --
 ALTER TABLE `Canvas`
-  ADD CONSTRAINT `Canvas_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `Canvas_ibfk_2` FOREIGN KEY (`user_email`) REFERENCES `user` (`email`);
 
 --
