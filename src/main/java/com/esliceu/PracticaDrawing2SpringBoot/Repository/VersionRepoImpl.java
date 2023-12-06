@@ -126,6 +126,7 @@ public class VersionRepoImpl implements VersionRepo {
         }
     }
 
+    /*
     @Override
     public Version getLastVersionByCanvasId(int idCanvas) {
         try {
@@ -136,6 +137,24 @@ public class VersionRepoImpl implements VersionRepo {
             System.out.println("Last version failet in VersionRepo");
             throw new RuntimeException();
         }
+    }
+
+     */
+
+    public Version getLastVersionById(int id) {
+        String sql = "SELECT * FROM Version WHERE idDraw = ? AND dateLastModified = (SELECT MAX(dateLastModified) FROM Version WHERE idDraw = ?)";
+
+        return jdbcTemplate.queryForObject(sql, new Object[]{id, id}, (rs, rowNum) -> {
+            Version version = new Version();
+            version.setIdVersion(rs.getInt("idVersion"));
+            version.setIdDraw(rs.getInt("idDraw"));
+            version.setFigures(rs.getString("figuresJSON"));
+            version.setStrokes(rs.getString("strokesJSON"));
+            version.setDateLastModified(rs.getDate("dateLastModified"));
+            version.setNumberObject(rs.getInt("numberObject"));
+            version.setUser_email(rs.getString("user_email"));
+            return version;
+        });
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.esliceu.PracticaDrawing2SpringBoot.Services;
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.VersionRepo;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,10 +68,58 @@ public class VersionService {
         //Comproba el nameCanvas actual en la base de dades per mirar si ha cambiat
         String nameCanvasOld = versionRepo.getNameCanvasById(idCanvas);
         Version vOld=versionRepo.getLastVersionByCanvasId(idCanvas);
-        //if ()
 
+        System.out.println(vOld.toString());
 
+        String strokOld = vOld.getStrokes();
+        System.out.println("Strokes old" + strokOld);
+        String figuresOld = vOld.getFigures();
+        System.out.println("figures Old " + figuresOld);
+
+        String strokesNew = canvasVersionDTO.getStrokes();
+        System.out.println("Strokes nou "+strokesNew);
+        String figuresNew = canvasVersionDTO.getFigures();
+        System.out.println("FIGURES NEW " + figuresNew);
+
+        //boolean strokesJson = compareJSONContent(vOld.getStrokes(),canvasVersionDTO.getStrokes());
+        //System.out.println("Strokes han cambiat ?? " + strokesJson);
+
+        //boolean figuresJson = compareJSONContent(vOld.getFigures(),canvasVersionDTO.getFigures());
+        //System.out.println("Figures ha cambiat ? " + figuresJson);
+
+        boolean  strokesJson= strokesNew.equals(strokOld);
+        boolean figuresJson = figuresNew.equals(figuresOld);
+
+        if (!figuresJson || !strokesJson) { //falta el nom
+            //Todo: falta compara la visibilitat
+            System.out.println("Els Json han cambiat");
+            //Si els Json han cambiat guardam la nova versio a la base de dades.
+            return true;
+        }
+        //Tenir en compte si el boolean de Public ha cambiat i tambe comparar els dos json a la vegada if s1.equals(s2) and ...
         return false;
     }
+
+
+   /* public static boolean compareJSONContent(String json1, String json2) {
+        try {
+            System.out.println("Json1" + json1);
+            System.out.println("Json2" + json2);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode tree1 = objectMapper.readTree(json1);
+            JsonNode tree2 = objectMapper.readTree(json2);
+
+            // Compara los contenidos de los JSON convertidos a objetos Java
+            return tree1.toString().equals(tree2.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No ha comparat be els JSON");
+            return false;
+        }
+
+    }
+
+    */
 
 }
