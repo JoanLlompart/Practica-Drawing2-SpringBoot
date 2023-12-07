@@ -56,7 +56,7 @@ canvas.addEventListener("mouseout", () => {
     timerId = setTimeout(() => {
         console.log("Han pasado 20 segundos desde mouseout, guardando los datos...");
         guardarDatos(); // Esta función debería contener tu lógica para enviar los datos al servidor
-    }, 10000); // 20 segundos (20000 milisegundos)
+    }, 20000); // 20 segundos (20000 milisegundos)
 });
 
 // Cancelar el temporizador si el usuario regresa al canvas antes de 20 segundos

@@ -71,48 +71,6 @@ public class ModifyController {
 
         */
     }
-    /*
-    @PostMapping("/modify")
-    public String saveCanvas(@RequestParam("strokesData") String strokJson,
-                             @RequestParam("figuresData") String figureJson,
-                             @RequestParam("nomDibuix") String nameCanvas,
-                             HttpServletRequest req,
-                             HttpSession session) {
-        String email = (String) session.getAttribute("email");
-        userService.setEmail(email);
-       // String strokJson = req.getParameter("strokesData");
-       // System.out.println("Dibuix amb json " + strokJson);
-        //String figureJson = req.getParameter("figuresData");
-        //System.out.println("Figuras amb json " + figureJson);
-        System.out.println("Id de el canvas" + canvasVersionDTO.getIdObjectes());
-        if (strokJson.equals("[]") && figureJson.equals("[]")) {
-            System.err.println("Error no hi ha contingut a aquest canvas");
-            throw new RuntimeException();
-        }
-       // String nameCanvas = req.getParameter("nomDibuix");
-        //si el user no ha posat un nom se asigna automaticament.
-        System.out.println("Nom" +nameCanvas);
-        if (nameCanvas == null || nameCanvas.isEmpty()) {
-            nameCanvas = canvasServices.generarNom(nameCanvas);
-        }
-
-        String isPub = req.getParameter("isPublic");
-        System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
-        //Actualitzam els valors de la nova versio i el nous JSON
-        canvasVersionDTO.setStrokes(strokJson);
-        canvasVersionDTO.setFigures(figureJson);
-        System.out.println(canvasVersionDTO.toString());
-        if(versionService.newVersionCanvas(canvasVersionDTO,isPub)) {
-            System.out.println("Se ha actualitzat correctament");
-        } else {
-            System.out.println("No se ha pogut crear la nova versio");
-        }
-        return "canvasDraw";
-    }
-
-     */
-
-
 
     @PostMapping("/modify")
     public String saveCanvas(@RequestBody ModifyCanvasVersionDTO modifyCanvasVersionDTO,
