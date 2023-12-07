@@ -46,9 +46,17 @@ public class VersionService {
             boolean isPublic = canvasVersionDTO.isPublic();
             //Pasam tots els parametres de Version i el nameCanvas a la funcio de newVersionOfCanvas
             // return versionRepo.newVersionOfCanvas(nameCanvas, version);
+
+            //Comproba si te permissos de escritura
             if (versionRepo.verifyUserCanWrite(version)) {
+                //Comproba que el els JSON han cambiat si no, no guarda els canvis.
                 if (compareVersionChange(version,nameCanvas,isPublic)) {
+                    System.out.println("Els Json han cambiat");
                     return versionRepo.newVersionOfCanvas(nameCanvas, version,isPublic);
+                } else if (compareCanvasAtributtesChange(nameCanvas,isPublic,version.getIdDraw())) {
+                    System.out.println("Els atributs han cambiat");
+                    //Comproba que el nameCanvas o el public ha cambiat per actualitzar les dades de el canvas.
+                    return versionRepo.changeNameAndVisibility(nameCanvas,isPublic,version.getIdDraw());
                 } else {
                     System.out.println("No se ha modificado el Canvas");
                     return false;
@@ -63,6 +71,26 @@ public class VersionService {
         }
     }
 
+    private boolean compareCanvasAtributtesChange(String nameCanvas, boolean isPublic, int idDraw) {
+        Canvas c =canvasRepo.compareStatusCanvas(idDraw);
+        //Asigna el valor actual de la base de dades per comprobar que ha cambiat.
+        String nameCanvasOld = c.getNameCanvas();
+        boolean publicOld = c.isPublicDraw();
+        System.out.println("ANTES name" +nameCanvasOld);
+        System.out.println("Nou name" + nameCanvas);
+
+        //Comproba si ha cambiat la visibilitat
+        boolean publicChange = publicOld == isPublic;
+        boolean nameCanvChange = nameCanvas.equals(nameCanvasOld);
+       /* if (!publicChange || !nameCanvChange) {
+            return true;
+        } else {
+            return false;
+        }
+
+        */
+        return (!publicChange || !nameCanvChange);
+    }
 
 
     public List<Version> getAllVersion(int idObjectes) {
@@ -73,29 +101,22 @@ public class VersionService {
         //Agafar la darrera Versio de el dibuix amb aquest id i la comparam els json.
         int idCanvas =version.getIdDraw();
 
-        System.out.println("ANTES " +nameCanvas);
-        String nameCanvasNew=nameCanvas;
 
         //Comproba el nameCanvas actual en la base de dades per mirar si ha cambiat
         //String nameCanvasOld = versionRepo.getNameCanvasById(idCanvas);
         Version vOld=versionRepo.getLastVersionByCanvasId(idCanvas);
        // System.out.println(vOld.toString());
 
-        Canvas c =canvasRepo.compareStatusCanvas(idCanvas);
-        String nameCanvasOld = c.getNameCanvas();
-        boolean publicOld = c.isPublicDraw();
-
-        boolean publicChange = publicOld == isPublic;
-
         String strokOld = vOld.getStrokes();
-        System.out.println("Strokes old" + strokOld);
+       // System.out.println("Strokes old" + strokOld);
         String figuresOld = vOld.getFigures();
-        System.out.println("figures Old " + figuresOld);
+
 
         String strokesNew = version.getStrokes();
-        System.out.println("Strokes nou "+strokesNew);
+       // System.out.println("Strokes nou "+strokesNew);
         String figuresNew = version.getFigures();
         System.out.println("FIGURES NEW " + figuresNew);
+        System.out.println("figures Old " + figuresOld);
 
         //boolean strokesJson = compareJSONContent(vOld.getStrokes(),canvasVersionDTO.getStrokes());
         //System.out.println("Strokes han cambiat ?? " + strokesJson);
@@ -105,19 +126,21 @@ public class VersionService {
 
         boolean  strokesJson= strokesNew.equals(strokOld);
         boolean figuresJson = figuresNew.equals(figuresOld);
-        boolean nameCanv = nameCanvasNew.equals(nameCanvasOld);
 
         System.out.println("boolean figures" + figuresJson);
-        if (!figuresJson || !strokesJson) { //falta el nom
+     /*   if (!figuresJson || !strokesJson) { //falta el nom
             //Todo: falta compara la visibilitat
             System.out.println("Els Json han cambiat");
             //Si els Json han cambiat guardam la nova versio a la base de dades.
             return true;
-        } else if (!nameCanv || !publicChange){
+        }*/
+        /* else if (!nameCanv || !publicChange){
             return versionRepo.changeNameAndVisibility(nameCanvasNew,isPublic,idCanvas);
         }
+
+      */
         //Tenir en compte si el boolean de Public ha cambiat i tambe comparar els dos json a la vegada if s1.equals(s2) and ...
-        return false;
+        return (!figuresJson || !strokesJson);
     }
 
     /*
