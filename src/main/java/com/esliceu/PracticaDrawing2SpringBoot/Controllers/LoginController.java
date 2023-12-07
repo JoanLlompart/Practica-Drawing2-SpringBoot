@@ -32,8 +32,6 @@ public class LoginController {
         Integer loginAttempts = (Integer) session.getAttribute("loginAttempts");
         Long lastFailedLoginTime = (Long) session.getAttribute("lastFailedLoginTime");
         boolean userInPause = false;
-        //userService.registrarUsuari("Joan", "joan@gmail.com", "hola1");
-        //userService.registrarUsuari("Aina", "aina@gmail.com", "hola1");
         userService.setEmail(email);
         userService.setPassword(userService.encriptarPassword(password));
         String nameUser=userService.getNameOfUser(email);
@@ -43,7 +41,8 @@ public class LoginController {
                 session.setAttribute("loginAttempts", 0);
                 session.setAttribute("usuariLogueat", true);
                 session.setAttribute("name",nameUser);
-                return "redirect:/canvasDraw"; // redirige a la URL '/canvasDraw'
+                //Redireccio a canvasDraw
+                return "redirect:/canvasDraw";
             } else {
                 if (loginAttempts == null) {
                     loginAttempts = 1;
