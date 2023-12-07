@@ -67,6 +67,22 @@ canvas.addEventListener("mouseenter", () => {
     }
 });
 
+//NOU PER SI SURT EL USUARI SENSE GUARDAR
+// Manejar el evento beforeunload
+window.addEventListener("beforeunload", async (event) => {
+    // Evitar que la página se cierre de inmediato
+    event.preventDefault();
+
+    // Guardar los datos antes de que el usuario abandone la página
+    guardarDatos();
+
+    // Mostrar un mensaje al usuario antes de abandonar la página
+    event.returnValue = ''; // Este mensaje puede variar según el navegador y no se muestra en todos
+});
+
+
+
+
 const guardarDatos = () => {
 // Obtener los datos que deseas enviar al servidor
 const figuresData = document.getElementById('llistaFigureJson').value;
