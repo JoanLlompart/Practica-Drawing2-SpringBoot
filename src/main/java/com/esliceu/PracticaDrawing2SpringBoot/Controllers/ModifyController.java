@@ -118,13 +118,10 @@ public class ModifyController {
                              HttpSession session,Model model) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
-        System.out.println(modifyCanvasVersionDTO.toString());
-
-        System.out.println("Id de el canvas" + canvasVersionDTO.getIdObjectes());
+       // System.out.println("Id de el canvas" + canvasVersionDTO.getIdObjectes());
         String strokJson = modifyCanvasVersionDTO.getStrokesData();
         String figureJson = modifyCanvasVersionDTO.getFiguresData();
         System.out.println("---------ModifyController--------");
-        System.out.println(figureJson);
         String nameCanvas = modifyCanvasVersionDTO.getNameCanvas();
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
         String isPub = modifyCanvasVersionDTO.getIsPublic();
@@ -145,8 +142,6 @@ public class ModifyController {
         canvasVersionDTO.setStrokes(strokJson);
         canvasVersionDTO.setFigures(figureJson);
         canvasVersionDTO.setNameCanvas(nameCanvas);
-
-        System.out.println(canvasVersionDTO.toString());
 
         if(versionService.newVersionCanvas(canvasVersionDTO,isPub)) {
             System.out.println("Se ha actualitzat correctament");

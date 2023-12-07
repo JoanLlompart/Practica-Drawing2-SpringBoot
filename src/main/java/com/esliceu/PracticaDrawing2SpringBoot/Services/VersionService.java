@@ -26,6 +26,7 @@ public class VersionService {
         try {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
             this.canvasVersionDTO = canvasVersionDTO;
+            System.out.println("is pub "+isPub);
             if (isPub == null) {
                 canvasVersionDTO.setPublic(false);
             }else if (isPub.equals("on")) {
