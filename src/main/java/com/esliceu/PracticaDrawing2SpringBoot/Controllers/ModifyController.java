@@ -125,7 +125,8 @@ public class ModifyController {
         String nameCanvas = modifyCanvasVersionDTO.getNameCanvas();
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
         String isPub = modifyCanvasVersionDTO.getIsPublic();
-
+        //canvasVersionDTO.setPublic(modifyCanvasVersionDTO.getIsPublic());
+        System.out.println("Torna puclic com a : " + modifyCanvasVersionDTO.getIsPublic());
         if (strokJson.equals("[]") && figureJson.equals("[]")) {
             System.err.println("Error no hi ha contingut a aquest canvas");
             throw new RuntimeException();

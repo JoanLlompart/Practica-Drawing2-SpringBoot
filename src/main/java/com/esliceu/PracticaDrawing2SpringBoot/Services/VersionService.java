@@ -26,15 +26,18 @@ public class VersionService {
         try {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
             this.canvasVersionDTO = canvasVersionDTO;
-            System.out.println("is pub "+isPub);
+
+           /* System.out.println("is pub "+isPub);
             if (isPub == null) {
                 canvasVersionDTO.setPublic(false);
             }else if (isPub.equals("on")) {
                 canvasVersionDTO.setPublic(true);
             }
+
+            */
             System.out.println("public? " +canvasVersionDTO.isPublic());
             Version version = new Version();
-            System.out.println(canvasVersionDTO.toString());
+            //System.out.println(canvasVersionDTO.toString());
             //Ara cream asignam els atributs a la clase version.
             version.setIdDraw(canvasVersionDTO.getIdObjectes());
             System.out.println(version.getIdDraw() +"IdDraw");
