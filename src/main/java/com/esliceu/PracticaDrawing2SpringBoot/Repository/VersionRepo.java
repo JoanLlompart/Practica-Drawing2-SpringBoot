@@ -1,5 +1,4 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
-import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import java.util.List;
 
@@ -12,4 +11,5 @@ public interface VersionRepo {
 
     String getNameCanvasById(int idCanvas);
 
+    boolean changeNameAndVisibility(String nameCanvasNew, boolean isPublic, int idCanvas);
 }

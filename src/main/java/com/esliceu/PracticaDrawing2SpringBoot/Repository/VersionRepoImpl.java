@@ -1,6 +1,5 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 
-import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -148,6 +147,19 @@ public class VersionRepoImpl implements VersionRepo {
     public String getNameCanvasById(int idCanvas) {
         String sql = "SELECT nameCanvas FROM Canvas WHERE idObjectes = ?;";
         return jdbcTemplate.queryForObject(sql,String.class,idCanvas);
+    }
+
+    @Override
+    public boolean changeNameAndVisibility(String nameCanvasNew, boolean isPublic, int idCanvas) {
+        String sqlUpdate = "UPDATE Canvas " +
+                "SET nameCanvas = ?, public = ? " +
+                "WHERE idObjectes = ?;";
+        System.out.println("name new " + nameCanvasNew);
+        int count = jdbcTemplate.update(sqlUpdate,nameCanvasNew,isPublic,idCanvas);
+        if (count >0) {
+            return true;
+        }
+        return false;
     }
 
     @Override

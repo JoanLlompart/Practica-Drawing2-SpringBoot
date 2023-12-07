@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.color.ICC_ColorSpace;
 import java.util.List;
 
 @Service
@@ -72,6 +73,7 @@ public class VersionService {
         //Agafar la darrera Versio de el dibuix amb aquest id i la comparam els json.
         int idCanvas =version.getIdDraw();
 
+        System.out.println("ANTES " +nameCanvas);
         String nameCanvasNew=nameCanvas;
 
         //Comproba el nameCanvas actual en la base de dades per mirar si ha cambiat
@@ -106,11 +108,13 @@ public class VersionService {
         boolean nameCanv = nameCanvasNew.equals(nameCanvasOld);
 
         System.out.println("boolean figures" + figuresJson);
-        if (!figuresJson || !strokesJson || !nameCanv || !publicChange) { //falta el nom
+        if (!figuresJson || !strokesJson) { //falta el nom
             //Todo: falta compara la visibilitat
             System.out.println("Els Json han cambiat");
             //Si els Json han cambiat guardam la nova versio a la base de dades.
             return true;
+        } else if (!nameCanv || !publicChange){
+            return versionRepo.changeNameAndVisibility(nameCanvasNew,isPublic,idCanvas);
         }
         //Tenir en compte si el boolean de Public ha cambiat i tambe comparar els dos json a la vegada if s1.equals(s2) and ...
         return false;

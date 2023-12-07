@@ -339,6 +339,15 @@ canvas.addEventListener("click", dibuixarFigure);
 
 
 
+function actualizarCamposHidden() {
+    const figuresDataInput = document.getElementById("figuresData");
+    const strokesDataInput = document.getElementById("strokesData");
+
+    figuresDataInput.value = drawingData.getFiguresJSON();
+    strokesDataInput.value = drawingData.getStrokesJSON();
+}
+
+
 
 //comentar per probar fetch
 /*
