@@ -81,13 +81,13 @@ public class VersionService {
 
         //Comproba si ha cambiat la visibilitat
         boolean publicChange = publicOld == isPublic;
+        //Comproba el nameCanvas actual de la base de dades per mirar si ha cambiat
         boolean nameCanvChange = nameCanvas.equals(nameCanvasOld);
        /* if (!publicChange || !nameCanvChange) {
             return true;
         } else {
             return false;
         }
-
         */
         return (!publicChange || !nameCanvChange);
     }
@@ -100,20 +100,12 @@ public class VersionService {
     public boolean compareVersionChange(Version version,String nameCanvas, boolean isPublic) {
         //Agafar la darrera Versio de el dibuix amb aquest id i la comparam els json.
         int idCanvas =version.getIdDraw();
-
-
-        //Comproba el nameCanvas actual en la base de dades per mirar si ha cambiat
-        //String nameCanvasOld = versionRepo.getNameCanvasById(idCanvas);
         Version vOld=versionRepo.getLastVersionByCanvasId(idCanvas);
        // System.out.println(vOld.toString());
 
         String strokOld = vOld.getStrokes();
-       // System.out.println("Strokes old" + strokOld);
         String figuresOld = vOld.getFigures();
-
-
         String strokesNew = version.getStrokes();
-       // System.out.println("Strokes nou "+strokesNew);
         String figuresNew = version.getFigures();
         System.out.println("FIGURES NEW " + figuresNew);
         System.out.println("figures Old " + figuresOld);
@@ -128,65 +120,10 @@ public class VersionService {
         boolean figuresJson = figuresNew.equals(figuresOld);
 
         System.out.println("boolean figures" + figuresJson);
-     /*   if (!figuresJson || !strokesJson) { //falta el nom
-            //Todo: falta compara la visibilitat
-            System.out.println("Els Json han cambiat");
-            //Si els Json han cambiat guardam la nova versio a la base de dades.
-            return true;
-        }*/
-        /* else if (!nameCanv || !publicChange){
-            return versionRepo.changeNameAndVisibility(nameCanvasNew,isPublic,idCanvas);
-        }
 
-      */
         //Tenir en compte si el boolean de Public ha cambiat i tambe comparar els dos json a la vegada if s1.equals(s2) and ...
         return (!figuresJson || !strokesJson);
     }
-
-    /*
-    public boolean compareVersionChange(Version version,String nameCanvas, boolean isPublic) {
-        //Agafar la darrera Versio de el dibuix amb aquest id i la comparam els json.
-        int idCanvas = canvasVersionDTO.getIdObjectes();
-        String nameCanvasNew=canvasVersionDTO.getNameCanvas();
-
-        //Comproba el nameCanvas actual en la base de dades per mirar si ha cambiat
-        String nameCanvasOld = versionRepo.getNameCanvasById(idCanvas);
-        Version vOld=versionRepo.getLastVersionByCanvasId(idCanvas);
-
-        System.out.println(vOld.toString());
-
-        String strokOld = vOld.getStrokes();
-        System.out.println("Strokes old" + strokOld);
-        String figuresOld = vOld.getFigures();
-        System.out.println("figures Old " + figuresOld);
-
-        String strokesNew = canvasVersionDTO.getStrokes();
-        System.out.println("Strokes nou "+strokesNew);
-        String figuresNew = canvasVersionDTO.getFigures();
-        System.out.println("FIGURES NEW " + figuresNew);
-
-        //boolean strokesJson = compareJSONContent(vOld.getStrokes(),canvasVersionDTO.getStrokes());
-        //System.out.println("Strokes han cambiat ?? " + strokesJson);
-
-        //boolean figuresJson = compareJSONContent(vOld.getFigures(),canvasVersionDTO.getFigures());
-        //System.out.println("Figures ha cambiat ? " + figuresJson);
-
-        boolean  strokesJson= strokesNew.equals(strokOld);
-        boolean figuresJson = figuresNew.equals(figuresOld);
-
-        System.out.println("boolean figures" + figuresJson);
-        if (!figuresJson || !strokesJson) { //falta el nom
-            //Todo: falta compara la visibilitat
-            System.out.println("Els Json han cambiat");
-            //Si els Json han cambiat guardam la nova versio a la base de dades.
-            return true;
-        }
-        //Tenir en compte si el boolean de Public ha cambiat i tambe comparar els dos json a la vegada if s1.equals(s2) and ...
-        return false;
-    }
-     */
-
-
 
    /* public static boolean compareJSONContent(String json1, String json2) {
         try {

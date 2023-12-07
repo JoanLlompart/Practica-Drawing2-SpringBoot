@@ -125,6 +125,7 @@ public class ModifyController {
         System.out.println("---------ModifyController--------");
         System.out.println(figureJson);
         String nameCanvas = modifyCanvasVersionDTO.getNameCanvas();
+        System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
         String isPub = modifyCanvasVersionDTO.getIsPublic();
 
 
@@ -140,7 +141,6 @@ public class ModifyController {
         }
 
         //String isPub = req.getParameter("isPublic");
-        System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
         //Actualitzam els valors de la nova versio i el nous JSON
         canvasVersionDTO.setStrokes(strokJson);
         canvasVersionDTO.setFigures(figureJson);

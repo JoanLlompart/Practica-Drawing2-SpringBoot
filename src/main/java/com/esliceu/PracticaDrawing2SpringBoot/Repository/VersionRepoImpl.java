@@ -143,12 +143,13 @@ public class VersionRepoImpl implements VersionRepo {
     }
 
 
+/*
     @Override
     public String getNameCanvasById(int idCanvas) {
         String sql = "SELECT nameCanvas FROM Canvas WHERE idObjectes = ?;";
         return jdbcTemplate.queryForObject(sql,String.class,idCanvas);
     }
-
+ */
     @Override
     public boolean changeNameAndVisibility(String nameCanvasNew, boolean isPublic, int idCanvas) {
         String sqlUpdate = "UPDATE Canvas " +

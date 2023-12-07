@@ -67,7 +67,6 @@ canvas.addEventListener("mouseenter", () => {
     }
 });
 
-
 const guardarDatos = () => {
 // Obtener los datos que deseas enviar al servidor
 const figuresData = document.getElementById('llistaFigureJson').value;
@@ -77,7 +76,10 @@ console.log("figuresData" + figuresData);
 console.log("strokesData "+ strokesData);
 // Datos adicionales que quieras enviar
 const nameCanvas = document.getElementById('nomDibuix').value;
+console.log("name canvas" + nameCanvas);
 const isPublic = document.getElementById('toggleVisibility').checked;
+
+console.log("is public? " + isPublic);
 
 // Crear el objeto con los datos a enviar
 const data = {

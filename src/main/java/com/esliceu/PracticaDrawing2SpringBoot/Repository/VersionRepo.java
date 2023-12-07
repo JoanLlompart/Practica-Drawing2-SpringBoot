@@ -9,7 +9,7 @@ public interface VersionRepo {
     boolean verifyUserCanRead(Version version);
     Version getLastVersionByCanvasId(int idCanvas);
 
-    String getNameCanvasById(int idCanvas);
+    //String getNameCanvasById(int idCanvas);
 
     boolean changeNameAndVisibility(String nameCanvasNew, boolean isPublic, int idCanvas);
 }
