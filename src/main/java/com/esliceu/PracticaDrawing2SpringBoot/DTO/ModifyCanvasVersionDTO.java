@@ -1,13 +1,20 @@
 package com.esliceu.PracticaDrawing2SpringBoot.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.Column;
+import java.io.Serial;
+
+@Component
 public class ModifyCanvasVersionDTO {
     private String strokesData;
     private String figuresData;
+    @JsonProperty("nomDibuix")
     private String nameCanvas;
     private String isPublic;
 
     public ModifyCanvasVersionDTO(){
-
     }
     public ModifyCanvasVersionDTO(String strokesData, String figuresData, String nameCanvas, String isPublic) {
         this.strokesData = strokesData;

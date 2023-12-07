@@ -118,6 +118,7 @@ public class ModifyController {
                              HttpSession session,Model model) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
+        System.out.println(modifyCanvasVersionDTO.toString());
 
         System.out.println("Id de el canvas" + canvasVersionDTO.getIdObjectes());
         String strokJson = modifyCanvasVersionDTO.getStrokesData();
@@ -127,7 +128,6 @@ public class ModifyController {
         String nameCanvas = modifyCanvasVersionDTO.getNameCanvas();
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
         String isPub = modifyCanvasVersionDTO.getIsPublic();
-
 
         if (strokJson.equals("[]") && figureJson.equals("[]")) {
             System.err.println("Error no hi ha contingut a aquest canvas");
@@ -144,6 +144,8 @@ public class ModifyController {
         //Actualitzam els valors de la nova versio i el nous JSON
         canvasVersionDTO.setStrokes(strokJson);
         canvasVersionDTO.setFigures(figureJson);
+        canvasVersionDTO.setNameCanvas(nameCanvas);
+
         System.out.println(canvasVersionDTO.toString());
 
         if(versionService.newVersionCanvas(canvasVersionDTO,isPub)) {
