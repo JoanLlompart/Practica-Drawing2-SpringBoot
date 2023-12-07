@@ -124,8 +124,8 @@ public class ModifyController {
         System.out.println("---------ModifyController--------");
         String nameCanvas = modifyCanvasVersionDTO.getNameCanvas();
         System.out.println("NOM DE EL DIBUIX :" + nameCanvas);
-        String isPub = modifyCanvasVersionDTO.getIsPublic();
-        //canvasVersionDTO.setPublic(modifyCanvasVersionDTO.getIsPublic());
+
+        canvasVersionDTO.setPublic(modifyCanvasVersionDTO.getIsPublic());
         System.out.println("Torna puclic com a : " + modifyCanvasVersionDTO.getIsPublic());
         if (strokJson.equals("[]") && figureJson.equals("[]")) {
             System.err.println("Error no hi ha contingut a aquest canvas");
@@ -144,7 +144,7 @@ public class ModifyController {
         canvasVersionDTO.setFigures(figureJson);
         canvasVersionDTO.setNameCanvas(nameCanvas);
 
-        if(versionService.newVersionCanvas(canvasVersionDTO,isPub)) {
+        if(versionService.newVersionCanvas(canvasVersionDTO)) {
             System.out.println("Se ha actualitzat correctament");
            // model.addAttribute("message-ok",true);
            // return "Se ha creat una nova versio de el canvas";

@@ -12,11 +12,12 @@ public class ModifyCanvasVersionDTO {
     private String figuresData;
     @JsonProperty("nomDibuix")
     private String nameCanvas;
-    private String isPublic;
+    private boolean isPublic;
 
     public ModifyCanvasVersionDTO(){
     }
-    public ModifyCanvasVersionDTO(String strokesData, String figuresData, String nameCanvas, String isPublic) {
+
+    public ModifyCanvasVersionDTO(String strokesData, String figuresData, String nameCanvas, boolean isPublic) {
         this.strokesData = strokesData;
         this.figuresData = figuresData;
         this.nameCanvas = nameCanvas;
@@ -58,11 +59,11 @@ public class ModifyCanvasVersionDTO {
         this.nameCanvas = nameCanvas;
     }
 
-    public String getIsPublic() {
+    public boolean getIsPublic() {
         return isPublic;
     }
 
-    public void setIsPublic(String isPublic) {
+    public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
 }

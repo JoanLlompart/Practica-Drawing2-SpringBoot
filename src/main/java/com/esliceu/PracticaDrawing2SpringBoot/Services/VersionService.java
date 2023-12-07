@@ -5,12 +5,9 @@ import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepo;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.VersionRepo;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.color.ICC_ColorSpace;
 import java.util.List;
 
 @Service
@@ -22,7 +19,7 @@ public class VersionService {
 
     @Autowired
     CanvasRepo canvasRepo;
-    public boolean newVersionCanvas(CanvasVersionDTO canvasVersionDTO,String isPub) {
+    public boolean newVersionCanvas(CanvasVersionDTO canvasVersionDTO) {
         try {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
             this.canvasVersionDTO = canvasVersionDTO;
