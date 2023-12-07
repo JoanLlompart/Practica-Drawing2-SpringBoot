@@ -484,7 +484,7 @@ function borrarLienzo() {
     drawingData.deleteAll();
 }
 
-
+/*
 canvas.addEventListener("mouseout", () => {
     console.log("mouseout");
 
@@ -551,3 +551,4 @@ fetch('/modify', {
         console.error('Error al enviar datos:', error);
     });
 };
+*/
