@@ -41,6 +41,7 @@ public class VersionService {
             version.setStrokes(canvasVersionDTO.getStrokes());
             version.setFigures(canvasVersionDTO.getFigures());
             version.setDateLastModified(canvasVersionDTO.getDateLastModified());//Treure data actual
+
             version.setNumberObject(canvasVersionDTO.getNumberObject());
             version.setUser_email(canvasVersionDTO.getUser_email());
             String nameCanvas = canvasVersionDTO.getNameCanvas();
@@ -77,13 +78,16 @@ public class VersionService {
         //Asigna el valor actual de la base de dades per comprobar que ha cambiat.
         String nameCanvasOld = c.getNameCanvas();
         boolean publicOld = c.isPublicDraw();
-        System.out.println("ANTES name" +nameCanvasOld);
-        System.out.println("Nou name" + nameCanvas);
+        System.out.println("ANTES name " +nameCanvasOld);
+        System.out.println("Nou name " + nameCanvas);
 
         //Comproba si ha cambiat la visibilitat
         boolean publicChange = publicOld == isPublic;
+        System.out.println("Public change? " + publicChange);
+
         //Comproba el nameCanvas actual de la base de dades per mirar si ha cambiat
         boolean nameCanvChange = nameCanvas.equals(nameCanvasOld);
+        System.out.println("bool cambi de nom ? " + nameCanvChange);
        /* if (!publicChange || !nameCanvChange) {
             return true;
         } else {
@@ -119,8 +123,8 @@ public class VersionService {
 
         boolean  strokesJson= strokesNew.equals(strokOld);
         boolean figuresJson = figuresNew.equals(figuresOld);
-
-        System.out.println("boolean figures" + figuresJson);
+        System.out.println("boolean figures  " + figuresJson);
+        System.out.println("boolean strokes : " + strokesJson);
 
         //Tenir en compte si el boolean de Public ha cambiat i tambe comparar els dos json a la vegada if s1.equals(s2) and ...
         return (!figuresJson || !strokesJson);

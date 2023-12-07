@@ -246,7 +246,7 @@ public class CanvasRepoSQL implements CanvasRepo{
             Canvas canvas = new Canvas();
             canvas.setPublicDraw(rs.getBoolean("public"));
             canvas.setTrash(rs.getBoolean("trash"));
-            canvas.setNameCanvas("nameCanvas");
+            canvas.setNameCanvas(rs.getString("nameCanvas"));
             Timestamp timestamp=rs.getTimestamp("dataCreacio");
             canvas.setDataCreacio(Instant.ofEpochMilli(timestamp.getTime()));
             System.out.println("Instant time : " + canvas.getDataCreacio());
