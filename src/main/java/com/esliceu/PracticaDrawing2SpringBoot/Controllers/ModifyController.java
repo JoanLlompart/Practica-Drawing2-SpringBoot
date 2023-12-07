@@ -41,6 +41,7 @@ public class ModifyController {
             model.addAttribute("llistaFigureJson", canvasVersionDTO.getFigures());
             model.addAttribute("llistaStroke", canvasVersionDTO.getStrokes());
             model.addAttribute("nameCanvas", nameCanvas);
+            System.out.println("Nom que ve de el dibuix "+ nameCanvas);
             model.addAttribute("name",nameUser);
             model.addAttribute("idObjectes",idObjectes);
             return "modify";
