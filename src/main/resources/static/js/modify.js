@@ -178,6 +178,9 @@ class Drawing {
 }
 //cream la instancia de la clase Draw que guardara els dibuixos.
 const drawingData = new Drawing(figuras,strokes,nameDraw);
+
+
+/*
 const render = () => {
     const ul = document.querySelector("#liFigures");
     ul.innerHTML = "";
@@ -204,6 +207,42 @@ const removeStroke = (i) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     render();
 };
+*/
+
+const render = () => {
+    const ul = document.querySelector("#liFigures");
+    ul.innerHTML = "";
+    drawingData.figures.forEach((item, i) => {
+        // Es una figura
+        ul.innerHTML += `<li>${item.type}
+        <button id="${i}" onclick="removeFigure(${i})">x</button>
+        </li>`;
+    });
+    drawingData.strokes.forEach((stoke, i) => {
+        // Es un trazo (stroke)
+        ul.innerHTML += `<li>Stroke
+        <button id="${i}" onclick="removeStroke(${i})">x</button>
+        </li>`;
+    });
+    // Actualizar los campos JSON
+    figuresJSON.value = JSON.stringify(drawingData.figures);
+    strokesJSON.value = JSON.stringify(drawingData.strokes);
+};
+const removeFigure = (i) => {
+    drawingData.figures.splice(i, 1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    render();
+};
+const removeStroke = (i) => {
+    drawingData.strokes.splice(i, 1);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    render();
+};
+
+
+
+
+
 
 const pintar = (cursorX, cursorY) => {
     if (activaPintar && figura.value === "sinSeleccionar") {
@@ -339,14 +378,6 @@ canvas.addEventListener("click", dibuixarFigure);
 
 
 
-function actualizarCamposHidden() {
-    const figuresDataInput = document.getElementById("figuresData");
-    const strokesDataInput = document.getElementById("strokesData");
-
-    figuresDataInput.value = drawingData.getFiguresJSON();
-    strokesDataInput.value = drawingData.getStrokesJSON();
-}
-
 
 
 //comentar per probar fetch
@@ -435,19 +466,6 @@ fetch('/modify', {
 */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Asocia el botó "Dibujar" amb la función de activar el pintar
 //dibuix.addEventListener("click", activarDibuix);
 dibuix.addEventListener("change", (event) => {
@@ -465,3 +483,71 @@ function borrarLienzo() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawingData.deleteAll();
 }
+
+
+canvas.addEventListener("mouseout", () => {
+    console.log("mouseout");
+
+    // Si el temporizador está activo (previene múltiples temporizadores)
+    if (timerId) {
+        clearTimeout(timerId);
+    }
+
+    // Iniciar un temporizador para guardar después de 20 segundos
+    timerId = setTimeout(() => {
+        console.log("Han pasado 20 segundos desde mouseout, guardando los datos...");
+        guardarDatos(); // Esta función debería contener tu lógica para enviar los datos al servidor
+    }, 10000); // 20 segundos (20000 milisegundos)
+});
+
+// Cancelar el temporizador si el usuario regresa al canvas antes de 20 segundos
+canvas.addEventListener("mouseenter", () => {
+    if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+    }
+});
+
+
+const guardarDatos = () => {
+// Obtener los datos que deseas enviar al servidor
+const figuresData = document.getElementById('llistaFigureJson').value;
+const strokesData = document.getElementById('llistaStroke').value;
+
+console.log("figuresData" + figuresData);
+console.log("strokesData "+ strokesData);
+// Datos adicionales que quieras enviar
+const nameCanvas = document.getElementById('nomDibuix').value;
+const isPublic = document.getElementById('toggleVisibility').checked;
+
+// Crear el objeto con los datos a enviar
+const data = {
+    strokesData: strokesData,
+    figuresData: figuresData,
+    nomDibuix: nameCanvas,
+    isPublic: isPublic
+};
+console.log(data);
+// Realizar la solicitud POST al servidor
+fetch('/modify', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json' // Especificar el tipo de contenido como JSON
+    },
+    body: JSON.stringify(data) // Convertir el objeto a JSON
+})
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al enviar los datos al servidor');
+        }
+        return response.json(); // Si el servidor responde con JSON, parsea la respuesta
+    })
+    .then(data => {
+        // Manejar la respuesta del servidor si es necesario
+        console.log('Datos enviados correctamente:', data);
+    })
+    .catch(error => {
+        // Manejar cualquier error que ocurra durante la solicitud
+        console.error('Error al enviar datos:', error);
+    });
+};
