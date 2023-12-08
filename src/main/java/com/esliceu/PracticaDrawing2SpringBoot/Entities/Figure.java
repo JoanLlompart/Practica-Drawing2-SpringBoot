@@ -3,33 +3,12 @@ package com.esliceu.PracticaDrawing2SpringBoot.Entities;
 import java.util.Date;
 import java.util.List;
 /*
-public class Figure extends Canvas {
+public class Figure  {
     private String type;
     private String color;
     private boolean isFilled;
     private int size;
     private int centerX,centerY;
-
-    public Figure(String nameCanvas, int idObjectes, User user, Date dataCreacio, List<Figure> figures, List<Strokes>
-            strokes, String type, String color, boolean isFilled, int size, int centerX, int centerY) {
-
-        super(nameCanvas, idObjectes, user, dataCreacio, figures, strokes);
-        this.type = type;
-        this.color = color;
-        this.isFilled = isFilled;
-        this.size = size;
-        this.centerX = centerX;
-        this.centerY = centerY;
-    }
-
-    public Figure(String type, String color, boolean isFilled, int size, int centerX, int centerY) {
-        this.type = type;
-        this.color = color;
-        this.isFilled = isFilled;
-        this.size = size;
-        this.centerX = centerX;
-        this.centerY = centerY;
-    }
 
     public String getType() {
         return type;
@@ -79,5 +58,5 @@ public class Figure extends Canvas {
         this.centerY = centerY;
     }
 }
+*/
 
- */
