@@ -21,7 +21,7 @@ public class VersionService {
 
     @Autowired
     CanvasRepo canvasRepo;
-    public boolean newVersionCanvas(CanvasVersionDTO canvasVersionDTO) {
+    public boolean newVersionCanvas(CanvasVersionDTO canvasVersionDTO,String sessionEmail) {
         try {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
             this.canvasVersionDTO = canvasVersionDTO;
@@ -52,7 +52,7 @@ public class VersionService {
             // return versionRepo.newVersionOfCanvas(nameCanvas, version);
 
             //Comproba si te permissos de escritura
-            if (versionRepo.verifyUserCanWrite(version)) {
+            if (versionRepo.verifyUserCanWrite(version,sessionEmail)) {
                 //Comproba que el els JSON han cambiat si no, no guarda els canvis.
                 if (compareVersionChange(version,nameCanvas,isPublic)) {
                     System.out.println("Els Json han cambiat");
@@ -142,8 +142,9 @@ public class VersionService {
         // fa la copia te permissos o es el propietari.
 
         //Asignam el email de la sessio per comprobar si de veres te permissos.
-        version.setUser_email(email);
-        if (versionRepo.verifyUserCanRead(version)) {
+        //version.setUser_email(email);
+
+        if (versionRepo.verifyUserCanRead(version,email)) {
             //te permisos de lectura, escritura o es el propietari.
             return true;
         }

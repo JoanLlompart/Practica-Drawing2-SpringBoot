@@ -93,10 +93,9 @@ public class VersionRepoImpl implements VersionRepo {
         }
     }
     @Override
-    public boolean verifyUserCanWrite(Version version) {
-        //Mira si es el propietari
+    public boolean verifyUserCanWrite(Version version,String sessionEmail) {
         String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE (permissionType ='W') AND idCanvas=? AND user_email= ?";
-        int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), version.getUser_email());
+        int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), sessionEmail);
         String slqOwner = "SELECT COUNT(*) FROM Canvas WHERE idObjectes =? AND user_email= ? AND trash =false";
         permisCount = jdbcTemplate.queryForObject(slqOwner, Integer.class, version.getIdDraw(), version.getUser_email());
         if (permisCount > 0) {
@@ -110,11 +109,11 @@ public class VersionRepoImpl implements VersionRepo {
         }
     }
     @Override
-    public boolean verifyUserCanRead(Version version) {
+    public boolean verifyUserCanRead(Version version, String sessionEmail) {
         //Si te permissos de escritura tambe te de lectura per aixo la select verificara com si te permisos de lectura
         // com de escritura tornara true ja que, tendria de lectura igualment
         String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE (permissionType ='R' OR permissionType ='W') AND idCanvas=? AND user_email= ?";
-        int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), version.getUser_email());
+        int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), sessionEmail);
 
         String slqOwner = "SELECT COUNT(*) FROM Canvas WHERE idObjectes =? AND user_email= ? AND trash =false";
         permisCount = jdbcTemplate.queryForObject(slqOwner, Integer.class, version.getIdDraw(), version.getUser_email());

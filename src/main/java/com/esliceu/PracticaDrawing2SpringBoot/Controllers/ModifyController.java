@@ -103,7 +103,7 @@ public class ModifyController {
         canvasVersionDTO.setFigures(figureJson);
         canvasVersionDTO.setNameCanvas(nameCanvas);
 
-        if(versionService.newVersionCanvas(canvasVersionDTO)) {
+        if(versionService.newVersionCanvas(canvasVersionDTO,email)) {
             System.out.println("Se ha actualitzat correctament");
            // model.addAttribute("message-ok",true);
            // return "Se ha creat una nova versio de el canvas";
