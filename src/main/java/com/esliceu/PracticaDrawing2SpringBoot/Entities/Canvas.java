@@ -64,6 +64,9 @@ public class Canvas {
     public Instant getDataCreacio() {
         return dataCreacio;
     }
+    public Timestamp viewDataCreacio() {
+        return Timestamp.from(dataCreacio);
+    }
 
     public void setDataCreacio(Instant dataCreacio) {
         this.dataCreacio = dataCreacio;

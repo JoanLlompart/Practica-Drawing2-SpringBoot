@@ -1,5 +1,6 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Entities;
 import javax.persistence.Column;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 public class Version {
@@ -40,6 +41,10 @@ public class Version {
     }
     public Instant getDateLastModified() {
         return dateLastModified;
+    }
+
+    public Timestamp viewDateLastModified() {
+        return Timestamp.from(dateLastModified);
     }
 
     public void setDateLastModified(Instant dateLastModified) {
@@ -85,7 +90,6 @@ public class Version {
     public void setStrokes(String strokes) {
         this.strokes = strokes;
     }
-
 
 
     public String getUser_email() {
