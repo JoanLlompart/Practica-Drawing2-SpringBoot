@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -48,6 +49,11 @@ public class ViewController {
         //todo: falta poder elegir la versio.
         List<Version> versionList = versionService.getAllVersion(idObjectes);
 
+        System.out.println("------Version List--------");
+        for (Version v:versionList) {
+            Timestamp dateTimestamp = Timestamp.from(v.getDateLastModified());
+            System.out.println("IdDraw : " + v.getIdDraw() + ",    idVersion "+ v.getIdVersion() + " , data : " + dateTimestamp);
+        }
         model.addAttribute("allUsers", usersList);
         String nameUser=(String) session.getAttribute("name");
         model.addAttribute("name",nameUser);
@@ -76,7 +82,6 @@ public class ViewController {
         canvasPermissionDTO.setUser_email(permission.getUser_email());
         userService.setEmail(email);
         boolean permisOk=permissionService.givePermission(canvasPermissionDTO);
-
 
         if (permisOk) {
             //Mensatge de exit
