@@ -18,8 +18,6 @@ public class PermissionService {
   @Autowired
     UserRepo userRepo;
 
-
-
     public boolean givePermission(CanvasPermissionDTO canvasPermissionDTO) {
         Permission p = new Permission();
         System.out.println("Pc" + canvasPermissionDTO.getUser_email());

@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.io.IOException;
-
 @Controller
 public class RegisterController {
     @Autowired
@@ -39,6 +37,5 @@ public class RegisterController {
             model.addAttribute("missatgeError", "La contraseña es demasiado corta, debe tener más de 5 caracteres");
             return "register";
         }
-        //return "register";
     }
 }
