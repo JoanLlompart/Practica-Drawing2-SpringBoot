@@ -16,6 +16,8 @@ public class VersionService {
     CanvasVersionDTO canvasVersionDTO;
     @Autowired
     VersionRepo versionRepo;
+    @Autowired
+    CanvasServices canvasServices;
 
     @Autowired
     CanvasRepo canvasRepo;
@@ -88,12 +90,6 @@ public class VersionService {
         //Comproba el nameCanvas actual de la base de dades per mirar si ha cambiat
         boolean nameCanvChange = nameCanvas.equals(nameCanvasOld);
         System.out.println("bool cambi de nom ? " + nameCanvChange);
-       /* if (!publicChange || !nameCanvChange) {
-            return true;
-        } else {
-            return false;
-        }
-        */
         return (!publicChange || !nameCanvChange);
     }
 
@@ -117,7 +113,6 @@ public class VersionService {
 
         //boolean strokesJson = compareJSONContent(vOld.getStrokes(),canvasVersionDTO.getStrokes());
         //System.out.println("Strokes han cambiat ?? " + strokesJson);
-
         //boolean figuresJson = compareJSONContent(vOld.getFigures(),canvasVersionDTO.getFigures());
         //System.out.println("Figures ha cambiat ? " + figuresJson);
 
@@ -131,7 +126,6 @@ public class VersionService {
     }
 
     public Version getVersionById(Version version, String email) {
-        //todo hem de comprobar que te permisos de escritura
         //torna la versio de el idVersion que especificam
         version=versionRepo.getVersionByIdVersion(version.getIdVersion());
         System.out.println("------version--");
@@ -145,11 +139,19 @@ public class VersionService {
     public boolean verifyCanCopyVersion(Version version, String email) {
         //comproba si el dibuix es public, o el usuari que
         // fa la copia te permissos o es el propietari.
-        boolean readPermission=versionRepo.verifyUserCanRead(version);
-        boolean writePermission = versionRepo.verifyUserCanWrite(version);
 
-        return false;
+        //Asignam el email de la sessio per comprobar si de veres te permissos.
+        version.setUser_email(email);
+        if (versionRepo.verifyUserCanRead(version)) {
+            //te permisos de lectura, escritura o es el propietari.
+            return true;
+        }
+        //comproba si el dibuix es public
+        boolean publicDraw =canvasServices.isCanvasPublic(version.getIdDraw());
+
+        return publicDraw;
     }
+
 
 
 

@@ -101,7 +101,8 @@ public class ViewController {
         version.setIdDraw(canvasVersionDTO.getIdObjectes());
         //canvasVersionDTO.setVersion(version.getIdVersion());
         version=versionService.getVersionById(version,email);
-
+        System.out.println("ver2 " + version.toString());
+        //boolean copyOk =versionService.makeCopyCanvas(version);
         //canvasServices.createCanvasCopy();
         //System.out.println(canvasVersionDTO.toString());
         return "viewCanvas";

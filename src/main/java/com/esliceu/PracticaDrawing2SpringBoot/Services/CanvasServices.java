@@ -214,4 +214,8 @@ public class CanvasServices {
         return canvasVersionDTOList;
     }
 
+
+    public boolean isCanvasPublic(int idObjectes) {
+        return canvasRepo.visibilityCanvas(idObjectes);
+    }
 }

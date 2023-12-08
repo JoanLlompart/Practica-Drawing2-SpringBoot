@@ -330,4 +330,10 @@ public class CanvasRepoSQL implements CanvasRepo {
             return canvas;
         });
     }
+
+    @Override
+    public boolean visibilityCanvas(int idObjectes) {
+        String sql = "SELECT public FROM `Canvas` WHERE idObjectes=?";
+        return jdbcTemplate.queryForObject(sql,Boolean.class,idObjectes);
+    }
 }
