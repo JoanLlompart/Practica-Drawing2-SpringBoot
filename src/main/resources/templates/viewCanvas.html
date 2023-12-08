@@ -24,7 +24,6 @@
     </header>
     <h1>Bienvenido a la Seccion de Visualización de el Canvas , [[${name}]]</h1>
     <br>
-   <!--<h2>Bienvenido, [[${name}]]</h2>-->
     <br>
     <h3>Nombre de el canvas: , [[${nameCanvas}]]</h3>
     <br>
@@ -32,14 +31,6 @@
     <input type="hidden" id="llistaFigureJson" name="llistaFigureJson" th:value="${llistaFigureJson}" />
     <input type="hidden" id="llistaStroke" name="llistaStroke" th:value="${llistaStroke}" />
     <canvas id="lienzo" width="800" height="550"></canvas>
-
-    <!--
-    <select>
-        <option th:each="version : ${versions}" 
-            th:text="${version.viewDateLastModified()}" >
-        </option>
-    </select>-->
-
     <button type="button" id="copyButton" name="copy"onclick="sendCopyRequest(this)">Realizar una Copia</button>
     <select>
         <option th:each="version : ${versions}" 
