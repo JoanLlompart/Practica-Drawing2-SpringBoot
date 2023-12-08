@@ -225,13 +225,15 @@ public class CanvasServices {
         //String strokesJson, String figureJson, String email, String nameCanvas, String esPub
         String strokesJson = canVerDTOCopy.getStrokes();
         String figureJson = canVerDTOCopy.getFigures();
+        String nameCopy = "Copy_"+ canVerDTOCopy.getNameCanvas();
+
         Canvas copyC = new Canvas();
         copyC.setUser_email(canVerDTOCopy.getUser_email());
-        copyC.setNameCanvas(canVerDTOCopy.getNameCanvas());
+        copyC.setNameCanvas(nameCopy);
         copyC.setPublicDraw(canVerDTOCopy.isPublic());
         copyC.setTrash(false);
         try {
-            canvasRepo.saveCanvas(copyC,strokesJson,strokesJson);
+            canvasRepo.saveCanvas(copyC,strokesJson,figureJson);
         } catch (Exception e) {
             throw new RuntimeException("Error al realitzar la copia de el canvas" +e.getCause()  +  e.getLocalizedMessage());
         }
