@@ -57,21 +57,7 @@ public class UserRepoImplSQL implements UserRepo  {
     }
 
 
-/*
 
-    public boolean isPasswordOfUser(User user, String pasword) {
-        try {
-            String sql = "SELECT password FROM user WHERE email = ?";
-            User userDB = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
-            System.out.println(user.toString());
-            return true;
-        } catch (EmptyResultDataAccessException e) {
-            System.err.println("No se ha encontrado el usuario");
-            return false;
-        }
-    }
-
- */
 
     @Override
     public User initSession(String email, String password) {

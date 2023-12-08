@@ -51,25 +51,7 @@ public class ModifyController {
             model.addAttribute("errorMessage", message);
             return "errorNotYourCanvas";
         }
-       /* try {
-            Canvas canvas = canvasServices.getCanvasToModify(idObjectes, email);
-            String nameUser = (String) session.getAttribute("name");
-            System.out.println("print figures" + canvas.getFigures());
 
-            System.out.println("print strokes" + canvas.getStrokes());
-            model.addAttribute("llistaFigureJson", canvas.getFigures());
-            model.addAttribute("llistaStroke", canvas.getStrokes());
-            model.addAttribute("nameCanvas", nameCanvas);
-            model.addAttribute("name",nameUser);
-            return "modify";
-        } catch (NotYourCanvasException e) {
-            System.out.println("Mensaje del throw " + e.getMessage());
-            String message = e.getMessage();
-            model.addAttribute("errorMessage", message);
-            return "errorNotYourCanvas";
-        }
-
-        */
     }
 
     @PostMapping("/modify")
@@ -90,14 +72,12 @@ public class ModifyController {
             System.err.println("Error no hi ha contingut a aquest canvas");
             throw new RuntimeException();
         }
-        // String nameCanvas = req.getParameter("nomDibuix");
         //si el user no ha posat un nom se asigna automaticament.
         System.out.println("Nom" + nameCanvas);
         if (nameCanvas == null || nameCanvas.isEmpty()) {
             nameCanvas = canvasServices.generarNom(nameCanvas);
         }
 
-        //String isPub = req.getParameter("isPublic");
         //Actualitzam els valors de la nova versio i el nous JSON
         canvasVersionDTO.setStrokes(strokJson);
         canvasVersionDTO.setFigures(figureJson);

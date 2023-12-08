@@ -148,61 +148,6 @@ public class CanvasRepoSQL implements CanvasRepo {
         }
     }
 
-    /*
-    @Override
-    public List<Object[]> showAllCanvas(String sessionEmail) {
-        String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, latestVersion.figuresJSON, latestVersion.strokesJSON, latestVersion.dateLastModified " +
-                "FROM Canvas c " +
-                "INNER JOIN ( " +
-                "    SELECT idDraw, MAX(dateLastModified) AS MaxDate " +
-                "    FROM Version " +
-                "    GROUP BY idDraw " +
-                ") latestVersionDate ON c.idObjectes = latestVersionDate.idDraw " +
-                "INNER JOIN Version latestVersion ON latestVersionDate.idDraw = latestVersion.idDraw AND latestVersionDate.MaxDate = latestVersion.dateLastModified " +
-                "WHERE ((c.trash = false AND c.public = true) OR (c.user_email = ? AND c.public = false)) " +
-                "AND c.trash = false " +
-                "ORDER BY c.idObjectes;";
-        try {
-            return jdbcTemplate.query(selectAllCanvasQuery, new Object[]{sessionEmail}, (resultSet, i) -> {
-                int canvasId = resultSet.getInt("idObjectes");
-                String nameCanvas = resultSet.getString("nameCanvas");
-                //Instant dataCreacio = resultSet.getTimestamp("dataCreacio").toInstant();
-                String userEmail = resultSet.getString("user_email");
-                String figuresJSON = resultSet.getString("figuresJSON");
-                String strokesJSON = resultSet.getString("strokesJSON");
-                //Instant dateLastModified = resultSet.getTimestamp("dateLastModified").toInstant();
-                Instant dataCreacio = null;
-                Timestamp dataCreacioTimestamp = resultSet.getTimestamp("dataCreacio");
-                if (dataCreacioTimestamp != null) {
-                    dataCreacio = dataCreacioTimestamp.toInstant();
-                }
-
-                Instant dateLastModified = null;
-                Timestamp dateLastModifiedTimestamp = resultSet.getTimestamp("dateLastModified");
-                if (dateLastModifiedTimestamp != null) {
-                    dateLastModified = dateLastModifiedTimestamp.toInstant();
-                }
-                // Crear objetos Canvas y Version y almacenarlos en un array de objetos
-                Canvas canvas = new Canvas();
-                canvas.setIdObjectes(canvasId);
-                canvas.setNameCanvas(nameCanvas);
-                canvas.setDataCreacio(dataCreacio);
-                canvas.setUser_email(userEmail);
-
-                Version version = new Version();
-                version.setFigures(figuresJSON);
-                version.setStrokes(strokesJSON);
-                version.setDateLastModified(dateLastModified);
-                Permission p = new Permission();
-
-                // Toran un array de objectes amb el Canvas i la Version asociada
-                return new Object[]{canvas, version};
-            });
-        } catch (EmptyResultDataAccessException e) {
-            return Collections.emptyList();
-        }
-    }*/
-
     @Override
     public boolean removeCanvas(int idCanvas, String emailSessio) {
         String deleteVersionQuery = "DELETE FROM Version WHERE idDraw = ? AND user_email = ?";
@@ -306,26 +251,11 @@ public class CanvasRepoSQL implements CanvasRepo {
             canvasAndVersion.add(canvas);
             canvasAndVersion.add(version);
             return canvasAndVersion;
-             /*
-                canvas.setFigures(resultSet.getString("figuresJSON"));
-                canvas.setStrokes(resultSet.getString("strokesJSON"));
-                canvas.setDateLastModified(resultSet.getTimestamp("dateLastModified"));
-
-                return canvas;
-
-              */
         });
     }
 
     @Override
     public List<Object[]> showMyTrash(String emailSessio) {
-       /* String selectMyTrashQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, v.figuresJSON, v.strokesJSON, v.dateLastModified " +
-                "FROM Canvas c " +
-                "INNER JOIN Version v ON c.idObjectes = v.idDraw " +
-                "WHERE c.user_email = ? AND c.trash = true " + //filtra els Canvas de el email de la sessio i que estiguin a la papelera.
-                "ORDER BY c.idObjectes, v.dateLastModified DESC";
-
-        */
 
         String selectMyTrashQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, latestVersion.figuresJSON, latestVersion.strokesJSON, latestVersion.dateLastModified " +
                 "FROM Canvas c " +

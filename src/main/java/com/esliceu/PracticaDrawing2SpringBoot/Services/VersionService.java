@@ -26,17 +26,8 @@ public class VersionService {
             //Els valors de canvasVersionDTO els asignam a la instancia de clase amb this.
             this.canvasVersionDTO = canvasVersionDTO;
 
-           /* System.out.println("is pub "+isPub);
-            if (isPub == null) {
-                canvasVersionDTO.setPublic(false);
-            }else if (isPub.equals("on")) {
-                canvasVersionDTO.setPublic(true);
-            }
-
-            */
             System.out.println("public? " +canvasVersionDTO.isPublic());
             Version version = new Version();
-            //System.out.println(canvasVersionDTO.toString());
             //Ara cream asignam els atributs a la clase version.
             version.setIdDraw(canvasVersionDTO.getIdObjectes());
             System.out.println(version.getIdDraw() +"IdDraw");
@@ -49,8 +40,6 @@ public class VersionService {
             String nameCanvas = canvasVersionDTO.getNameCanvas();
             boolean isPublic = canvasVersionDTO.isPublic();
             //Pasam tots els parametres de Version i el nameCanvas a la funcio de newVersionOfCanvas
-            // return versionRepo.newVersionOfCanvas(nameCanvas, version);
-
             //Comproba si te permissos de escritura
             if (versionRepo.verifyUserCanWrite(version,sessionEmail)) {
                 //Comproba que el els JSON han cambiat si no, no guarda els canvis.
@@ -95,14 +84,12 @@ public class VersionService {
 
 
     public List<Version> getAllVersion(int idObjectes) {
-        //if (versionRepo.verifyUserCanRead())
         return versionRepo.getVersionsByIdDraw(idObjectes);
     }
     public boolean compareVersionChange(Version version,String nameCanvas, boolean isPublic) {
         //Agafar la darrera Versio de el dibuix amb aquest id i la comparam els json.
         int idCanvas =version.getIdDraw();
         Version vOld=versionRepo.getLastVersionByCanvasId(idCanvas);
-       // System.out.println(vOld.toString());
 
         String strokOld = vOld.getStrokes();
         String figuresOld = vOld.getFigures();
@@ -110,12 +97,6 @@ public class VersionService {
         String figuresNew = version.getFigures();
         System.out.println("FIGURES NEW " + figuresNew);
         System.out.println("figures Old " + figuresOld);
-
-        //boolean strokesJson = compareJSONContent(vOld.getStrokes(),canvasVersionDTO.getStrokes());
-        //System.out.println("Strokes han cambiat ?? " + strokesJson);
-        //boolean figuresJson = compareJSONContent(vOld.getFigures(),canvasVersionDTO.getFigures());
-        //System.out.println("Figures ha cambiat ? " + figuresJson);
-
         boolean  strokesJson= strokesNew.equals(strokOld);
         boolean figuresJson = figuresNew.equals(figuresOld);
         System.out.println("boolean figures  " + figuresJson);
@@ -132,9 +113,7 @@ public class VersionService {
         System.out.println("------version--");
         System.out.println(version.toString());
         //si te permissos per fer la copia retorna una version i si no null.
-        //todo alomillor no fa falta que retorni la versio ja la pot mandar a crear.
         return (verifyCanCopyVersion(version,email)) ? version : null;
-        //return version;
     }
 
     public boolean verifyCanCopyVersion(Version version, String email) {

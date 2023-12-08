@@ -26,28 +26,13 @@ public class AllCanvasController {
         //session.setAttribute("name", name);
         System.out.println("antes de petar");
         List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas(email);
-       /* for (CanvasVersionDTO c : listCanvas) {
-            System.out.println("ID OBEJCTEEES : ");
-            System.out.println(c.getIdObjectes());
-        }
-        */
-       // if (listCanvas.isEmpty()) System.out.println("Llista buida");
+
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);
         return "allCanvas";
     }
-    /*
-    @PostMapping("/allCanvas")
-    public String deleteCanvas(@RequestParam("id") int id, HttpSession session) {
-        String email = (String) session.getAttribute("email");
-        userService.setEmail(email);
-        if (!canvasServices.deleteCanvasById(id, email)) {
-            //TODO
-        }
-        return "redirect:/allCanvas";
-    }
-     */
+
     @PostMapping("/trash")
     public String sendToTrash(@RequestParam("id") int id, HttpSession session,Model model) {
         String email = (String) session.getAttribute("email");

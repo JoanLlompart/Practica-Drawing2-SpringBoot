@@ -29,12 +29,8 @@ public class UserService {
             System.out.println(user);
             return false;
         }
-       /* password = encriptarPassword(password);
-        if (user.getEmail().equals(email) && email.equals(user.getEmail())) return true;
-        return false;
-        */
+
         return true;
-       // return userRepo.isPasswordOfUser(user, password);
     }
     public String getNameOfUser(String email) {
         User u = userRepo.findByEmail(email);

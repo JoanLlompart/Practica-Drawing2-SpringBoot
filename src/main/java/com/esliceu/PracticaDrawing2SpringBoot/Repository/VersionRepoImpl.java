@@ -193,19 +193,6 @@ public class VersionRepoImpl implements VersionRepo {
 
     @Override
     public boolean newVersionOfCanvas(String nameCanvas, Version version, boolean isPublic) {
-        /*
-            String sqlPermissionCheck = "SELECT COUNT(*) " +
-                    "FROM Permission AS p " +
-                    "WHERE p.user_email = ? " +
-                    "    AND p.idCanvas = ? " +
-                    "    AND p.permissionType = 'W'";
-            //String sqlPermissionCheck = "SELECT COUNT(*) FROM Permission WHERE idCanvas = ? AND user_email = ? ";
-
-            //int permissionCount = jdbcTemplate.queryForObject(sqlPermissionCheck, Integer.class, version.getIdDraw(), version.getUser_email());
-            int permissionCount = jdbcTemplate.queryForObject(sqlPermissionCheck, Integer.class, version.getUser_email(),
-                    version.getIdDraw());
-            if (permissionCount > 0) {
-        */
         try {
             // El usuario tiene permisos, realizar la inserción de la versión
             String sqlInsertVersion = "INSERT INTO Version (idDraw, figuresJSON, strokesJSON, dateLastModified, user_email, numberObject) VALUES (?, ?, ?, NOW(), ?, ?)";

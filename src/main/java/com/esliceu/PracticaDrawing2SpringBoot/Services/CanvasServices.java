@@ -85,22 +85,6 @@ public class CanvasServices {
         System.out.println("No se ha pogut mandar a la defora de papelera el canvas amb id " + idCanvasTrash);
         return false;
     }
-    /*
-    public Canvas getCanvasToModify(int id,String emailSessionUser) throws NotYourCanvasException {
-        //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.
-        Canvas c = canvasRepo.getCanvasById(id);
-        //email de el pintor de el dibuix
-        String emailPainter = c.getUser_email();
-        if (emailPainter.equals(emailSessionUser)) {
-            //si el email de el pintor coincideix amb el de el user de la sessio tornara el canvas.
-            System.out.println("Print a canvasServices modify" + c.toString());
-            return c;
-        } else {
-            throw new NotYourCanvasException("No eres el propietario de este Canvas!");
-        }
-    }
-
-     */
     public CanvasVersionDTO getCanvasToModify(int id, String emailSessionUser) throws NotYourCanvasException {
         //hem de comprobar que aquest id pertany a el mateix usuari que el ha creat i que esta en la sessio.
         List<Object> canvasVersionList = canvasRepo.getCanvasById(id);
@@ -116,7 +100,6 @@ public class CanvasServices {
         canvasVersionDTO.setDateLastModified(v.getDateLastModified());
         canvasVersionDTO.setUser_email(c.getUser_email());
         canvasVersionDTO.setIdObjectes(c.getIdObjectes());
-        //canvasVersionDTO.setTrash(c.isTrash());
 
         //email de el pintor de el dibuix
         String emailPainter = c.getUser_email();
@@ -151,27 +134,6 @@ public class CanvasServices {
         }
         return canvasVersionDTOList;
     }
-    /*
-    public List<CanvasVersionDTO> showAllCanvasCanBeSee(String email) {
-        List<CanvasVersionDTO> listAll = showAllCanvas(email);
-        List<CanvasVersionDTO> canvasPermissionlist = getCanvasHavePermission(email);
-        listAll.addAll(canvasPermissionlist);
-        return listAll;
-    }
-
-
-    private List<CanvasVersionDTO> getCanvasHavePermission(String email) {
-         canvasRepo.showCanvasHavePermission(email);
-         return null;
-    }
-
-     */
-
-    /*
-    public List<Canvas> showAllCanvas() {
-        return canvasRepo.showAllCanvas();
-    }
-     */
     public Canvas getCanvas(int id,String email) {
         List<Object> list =canvasRepo.getCanvasById(id);
         Canvas c = (Canvas) list.get(0);
