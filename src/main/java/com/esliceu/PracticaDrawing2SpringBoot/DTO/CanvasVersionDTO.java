@@ -2,6 +2,7 @@ package com.esliceu.PracticaDrawing2SpringBoot.DTO;
 import org.springframework.stereotype.Component;
 import javax.persistence.Column;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Component
@@ -55,6 +56,12 @@ public class CanvasVersionDTO {
                 '}';
     }
 
+    public Timestamp viewDateLastModified() {
+        return Timestamp.from(dateLastModified);
+    }
+    public Timestamp viewDataCreacio() {
+        return Timestamp.from(dataCreacio);
+    }
     public boolean isPublic() {
         return isPublic;
     }
@@ -94,6 +101,7 @@ public class CanvasVersionDTO {
     public void setDataCreacio(Instant dataCreacio) {
         this.dataCreacio = dataCreacio;
     }
+
 
     public int getNumberObject() {
         return numberObject;

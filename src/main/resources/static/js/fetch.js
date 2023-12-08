@@ -125,7 +125,8 @@ function confirmDeleteCanvas(canvasId) {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        version: selectedVersionId
+                        idVersion: selectedVersionId
+                        
                     })
                 })
                 .then(response => {
@@ -143,6 +144,8 @@ function confirmDeleteCanvas(canvasId) {
                     console.error('Hubo un problema al copiar la versión:', error);
                 });
             }
+
+
 
             /*
             // Capturar el evento de cambio del select

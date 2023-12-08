@@ -130,6 +130,29 @@ public class VersionService {
         return (!figuresJson || !strokesJson);
     }
 
+    public Version getVersionById(Version version, String email) {
+        //todo hem de comprobar que te permisos de escritura
+        //torna la versio de el idVersion que especificam
+        version=versionRepo.getVersionByIdVersion(version.getIdVersion());
+        System.out.println("------version--");
+        System.out.println(version.toString());
+        //si te permissos per fer la copia retorna una version i si no null.
+        //todo alomillor no fa falta que retorni la versio ja la pot mandar a crear.
+        return (verifyCanCopyVersion(version,email)) ? version : null;
+        //return version;
+    }
+
+    public boolean verifyCanCopyVersion(Version version, String email) {
+        //comproba si el dibuix es public, o el usuari que
+        // fa la copia te permissos o es el propietari.
+        boolean readPermission=versionRepo.verifyUserCanRead(version);
+        boolean writePermission = versionRepo.verifyUserCanWrite(version);
+
+        return false;
+    }
+
+
+
    /* public static boolean compareJSONContent(String json1, String json2) {
         try {
             System.out.println("Json1" + json1);

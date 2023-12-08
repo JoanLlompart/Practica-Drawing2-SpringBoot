@@ -144,3 +144,18 @@ pintar(listStrokes);
 
 
 
+/*
+
+
+            // Obtener los elementos por su ID
+var llistaFigureInput = document.getElementById('llistaFigureJson');
+var llistaStrokeInput = document.getElementById('llistaStroke');
+
+// Modificar los valores
+var nuevoValorFigure = '{"nuevo": "valor_figure"}'; // Nuevo valor para llistaFigureJson
+var nuevoValorStroke = '{"nuevo": "valor_stroke"}'; // Nuevo valor para llistaStroke
+
+llistaFigureInput.value = nuevoValorFigure;
+llistaStrokeInput.value = nuevoValorStroke;
+
+*/

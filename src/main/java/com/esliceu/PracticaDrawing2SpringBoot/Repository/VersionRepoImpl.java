@@ -3,6 +3,7 @@ package com.esliceu.PracticaDrawing2SpringBoot.Repository;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -93,7 +94,8 @@ public class VersionRepoImpl implements VersionRepo {
     }
     @Override
     public boolean verifyUserCanWrite(Version version) {
-        String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE permissionType ='W' AND idCanvas=? AND user_email= ?";
+        //Mira si es el propietari
+        String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE (permissionType ='W') AND idCanvas=? AND user_email= ?";
         int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), version.getUser_email());
         String slqOwner = "SELECT COUNT(*) FROM Canvas WHERE idObjectes =? AND user_email= ? AND trash =false";
         permisCount = jdbcTemplate.queryForObject(slqOwner, Integer.class, version.getIdDraw(), version.getUser_email());
@@ -109,7 +111,7 @@ public class VersionRepoImpl implements VersionRepo {
     }
     @Override
     public boolean verifyUserCanRead(Version version) {
-        String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE permissionType ='R' AND idCanvas=? AND user_email= ?";
+        String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE (permissionType ='R' OR permissionType ='W') AND idCanvas=? AND user_email= ?";
         int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), version.getUser_email());
         String slqOwner = "SELECT COUNT(*) FROM Canvas WHERE idObjectes =? AND user_email= ? AND trash =false";
         permisCount = jdbcTemplate.queryForObject(slqOwner, Integer.class, version.getIdDraw(), version.getUser_email());
@@ -162,6 +164,29 @@ public class VersionRepoImpl implements VersionRepo {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Version getVersionByIdVersion(int idVersion) {
+        try {
+            String sql = "SELECT * FROM Version WHERE idVersion = ?";
+            return jdbcTemplate.queryForObject(sql, new Object[]{idVersion}, (rs, rowNum) -> {
+                Version version = new Version();
+                version.setIdVersion(rs.getInt("idVersion"));
+                version.setIdDraw(rs.getInt("idDraw"));
+                version.setFigures(rs.getString("figuresJSON"));
+                version.setStrokes(rs.getString("strokesJSON"));
+                Timestamp timestamp=rs.getTimestamp("dateLastModified");
+                version.setDateLastModified(Instant.ofEpochMilli(timestamp.getTime()));
+                version.setNumberObject(rs.getInt("numberObject"));
+                version.setUser_email(rs.getString("user_email"));
+                return version;
+            });
+        } catch (Exception e) {
+            System.err.println("error: getVersionByIdVersion");
+            return null;
+        }
+
     }
 
     @Override

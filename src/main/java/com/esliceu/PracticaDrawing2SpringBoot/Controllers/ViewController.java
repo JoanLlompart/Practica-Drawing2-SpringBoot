@@ -33,6 +33,8 @@ public class ViewController {
     PermissionService permissionService;
     @Autowired
     CanvasPermissionDTO canvasPermissionDTO;
+    @Autowired
+    CanvasVersionDTO canvasVersionDTO;
     @GetMapping("/viewCanvas")
     public String viewCanvas(@RequestParam("id") int idObjectes,
                              @RequestParam("nameCanvas") String nameCanvas,
@@ -91,63 +93,17 @@ public class ViewController {
         return "viewCanvas";
     }
     @PostMapping("/viewCanvas/copy")
-    public String copyCanvasPost(@RequestBody CanvasVersionDTO canvasVersionDTO) {
-
-        System.out.println("version copy " + canvasVersionDTO.getVersion());
-        return "viewCanvas";
-    }
-
-    /*
-    @GetMapping("/getCanvasData")
-    @ResponseBody
-    public ResponseEntity<String> getCanvasData(@RequestParam("id") int idObjectes,
-                                                HttpSession session) {
+    public String copyCanvasPost(@RequestBody Version version,HttpSession session) {
         String email = (String) session.getAttribute("email");
-        CanvasVersionDTO canvasVersionDTO = canvasServices.getVersion(idObjectes, email);
-        Gson gson = new Gson();
-        String jsonData = gson.toJson(canvasVersionDTO);
 
-        return ResponseEntity.ok(jsonData);
-    }
+        System.out.println("version copy " + version.getIdVersion());
+        System.out.println(version.toString());
+        version.setIdDraw(canvasVersionDTO.getIdObjectes());
+        //canvasVersionDTO.setVersion(version.getIdVersion());
+        version=versionService.getVersionById(version,email);
 
-     */
-    /*
-    @PostMapping("/viewCanvas/write")
-    public String writePermission(HttpSession session) {
-        String email = (String) session.getAttribute("email");
-        permissionService.setUser_email(email);
-        permissionService.getPermission();
+        //canvasServices.createCanvasCopy();
+        //System.out.println(canvasVersionDTO.toString());
         return "viewCanvas";
     }
-    @PostMapping("/viewCanvas/write")
-    public String readPermission(HttpSession session) {
-        //String email = (String) session.getAttribute("email");
-        permissionService.setUser_email(email,);
-        return "viewCanvas";
-    }
-     */
-    /*
-    @PostMapping("/viewCanvas/write")
-    public String writePermission(@RequestParam("id") int id,
-                                  @RequestParam("nameCanvas") String user_email,
-                                  HttpSession session) {
-        String email = (String) session.getAttribute("email");
-        permissionService.setUser_email(email);
-        canvasPermissionDTO.setUser_email(user_email);
-        System.out.println("User owner : " + canvasPermissionDTO.getOwner_email());
-        System.out.println("User email : " + canvasPermissionDTO.getUser_email());
-        return "viewCanvas";
-    }
-    @PostMapping("/viewCanvas/read")
-    public String readPermission(@RequestParam("id") int id,
-                                 @RequestParam("user_email") String user_email,
-                                 HttpSession session) {
-        String email = (String) session.getAttribute("email");
-        canvasPermissionDTO.setOwner_email(email);
-        canvasPermissionDTO.setUser_email(user_email);
-        //permissionService.setUser_email(email);
-        //permissionService.getPermission();
-        return "viewCanvas";
-    }
-     */
 }
