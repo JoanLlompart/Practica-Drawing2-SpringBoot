@@ -32,11 +32,15 @@
     <input type="hidden" id="llistaFigureJson" name="llistaFigureJson" th:value="${llistaFigureJson}" />
     <input type="hidden" id="llistaStroke" name="llistaStroke" th:value="${llistaStroke}" />
     <canvas id="lienzo" width="800" height="550"></canvas>
-    <select>
+    <!--<select>
         <option value="lasmod">Fecha 1</option>
         <option value="lasmod">Fecha 2</option>
         <option value="lasmod">Fecha 3</option>
         <option value="lasmod">Fecha 4</option>
+    </select> -->
+    <select>
+        <!-- Iterar sobre la lista de fechas y crear opciones -->
+        <option th:each="version : ${versions}" th:text="${version}"></option>
     </select>
     <table  th:if="${not #lists.isEmpty(allUsers)}">
         <tr>

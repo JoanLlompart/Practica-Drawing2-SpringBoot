@@ -54,6 +54,7 @@ public class ViewController {
             Timestamp dateTimestamp = Timestamp.from(v.getDateLastModified());
             System.out.println("IdDraw : " + v.getIdDraw() + ",    idVersion "+ v.getIdVersion() + " , data : " + dateTimestamp);
         }
+        model.addAttribute("versions",versionList);
         model.addAttribute("allUsers", usersList);
         String nameUser=(String) session.getAttribute("name");
         model.addAttribute("name",nameUser);
