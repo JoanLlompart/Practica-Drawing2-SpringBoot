@@ -98,36 +98,6 @@ const dibuixarFigure = (figures) => {
 };
 
 
-/*
-// Función para dibujar la versión seleccionada
-const dibujarVersion = () => {
-    // Obtener el índice de la opción seleccionada
-    const selectedIndex = select.selectedIndex;
-
-    // Obtener la versión correspondiente al índice seleccionado
-    const selectedVersion = versions[selectedIndex]; // Suponiendo que tienes una lista "versions" disponible con los datos
-
-    // Convertir las cadenas JSON en objetos para dibujar
-    const listFigure = JSON.parse(selectedVersion.figures.value);
-    const listStrokes = JSON.parse(selectedVersion.strokes.value);
-
-
-    // Limpiar el canvas antes de dibujar la nueva versión
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Dibujar la versión seleccionada en el canvas
-    dibuixarFigure(listFigure);
-    pintar(listStrokes);
-};
-
-
-// Agregar un evento de cambio al select
-select.addEventListener("change", dibujarVersion);
-
-// Llamar a la función dibujarVersion para dibujar la versión inicial seleccionada al cargar la página
-dibujarVersion();
-*/
-
 
 
 console.log(figuresJSON);
@@ -143,19 +113,3 @@ dibuixarFigure(listFigure);
 pintar(listStrokes);
 
 
-
-/*
-
-
-            // Obtener los elementos por su ID
-var llistaFigureInput = document.getElementById('llistaFigureJson');
-var llistaStrokeInput = document.getElementById('llistaStroke');
-
-// Modificar los valores
-var nuevoValorFigure = '{"nuevo": "valor_figure"}'; // Nuevo valor para llistaFigureJson
-var nuevoValorStroke = '{"nuevo": "valor_stroke"}'; // Nuevo valor para llistaStroke
-
-llistaFigureInput.value = nuevoValorFigure;
-llistaStrokeInput.value = nuevoValorStroke;
-
-*/

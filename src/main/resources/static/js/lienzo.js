@@ -101,32 +101,6 @@ const pintar = (cursorX, cursorY) => {
     }
 }
 
-/*
-
-const pintar = (cursorX, cursorY) => {
-    if (activaPintar) {
-        if (figura.value === "sinSeleccionar") {
-            ctx.beginPath();
-            ctx.moveTo(cursorX, cursorY);
-            ctx.lineWidth = sizeSelect.value;
-            ctx.strokeStyle = colorElegit.value;
-            ctx.lineCap = "round";
-            ctx.lineJoin = "round";
-            ctx.lineTo(cursorX, cursorY);
-            ctx.stroke();
-            //ptoba
-            //ctx.closePath();
-        }
-    } else {
-        figura.value = "sinSeleccionar";
-    }
-}
-*/
-
-
-
-
-
 const dibuixarFigure = (event) => {
     if (!activaPintar && figura.value !== "sinSeleccionar") {
         //var figure = new Figure(figura.value,colorElegit.value,isFilled.value,sizeSelect.value);
@@ -262,12 +236,7 @@ dibuix.addEventListener("change", (event) => {
     activaPintar = event.target.checked;
 });
 
-/*
-dibuix.addEventListener("click", (event) => {
-    // Activa la capacidad de dibuixar en fer  clic en el botó "Dibuixar"
-    activaPintar = !activaPintar;
-});
-*/
+
 
 canvas.addEventListener("mouseout", () => {
     console.log("mouseout");

@@ -57,36 +57,3 @@
                     console.error('Hubo un problema al copiar la versión:', error);
                 });
             }
-
-
-
-            /*
-            // Capturar el evento de cambio del select
-            document.addEventListener("DOMContentLoaded", function() {
-                var selectElement = document.querySelector('select');
-            
-                selectElement.addEventListener('change', function() {
-                    var selectedVersion = this.value; // Obtener la versión seleccionada
-            
-                    // Realizar una solicitud FETCH al servidor
-                    fetch('/viewCanvas?id=' + selectedVersion) // Ajustar la URL según tu configuración
-                        .then(function(response) {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(function(data) {
-                            // Actualizar los valores de los atributos con los nuevos datos
-                            document.getElementById('llistaFigureJson').value = data.llistaFigureJson;
-                            document.getElementById('llistaStroke').value = data.llistaStroke;
-                            // Puedes realizar otras acciones con los datos si es necesario
-                        })
-                        .catch(function(error) {
-                            console.error('Error al obtener los datos de la versión seleccionada:', error);
-                        });
-                });
-            });
-
-*/
-

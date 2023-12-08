@@ -30,13 +30,7 @@
         </div>
     </header>
     <h1>Papelera de [[${name}]]</h1>
-    <!-- 
-    <div th:if="${message}" class="message-ok">
-        <p th:text="${message}"></p>
-    </div>
-    <div th:if="${message}" class="message-error">
-        <p th:text="${message}"></p>
-    </div> -->
+
     <table>
         <tr>
             <th>IdCanvas</th>
@@ -58,12 +52,6 @@
             <td th:text="${canvas.getUser_email()}"></td>
             <td>
                 <div>
-                    <!--
-                    <form th:action="@{/trash/delete}" method="post">
-                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
-                        <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Delete</button>
-                    </form>
-                -->
                 <form th:action="@{/trash/delete}" method="post" onsubmit="return confirmDelete()">
                     <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                     <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Delete</button>

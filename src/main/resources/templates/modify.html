@@ -39,10 +39,7 @@
     <br>
     <h3>Nombre de el canvas: , [[${nameCanvas}]]</h3>
     <br>
-    <!-- 
-            <input type="hidden" id="llistaFigureJson" name="llistaFigureJson" value='${llistaFigureJson}'/>
-            <input type="hidden" id="llistaStroke" name="llistaStroke" value='${llistaStroke}'/>
--->
+
     <input type="hidden" id="llistaFigureJson" name="llistaFigureJson" th:value="${llistaFigureJson}" />
     <input type="hidden" id="llistaStroke" name="llistaStroke" th:value="${llistaStroke}" />
 
@@ -58,13 +55,6 @@
         </div>
     </div>
 
-    <!-- Mensajes de éxito o error 
-        <p>¡Se ha creado una nueva versión del canvas!</p>
-    </div>
-    <div th:if="${message-error}">
-        <p>Error: Datos no recibidos correctamente</p>
-    </div>
--->
     <br>
     <div class="dataContainer">
         <p>Dibujar</p>
@@ -104,7 +94,6 @@
             <p>Nombre:</p>
             <label for="nomDibuix"></label>
             <input type="text" id="nomDibuix" name="nomDibuix" th:value="${nameCanvas}">
-            <!-- <input type="text" id="nomDibuix" name="nomDibuix">-->
             <br>
             <p>Color:</p>
             <input type="color" name="color" id="color" value="#000000">

@@ -50,11 +50,6 @@
             <td th:text="${canvas.getUser_email()}"></td>
             <td>
                 <div>
-                    <!-- 
-                    <form th:action="@{/allCanvas}" method="post">
-                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
-                        <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Delete</button>
-                    </form> -->
                     <form th:action="@{/viewCanvas}" method="get">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
