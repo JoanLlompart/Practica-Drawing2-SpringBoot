@@ -51,8 +51,7 @@ public class ViewController {
 
         System.out.println("------Version List--------");
         for (Version v:versionList) {
-            Timestamp dateTimestamp = Timestamp.from(v.getDateLastModified());
-            System.out.println("IdDraw : " + v.getIdDraw() + ",    idVersion "+ v.getIdVersion() + " , data : " + dateTimestamp);
+            System.out.println("IdDraw : " + v.getIdDraw() + ",    idVersion "+ v.getIdVersion() + " , data : " + v.viewDateLastModified());
         }
         model.addAttribute("versions",versionList);
         model.addAttribute("allUsers", usersList);
