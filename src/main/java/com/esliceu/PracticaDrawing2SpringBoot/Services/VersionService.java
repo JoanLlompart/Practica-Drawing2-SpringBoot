@@ -126,6 +126,7 @@ public class VersionService {
     }
 
     public Version getVersionById(Version version, String email) {
+        //todo hem de comprobar que te permisos de escritura
         //torna la versio de el idVersion que especificam
         version=versionRepo.getVersionByIdVersion(version.getIdVersion());
         System.out.println("------version--");
@@ -151,7 +152,6 @@ public class VersionService {
 
         return publicDraw;
     }
-
 
 
 
