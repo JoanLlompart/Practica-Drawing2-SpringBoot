@@ -149,7 +149,6 @@ public class VersionService {
         }
         //comproba si el dibuix es public
         boolean publicDraw =canvasServices.isCanvasPublic(version.getIdDraw());
-
         return publicDraw;
     }
 
