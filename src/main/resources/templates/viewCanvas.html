@@ -40,7 +40,7 @@
     </select> -->
     <select>
         <!-- Iterar sobre la lista de fechas y crear opciones -->
-        <option th:each="version : ${versions}" th:text="${version}"></option>
+        <option th:each="version : ${versions}" th:text="${version.dateLastModified}"></option>
     </select>
     <table  th:if="${not #lists.isEmpty(allUsers)}">
         <tr>
