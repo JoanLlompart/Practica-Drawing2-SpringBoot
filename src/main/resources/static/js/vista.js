@@ -2,6 +2,7 @@ const canvas = document.getElementById("lienzo");
 const ctx = canvas.getContext("2d");
 const figuresJSON = document.getElementById("llistaFigureJson");
 const strokesJSON = document.getElementById("llistaStroke");
+const select = document.querySelector("select"); 
 
 const pintar = (listStrokes) => {
     listStrokes.forEach(stroke => {
@@ -96,6 +97,38 @@ const dibuixarFigure = (figures) => {
     });
 };
 
+
+// Función para dibujar la versión seleccionada
+const dibujarVersion = () => {
+    // Obtener el índice de la opción seleccionada
+    const selectedIndex = select.selectedIndex;
+
+    // Obtener la versión correspondiente al índice seleccionado
+    const selectedVersion = versions[selectedIndex]; // Suponiendo que tienes una lista "versions" disponible con los datos
+
+    // Convertir las cadenas JSON en objetos para dibujar
+    const listFigure = JSON.parse(selectedVersion.figures.value);
+    const listStrokes = JSON.parse(selectedVersion.strokes.value);
+
+
+    // Limpiar el canvas antes de dibujar la nueva versión
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Dibujar la versión seleccionada en el canvas
+    dibuixarFigure(listFigure);
+    pintar(listStrokes);
+};
+
+
+// Agregar un evento de cambio al select
+select.addEventListener("change", dibujarVersion);
+
+// Llamar a la función dibujarVersion para dibujar la versión inicial seleccionada al cargar la página
+dibujarVersion();
+
+
+/*
+
 console.log(figuresJSON);
 console.log(strokesJSON);
 //convertim a la llista de figure a una llista de objectes Figure
@@ -106,6 +139,7 @@ const listStrokes = JSON.parse(strokesJSON.value);
 console.log(listStrokes.value);
 
 dibuixarFigure(listFigure);
-
 pintar(listStrokes);
+*/
+
 

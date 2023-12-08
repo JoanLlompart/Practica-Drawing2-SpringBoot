@@ -13,12 +13,10 @@ import com.esliceu.PracticaDrawing2SpringBoot.Services.VersionService;
 import com.google.gson.Gson;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -83,6 +81,8 @@ public class ViewController {
         userService.setEmail(email);
         boolean permisOk=permissionService.givePermission(canvasPermissionDTO);
 
+        System.out.println("ID canvas services :" + canvasPermissionDTO.getIdCanvas());
+       // boolean copyMade = canvasServices.createCanvasCopy(email,c);
         if (permisOk) {
             //Mensatge de exit
         } else {
@@ -90,6 +90,27 @@ public class ViewController {
         }
         return "viewCanvas";
     }
+    @PostMapping("/viewCanvas/copy")
+    public String copyCanvasPost(@RequestBody CanvasVersionDTO canvasVersionDTO) {
+
+        System.out.println("version copy " + canvasVersionDTO.getVersion());
+        return "viewCanvas";
+    }
+
+    /*
+    @GetMapping("/getCanvasData")
+    @ResponseBody
+    public ResponseEntity<String> getCanvasData(@RequestParam("id") int idObjectes,
+                                                HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        CanvasVersionDTO canvasVersionDTO = canvasServices.getVersion(idObjectes, email);
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(canvasVersionDTO);
+
+        return ResponseEntity.ok(jsonData);
+    }
+
+     */
     /*
     @PostMapping("/viewCanvas/write")
     public String writePermission(HttpSession session) {
