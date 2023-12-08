@@ -111,8 +111,11 @@ public class VersionRepoImpl implements VersionRepo {
     }
     @Override
     public boolean verifyUserCanRead(Version version) {
+        //Si te permissos de escritura tambe te de lectura per aixo la select verificara com si te permisos de lectura
+        // com de escritura tornara true ja que, tendria de lectura igualment
         String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE (permissionType ='R' OR permissionType ='W') AND idCanvas=? AND user_email= ?";
         int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), version.getUser_email());
+
         String slqOwner = "SELECT COUNT(*) FROM Canvas WHERE idObjectes =? AND user_email= ? AND trash =false";
         permisCount = jdbcTemplate.queryForObject(slqOwner, Integer.class, version.getIdDraw(), version.getUser_email());
         if (permisCount > 0) {
