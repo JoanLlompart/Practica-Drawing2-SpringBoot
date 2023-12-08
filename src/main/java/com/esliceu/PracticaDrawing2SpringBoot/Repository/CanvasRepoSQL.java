@@ -82,7 +82,7 @@ public class CanvasRepoSQL implements CanvasRepo {
                 version.setFigures(figuresJSON);
                 version.setStrokes(strokesJSON);
                 version.setDateLastModified(dateLastModified);
-                Permission p = new Permission();
+                //Permission p = new Permission();
 
                 // Toran un array de objectes amb el Canvas i la Version asociada
                 return new Object[]{canvas, version};
@@ -91,27 +91,27 @@ public class CanvasRepoSQL implements CanvasRepo {
             return Collections.emptyList();
         }
     }
+
     @Override
     public List<Object[]> showCanvasUserHavePermission(String sessionEmail) {
-        String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, latestVersion.figuresJSON, latestVersion.strokesJSON, latestVersion.dateLastModified " +
-                "FROM Canvas c " +
-                "INNER JOIN ( " +
-                "    SELECT idDraw, MAX(dateLastModified) AS MaxDate " +
-                "    FROM Version " +
-                "    GROUP BY idDraw " +
-                ") latestVersionDate ON c.idObjectes = latestVersionDate.idDraw " +
-                "INNER JOIN Version latestVersion ON latestVersionDate.idDraw = latestVersion.idDraw AND latestVersionDate.MaxDate = latestVersion.dateLastModified " +
-                "WHERE ((c.trash = false AND c.public = true) OR (c.user_email = ? AND c.public = false)) " +
-                "AND c.trash = false " +
-                "ORDER BY c.idObjectes;";
+        String selectAllCanvasQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email as Propietari," +
+                " latestVersion.figuresJSON, latestVersion.strokesJSON, latestVersion.dateLastModified," +
+                "pe.permissionType FROM Canvas c " +
+                "INNER JOIN ( SELECT idDraw, MAX(dateLastModified) AS MaxDate FROM Version GROUP BY idDraw ) " +
+                "latestVersionDate ON c.idObjectes = latestVersionDate.idDraw " +
+                "INNER JOIN Version latestVersion ON latestVersionDate.idDraw = latestVersion.idDraw " +
+                "AND latestVersionDate.MaxDate = latestVersion.dateLastModified " +
+                "LEFT JOIN Permission pe ON pe.idCanvas = c.idObjectes and latestVersion.idDraw = pe.idCanvas " +
+                "WHERE (pe.user_email= ?) ORDER BY c.idObjectes;";
         try {
             return jdbcTemplate.query(selectAllCanvasQuery, new Object[]{sessionEmail}, (resultSet, i) -> {
                 int canvasId = resultSet.getInt("idObjectes");
                 String nameCanvas = resultSet.getString("nameCanvas");
                 //Instant dataCreacio = resultSet.getTimestamp("dataCreacio").toInstant();
-                String userEmail = resultSet.getString("user_email");
+                String userEmail = resultSet.getString("Propietari");
                 String figuresJSON = resultSet.getString("figuresJSON");
                 String strokesJSON = resultSet.getString("strokesJSON");
+                String permission = resultSet.getString("permissionType");
                 //Instant dateLastModified = resultSet.getTimestamp("dateLastModified").toInstant();
                 Instant dataCreacio = null;
                 Timestamp dataCreacioTimestamp = resultSet.getTimestamp("dataCreacio");
@@ -136,11 +136,14 @@ public class CanvasRepoSQL implements CanvasRepo {
                 version.setStrokes(strokesJSON);
                 version.setDateLastModified(dateLastModified);
                 Permission p = new Permission();
-
+                p.setPermissionType(permission);
+                p.setIdCanvas(canvasId);
+                p.setUser_email(sessionEmail);
                 // Toran un array de objectes amb el Canvas i la Version asociada
                 return new Object[]{canvas, version};
             });
         } catch (EmptyResultDataAccessException e) {
+            System.out.println("Exception a showCanvasUserHavePermission");
             return Collections.emptyList();
         }
     }
@@ -230,6 +233,7 @@ public class CanvasRepoSQL implements CanvasRepo {
             return false;
         }
     }
+
     @Override
     public boolean sendOutOfTrash(int idCanvas, String emailSessio) {
         //Si esta a la papelera i antes era puclic que pasa???
@@ -244,6 +248,7 @@ public class CanvasRepoSQL implements CanvasRepo {
             return false;
         }
     }
+
     @Transactional
     public void saveCanvas(Canvas canvas, String strokesJson, String figureJson) {
         //Nomes valid per guardar el canvas per primer pic, si no se actualitzara la data de creacio per ara.
@@ -322,7 +327,7 @@ public class CanvasRepoSQL implements CanvasRepo {
 
         */
 
-        String selectMyTrashQuery ="SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, latestVersion.figuresJSON, latestVersion.strokesJSON, latestVersion.dateLastModified " +
+        String selectMyTrashQuery = "SELECT c.idObjectes, c.nameCanvas, c.dataCreacio, c.user_email, latestVersion.figuresJSON, latestVersion.strokesJSON, latestVersion.dateLastModified " +
                 "FROM Canvas c " +
                 "INNER JOIN ( " +
                 "    SELECT idDraw, MAX(dateLastModified) AS MaxDate " +
@@ -391,6 +396,6 @@ public class CanvasRepoSQL implements CanvasRepo {
     @Override
     public boolean visibilityCanvas(int idObjectes) {
         String sql = "SELECT public FROM `Canvas` WHERE idObjectes=?";
-        return jdbcTemplate.queryForObject(sql,Boolean.class,idObjectes);
+        return jdbcTemplate.queryForObject(sql, Boolean.class, idObjectes);
     }
 }

@@ -130,6 +130,8 @@ public class CanvasServices {
     }
     public List<CanvasVersionDTO> showAllCanvas(String email) {
         List<Object[]> listOb = canvasRepo.showAllCanvas(email);
+        List<Object[]> lisPermisCanv =canvasRepo.showCanvasUserHavePermission(email);
+        listOb.addAll(lisPermisCanv);
         List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
         for (Object[] objects : listOb) {
             Canvas canvas = (Canvas) objects[0];
