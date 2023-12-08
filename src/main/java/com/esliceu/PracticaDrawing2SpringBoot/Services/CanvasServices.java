@@ -8,6 +8,8 @@ import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepo;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -219,4 +221,20 @@ public class CanvasServices {
     }
 
 
+    public boolean createCanvasCopy(CanvasVersionDTO canVerDTOCopy) {
+        //String strokesJson, String figureJson, String email, String nameCanvas, String esPub
+        String strokesJson = canVerDTOCopy.getStrokes();
+        String figureJson = canVerDTOCopy.getFigures();
+        Canvas copyC = new Canvas();
+        copyC.setUser_email(canVerDTOCopy.getUser_email());
+        copyC.setNameCanvas(canVerDTOCopy.getNameCanvas());
+        copyC.setPublicDraw(canVerDTOCopy.isPublic());
+        copyC.setTrash(false);
+        try {
+            canvasRepo.saveCanvas(copyC,strokesJson,strokesJson);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al realitzar la copia de el canvas" +e.getCause()  +  e.getLocalizedMessage());
+        }
+        return true;
+    }
 }

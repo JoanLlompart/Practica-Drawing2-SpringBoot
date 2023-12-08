@@ -140,10 +140,6 @@ public class VersionService {
     public boolean verifyCanCopyVersion(Version version, String email) {
         //comproba si el dibuix es public, o el usuari que
         // fa la copia te permissos o es el propietari.
-
-        //Asignam el email de la sessio per comprobar si de veres te permissos.
-        //version.setUser_email(email);
-
         if (versionRepo.verifyUserCanRead(version,email)) {
             //te permisos de lectura, escritura o es el propietari.
             return true;
@@ -152,28 +148,4 @@ public class VersionService {
         boolean publicDraw =canvasServices.isCanvasPublic(version.getIdDraw());
         return publicDraw;
     }
-
-
-
-   /* public static boolean compareJSONContent(String json1, String json2) {
-        try {
-            System.out.println("Json1" + json1);
-            System.out.println("Json2" + json2);
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode tree1 = objectMapper.readTree(json1);
-            JsonNode tree2 = objectMapper.readTree(json2);
-
-            // Compara los contenidos de los JSON convertidos a objetos Java
-            return tree1.toString().equals(tree2.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("No ha comparat be els JSON");
-            return false;
-        }
-
-    }
-
-    */
-
 }

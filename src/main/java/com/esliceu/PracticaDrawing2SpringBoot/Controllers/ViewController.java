@@ -100,11 +100,33 @@ public class ViewController {
         System.out.println(version.toString());
         version.setIdDraw(canvasVersionDTO.getIdObjectes());
         //canvasVersionDTO.setVersion(version.getIdVersion());
+        System.out.println("Copy----");
+        System.out.println(canvasVersionDTO.toString());
         version=versionService.getVersionById(version,email);
         System.out.println("ver2 " + version.toString());
-        //boolean copyOk =versionService.makeCopyCanvas(version);
-        //canvasServices.createCanvasCopy();
-        //System.out.println(canvasVersionDTO.toString());
+        //boolean copyOk =versionService.makeCopyCanvas(version,email);
+
+        CanvasVersionDTO canVerDTOCopy = new CanvasVersionDTO();
+
+        canVerDTOCopy.setFigures(version.getFigures());
+        canVerDTOCopy.setStrokes(version.getStrokes());
+        canVerDTOCopy.setNameCanvas(canvasVersionDTO.getNameCanvas());
+        canVerDTOCopy.setTrash(false);
+        canVerDTOCopy.setPublic(false);
+        canVerDTOCopy.setIdObjectes(version.getIdDraw());
+        canVerDTOCopy.setVersion(version.getIdVersion());
+        canVerDTOCopy.setUser_email(email);
+        canVerDTOCopy.setDateLastModified(version.getDateLastModified());
+        canVerDTOCopy.setDataCreacio(canvasVersionDTO.getDataCreacio());
+        canVerDTOCopy.setNumberObject(canvasVersionDTO.getNumberObject());
+        boolean copyOk = false;
+        if (versionService.verifyCanCopyVersion(version,email)) {
+            copyOk = canvasServices.createCanvasCopy(canVerDTOCopy);
+        }
+        if (copyOk) {
+            System.out.println("Se ha guardat correctament");
+        }
+
         return "viewCanvas";
     }
 }

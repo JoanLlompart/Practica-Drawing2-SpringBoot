@@ -19,5 +19,5 @@ public interface CanvasRepo {
     Canvas compareStatusCanvas(int idCanvas);
 
     boolean visibilityCanvas(int idObjectes);
-    //List<Object[]> showCanvasHavePermission(String email);
+    List<Object[]> showCanvasUserHavePermission(String email);
 }
