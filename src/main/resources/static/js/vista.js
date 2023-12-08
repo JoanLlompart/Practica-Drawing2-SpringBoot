@@ -98,6 +98,7 @@ const dibuixarFigure = (figures) => {
 };
 
 
+/*
 // Función para dibujar la versión seleccionada
 const dibujarVersion = () => {
     // Obtener el índice de la opción seleccionada
@@ -125,9 +126,9 @@ select.addEventListener("change", dibujarVersion);
 
 // Llamar a la función dibujarVersion para dibujar la versión inicial seleccionada al cargar la página
 dibujarVersion();
+*/
 
 
-/*
 
 console.log(figuresJSON);
 console.log(strokesJSON);
@@ -140,6 +141,6 @@ console.log(listStrokes.value);
 
 dibuixarFigure(listFigure);
 pintar(listStrokes);
-*/
+
 
 

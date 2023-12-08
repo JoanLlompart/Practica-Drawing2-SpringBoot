@@ -40,7 +40,7 @@
         </option>
     </select>-->
 
-    <button type="button" id="copyButton" name="copy"onclick="sendCopyRequest(this)"></button>
+    <button type="button" id="copyButton" name="copy"onclick="sendCopyRequest(this)">Realizar una Copia</button>
     <select>
         <option th:each="version : ${versions}" 
             th:text="${version.viewDateLastModified()}"

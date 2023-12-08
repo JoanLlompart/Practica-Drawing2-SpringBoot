@@ -65,7 +65,8 @@ public class VersionRepoImpl implements VersionRepo {
     @Override
     public List<Version> getVersionsByIdDraw(int idDraw) {
         try {
-            String sql = "SELECT * FROM Version WHERE idDraw = ?";
+            //Torna totes les Versions de la mes recent a la mes antigua.
+            String sql = "SELECT * FROM Version WHERE idDraw = ? ORDER BY dateLastModified DESC";
             List<Version> versionList = jdbcTemplate.query(sql, (rs, rowNum) -> {
                 Version version = new Version();
                 version.setIdDraw(rs.getInt("idDraw"));
