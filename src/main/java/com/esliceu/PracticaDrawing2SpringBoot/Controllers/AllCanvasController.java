@@ -25,7 +25,9 @@ public class AllCanvasController {
         String name = userService.getNameOfUser(email);
         System.out.println("antes de petar");
         List<CanvasVersionDTO> listCanvas = canvasServices.showAllCanvas(email);
-
+        for (CanvasVersionDTO dto : listCanvas) {
+            System.out.println(dto.toString());
+        }
         model.addAttribute("allCanvas", listCanvas);
         model.addAttribute("email", email);
         model.addAttribute("name", name);
