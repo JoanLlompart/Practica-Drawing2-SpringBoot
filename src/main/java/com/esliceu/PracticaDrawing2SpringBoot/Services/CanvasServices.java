@@ -1,6 +1,7 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Services;
 import com.esliceu.PracticaDrawing2SpringBoot.DTO.CanvasVersionDTO;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Canvas;
+import com.esliceu.PracticaDrawing2SpringBoot.Entities.Permission;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.User;
 import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
@@ -132,6 +133,12 @@ public class CanvasServices {
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }
+        System.out.println("-----------");
+        for (CanvasVersionDTO dto: canvasVersionDTOList) {
+            System.out.println(dto.toString());
+        }
+        System.out.println("-----------");
+
         return canvasVersionDTOList;
     }
     public Canvas getCanvas(int id,String email) {

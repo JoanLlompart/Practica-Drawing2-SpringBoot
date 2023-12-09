@@ -140,7 +140,7 @@ public class CanvasRepoSQL implements CanvasRepo {
                 p.setIdCanvas(canvasId);
                 p.setUser_email(sessionEmail);
                 // Toran un array de objectes amb el Canvas i la Version asociada
-                return new Object[]{canvas, version};
+                return new Object[]{canvas, version,permission};//modificat
             });
         } catch (EmptyResultDataAccessException e) {
             System.out.println("Exception a showCanvasUserHavePermission");

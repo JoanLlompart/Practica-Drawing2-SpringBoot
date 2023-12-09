@@ -20,6 +20,7 @@ public class CanvasVersionDTO {
     private Instant dateLastModified;
     private int version;
     private boolean isPublic;
+    private String permissionType;
     public CanvasVersionDTO() {
 
     }
@@ -53,6 +54,7 @@ public class CanvasVersionDTO {
                 ", dateLastModified=" + dateLastModified +
                 ", version=" + version +
                 ", isPublic=" + isPublic +
+                ", permissionType='" + permissionType + '\'' +
                 '}';
     }
 
@@ -62,6 +64,15 @@ public class CanvasVersionDTO {
     public Timestamp viewDataCreacio() {
         return Timestamp.from(dataCreacio);
     }
+
+    public String getPermissionType() {
+        return permissionType;
+    }
+
+    public void setPermissionType(String permissionType) {
+        this.permissionType = permissionType;
+    }
+
     public boolean isPublic() {
         return isPublic;
     }
