@@ -58,13 +58,31 @@
                     <form th:action="@{/modify}" method="get">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
+                        <!-- Cambia la condición de 'and' a 'or' -->
+                        <button type="submit" class="modify" th:if="${canvas.getUser_email() == email or canvas.permissionType == 'W'}">Modificar</button>
+                    </form>
+                    <form th:action="@{/trash}" method="post">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                        <!-- Cambia la condición de 'and' a 'or' -->
+                        <button type="submit" class="delete" th:if="${canvas.getUser_email() == email or canvas.permissionType == 'W'}">Enviar papelera</button>
+                    </form>
+                <!--
+                <div>
+                    <form th:action="@{/viewCanvas}" method="get">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
+                        <button type="submit" class="viewCanvas">Ver</button>
+                    </form>
+                    <form th:action="@{/modify}" method="get">
+                        <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
+                        <input type="hidden" name="nameCanvas" th:value="${canvas.nameCanvas}" readonly />
                         <button type="submit" class="modify" th:if="${canvas.getUser_email == email}">Modificar</button>
                     </form>
                     <form th:action="@{/trash}" method="post">
                         <input type="hidden" name="id" th:value="${canvas.idObjectes}" readonly />
                         <button type="submit" class="delete" th:if="${canvas.getUser_email == email}">Enviar papelera</button>
                     </form>
-                </div>
+                </div> -->
             </td>
         </tr>
     </table>
