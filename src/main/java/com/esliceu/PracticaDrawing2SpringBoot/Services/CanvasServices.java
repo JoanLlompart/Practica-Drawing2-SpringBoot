@@ -115,8 +115,58 @@ public class CanvasServices {
     public List<CanvasVersionDTO> showAllCanvas(String email) {
         List<Object[]> listOb = canvasRepo.showAllCanvas(email);
         List<Object[]> lisPermisCanv =canvasRepo.showCanvasUserHavePermission(email);
-        listOb.addAll(lisPermisCanv);
         List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
+
+        for (Object[] ob: lisPermisCanv) {
+            Canvas canvas = (Canvas) ob[0];
+            Version version = (Version) ob[1];
+            Permission permission = (Permission) ob[2];
+            CanvasVersionDTO dto = new CanvasVersionDTO();
+            dto.setIdObjectes(canvas.getIdObjectes());
+            dto.setNameCanvas(canvas.getNameCanvas());
+            dto.setUser_email(canvas.getUser_email());
+            dto.setDataCreacio(canvas.getDataCreacio());
+            dto.setNumberObject(version.getNumberObject());
+            dto.setFigures(version.getFigures());
+            dto.setStrokes(version.getStrokes());
+            dto.setTrash(canvas.isTrash());
+            dto.setDateLastModified(version.getDateLastModified());
+            dto.setVersion(version.getIdVersion());
+            dto.setPermissionType(permission.getPermissionType());
+            canvasVersionDTOList.add(dto);
+        }
+
+
+     /*   for (Object ob:lisPermisCanv) {
+            CanvasVersionDTO dto = new CanvasVersionDTO();
+            if (ob instanceof Canvas canvas) {
+                dto.setIdObjectes(canvas.getIdObjectes());
+                dto.setNameCanvas(canvas.getNameCanvas());
+                dto.setUser_email(canvas.getUser_email());
+                dto.setDataCreacio(canvas.getDataCreacio());
+                dto.setTrash(canvas.isTrash());
+            } else if (ob instanceof Version version) {
+                dto.setNumberObject(version.getNumberObject());
+                dto.setDateLastModified(version.getDateLastModified());
+                dto.setVersion(version.getIdVersion());
+            } else if (ob instanceof Permission permission) {
+                dto.setPermissionType(permission.getPermissionType());
+
+            }
+            canvasVersionDTOList.add(dto);
+        }
+
+      */
+
+
+        System.out.println("-----------");
+        for (CanvasVersionDTO dto: canvasVersionDTOList) {
+            System.out.println(dto.toString());
+        }
+        System.out.println("-----------");
+
+        //listOb.addAll(lisPermisCanv);
+        //List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
         for (Object[] objects : listOb) {
             Canvas canvas = (Canvas) objects[0];
             Version version = (Version) objects[1];
@@ -133,11 +183,9 @@ public class CanvasServices {
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }
-        System.out.println("-----------");
-        for (CanvasVersionDTO dto: canvasVersionDTOList) {
-            System.out.println(dto.toString());
-        }
-        System.out.println("-----------");
+
+
+
 
         return canvasVersionDTOList;
     }

@@ -138,9 +138,10 @@ public class CanvasRepoSQL implements CanvasRepo {
                 Permission p = new Permission();
                 p.setPermissionType(permission);
                 p.setIdCanvas(canvasId);
-                p.setUser_email(sessionEmail);
+                p.setUser_email(userEmail);
                 // Toran un array de objectes amb el Canvas i la Version asociada
-                return new Object[]{canvas, version,permission};//modificat
+                return new Object[]{canvas, version,p};//modificat
+                //return new Object[]{canvas, version,permission};
             });
         } catch (EmptyResultDataAccessException e) {
             System.out.println("Exception a showCanvasUserHavePermission");
@@ -157,11 +158,6 @@ public class CanvasRepoSQL implements CanvasRepo {
         int deletedCanvas = jdbcTemplate.update(deleteCanvasQuery, idCanvas, emailSessio);
         // Si se eliminó el lienzo y al menos una versión asociada
         return deletedCanvas > 0 && deletedVersions > 0;
-            /*} catch (NotYourCanvasException e) {
-                // Manejar excepciones
-                e.getMessage("Error al eliminar el lienzo");
-            }
-             */
     }
 
     @Override
