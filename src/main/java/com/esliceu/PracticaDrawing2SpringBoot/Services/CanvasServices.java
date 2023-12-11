@@ -159,11 +159,13 @@ public class CanvasServices {
       */
 
 
-        System.out.println("-----------");
+      /*  System.out.println("-----------");
         for (CanvasVersionDTO dto: canvasVersionDTOList) {
             System.out.println(dto.toString());
         }
         System.out.println("-----------");
+
+       */
 
         //listOb.addAll(lisPermisCanv);
         //List<CanvasVersionDTO> canvasVersionDTOList = new ArrayList<>();
