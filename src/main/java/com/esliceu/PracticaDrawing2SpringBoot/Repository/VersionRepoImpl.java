@@ -97,7 +97,6 @@ public class VersionRepoImpl implements VersionRepo {
         String sqlPermission = "SELECT COUNT(*) FROM Permission WHERE (permissionType ='W') AND idCanvas=? AND user_email= ?";
         int permisCount = jdbcTemplate.queryForObject(sqlPermission, Integer.class, version.getIdDraw(), sessionEmail);
         System.out.println("IdDraw :" + version.getIdDraw() + " , usuari amb permis :" + sessionEmail);
-        System.out.println("Contador de permis = " +permisCount);
         String slqOwner = "SELECT COUNT(*) FROM Canvas WHERE idObjectes =? AND user_email= ? AND trash =false";
         permisCount += jdbcTemplate.queryForObject(slqOwner, Integer.class, version.getIdDraw(), version.getUser_email());
         if (permisCount > 0) {
@@ -105,7 +104,6 @@ public class VersionRepoImpl implements VersionRepo {
             System.out.println("te permis");
             return true;
         } else {
-            System.out.println("Dins else " + permisCount);
             System.out.println("No te permis");
             //No te permisos per per realitzar modificacions
             return false;
