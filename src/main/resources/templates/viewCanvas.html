@@ -32,10 +32,11 @@
     <input type="hidden" id="llistaStroke" name="llistaStroke" th:value="${llistaStroke}" />
     <canvas id="lienzo" width="800" height="550"></canvas>
     <button type="button" id="copyButton" name="copy"onclick="sendCopyRequest(this)">Realizar una Copia</button>
-    <select>
+    <select id="versionSelect">
         <option th:each="version : ${versions}" 
             th:text="${version.viewDateLastModified()}"
-            th:value="${version.idVersion}" >
+            th:value="${version.idVersion}"
+            th:value="${version.}" >
         </option>
     </select>
     <table  th:if="${not #lists.isEmpty(allUsers)}">

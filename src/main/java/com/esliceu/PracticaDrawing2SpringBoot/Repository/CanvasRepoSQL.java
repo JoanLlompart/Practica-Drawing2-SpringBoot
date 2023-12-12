@@ -223,7 +223,6 @@ public class CanvasRepoSQL implements CanvasRepo {
             if (dataCreacioTimestamp != null) {
                 dataCreacio = dataCreacioTimestamp.toInstant();
             }
-
             Instant dateLastModified = null;
             Timestamp dateLastModifiedTimestamp = resultSet.getTimestamp("dateLastModified");
             if (dateLastModifiedTimestamp != null) {

@@ -112,3 +112,12 @@ console.log(listStrokes.value);
 dibuixarFigure(listFigure);
 pintar(listStrokes);
 
+/*
+const versionSelect = document.getElementById("versionSelect");
+
+versionSelect.addEventListener("change",function() {
+    const valueSelect = versionSelect.value;
+    console.log("Valor num " + valueSelect);
+    
+});
+*/
