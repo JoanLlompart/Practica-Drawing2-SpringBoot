@@ -112,4 +112,3 @@ console.log(listStrokes.value);
 dibuixarFigure(listFigure);
 pintar(listStrokes);
 
-
