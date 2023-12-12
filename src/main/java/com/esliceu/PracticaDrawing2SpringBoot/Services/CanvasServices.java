@@ -7,6 +7,7 @@ import com.esliceu.PracticaDrawing2SpringBoot.Entities.Version;
 import com.esliceu.PracticaDrawing2SpringBoot.Exceptions.NotYourCanvasException;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.CanvasRepo;
 import com.esliceu.PracticaDrawing2SpringBoot.Repository.UserRepo;
+import com.esliceu.PracticaDrawing2SpringBoot.Repository.VersionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ public class CanvasServices {
     CanvasRepo canvasRepo;
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    VersionRepo versionRepo;
     @Autowired
     CanvasVersionDTO canvasVersionDTO;
     public void newCanvas(String strokesJson, String figureJson, String email, String nameCanvas, String esPub) {
@@ -92,6 +95,7 @@ public class CanvasServices {
         Canvas c= (Canvas) canvasVersionList.get(0);
         Version v =(Version) canvasVersionList.get(1);
 
+
         canvasVersionDTO.setNameCanvas(c.getNameCanvas());
         canvasVersionDTO.setFigures(v.getFigures());
         canvasVersionDTO.setStrokes(v.getStrokes());
@@ -100,10 +104,13 @@ public class CanvasServices {
         canvasVersionDTO.setDataCreacio( c.getDataCreacio());
         canvasVersionDTO.setDateLastModified(v.getDateLastModified());
         canvasVersionDTO.setUser_email(c.getUser_email());
-        canvasVersionDTO.setIdObjectes(c.getIdObjectes());
+        canvasVersionDTO.setIdObjectes(id);
 
         //email de el pintor de el dibuix
         String emailPainter = c.getUser_email();
+
+        /*
+        //PROBAM A NO COMPROBAR AQUI.
         if (emailPainter.equals(emailSessionUser)) {
             //si el email de el pintor coincideix amb el de el user de la sessio tornara el canvas.
             System.out.println("Print a canvasServices modify" + c.toString());
@@ -111,6 +118,8 @@ public class CanvasServices {
         } else {
             throw new NotYourCanvasException("No eres el propietario de este Canvas!");
         }
+         */
+        return canvasVersionDTO;
     }
     public List<CanvasVersionDTO> showAllCanvas(String email) {
         List<Object[]> listOb = canvasRepo.showAllCanvas(email);
@@ -164,7 +173,6 @@ public class CanvasServices {
             System.out.println(dto.toString());
         }
         System.out.println("-----------");
-
        */
 
         //listOb.addAll(lisPermisCanv);
@@ -185,10 +193,6 @@ public class CanvasServices {
             canvasVersionDTO.setVersion(version.getIdVersion());
             canvasVersionDTOList.add(canvasVersionDTO);
         }
-
-
-
-
         return canvasVersionDTOList;
     }
     public Canvas getCanvas(int id,String email) {
