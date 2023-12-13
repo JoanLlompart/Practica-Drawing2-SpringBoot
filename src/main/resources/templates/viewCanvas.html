@@ -35,8 +35,7 @@
     <select id="versionSelect">
         <option th:each="version : ${versions}" 
             th:text="${version.viewDateLastModified()}"
-            th:value="${version.idVersion}"
-            th:value="${version.}" >
+            th:value="${version.idVersion}" >
         </option>
     </select>
     <table  th:if="${not #lists.isEmpty(allUsers)}">
