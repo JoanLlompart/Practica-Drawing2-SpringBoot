@@ -109,6 +109,7 @@ console.log(listFigure);
 const listStrokes = JSON.parse(strokesJSON.value);
 console.log(listStrokes.value);
 
+
 dibuixarFigure(listFigure);
 pintar(listStrokes);
 
