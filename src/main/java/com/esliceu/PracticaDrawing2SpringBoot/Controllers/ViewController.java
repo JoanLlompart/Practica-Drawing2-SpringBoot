@@ -53,6 +53,10 @@ public class ViewController {
         for (Version v:versionList) {
             System.out.println("IdDraw : " + v.getIdDraw() + ",    idVersion "+ v.getIdVersion() + " , data : " + v.viewDateLastModified());
         }
+        System.out.println("------VERSIO SENCERA");
+        for (Version v2: versionList) {
+            System.out.println("Figures :" + v2.getFigures() + " Strokes : "+v2.getStrokes());
+        }
         model.addAttribute("versions",versionList);
         model.addAttribute("allUsers", usersList);
         String nameUser=(String) session.getAttribute("name");
