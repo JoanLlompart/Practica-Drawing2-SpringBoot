@@ -1,4 +1,5 @@
 package com.esliceu.PracticaDrawing2SpringBoot.Controllers;
+import com.esliceu.PracticaDrawing2SpringBoot.Services.LoginOAuthServices;
 import com.esliceu.PracticaDrawing2SpringBoot.Services.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
     @Autowired
     UserService userService;
+    @Autowired
+    LoginOAuthServices loginOAuthServices;
     @GetMapping("/login")
     public String showLoginForm(HttpSession session) {
         if (session != null) {
@@ -68,4 +71,25 @@ public class LoginController {
             return "login";
         }
     }
+
+    @GetMapping("/logindiscord")
+    public String logindiscord() throws Exception {
+        return "redirect:" + loginOAuthServices.getDiscordRedirection();
+    }
+
+    @GetMapping("/discord/callback")
+    public String discordCallback(@RequestParam String code, HttpSession session) throws Exception{
+        String email = loginOAuthServices.getDiscordUserEmail(code);
+        session.setAttribute("email",email);
+        if (email.isEmpty()) return "redirect:/error";
+        userService.setEmail(email);
+        userService.setPassword("");
+        userService.registrarUsuari("",email, userService.getPassword());
+        System.out.println(email);
+        return "redirect:/canvasDrawing";
+    }
+
+
+
+
 }

@@ -26,6 +26,13 @@
     <p><input name="Iniciar sesión" value="Iniciar sesión" type="submit" required></p>
 </form>
 
+<div style="text-align: center; margin-top: 20px;">
+    <a href="/logindiscord" class="discord-button">
+        Sign with Discord <i class="fa-brands fa-discord"></i>
+    </a>
+</div>
+
+
 <!-- Missatges de exit o error -->
 <div th:if="${missatgeRegistre != null}" style="color: green;">
     <span th:text="${missatgeRegistre}"></span>
