@@ -37,13 +37,11 @@ public class LoginOAuthServices {
         uri.addParameter("redirect_uri", redirecturiDiscord);
         uri.addParameter("response_type", "code");
         uri.addParameter("scope", "identify email");
-
         return uri.build().toURL().toString();
     }
 
     public String getDiscordUserEmail(String code) throws Exception {
         URL uri = new URL("https://discord.com/api/oauth2/token");
-
         Map<String, String> parameters = new HashMap<>();
         parameters.put("client_id", clientidDiscord);
         parameters.put("client_secret", clientSecretDiscord);
