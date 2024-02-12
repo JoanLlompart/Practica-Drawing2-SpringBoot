@@ -22,7 +22,6 @@ public class CanvasController {
         //session.setAttribute("name", name);
         String nomSesion = (String)session.getAttribute("name");
         model.addAttribute("name", nomSesion);
-        //printSession(session);
         return "canvasDraw"; // nombre de la vista Thymeleaf
     }
     @PostMapping("/canvasDraw")
