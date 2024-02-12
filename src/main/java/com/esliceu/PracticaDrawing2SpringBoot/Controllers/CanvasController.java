@@ -19,7 +19,6 @@ public class CanvasController {
     public String getCanvasPage(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         String name = userService.getNameOfUser(email);
-        //session.setAttribute("name", name);
         String nomSesion = (String)session.getAttribute("name");
         model.addAttribute("name", nomSesion);
         return "canvasDraw"; // nombre de la vista Thymeleaf
@@ -35,7 +34,6 @@ public class CanvasController {
         if (strokJson.equals("[]") && figureJson.equals("[]")) {
             System.err.println("Error no hi ha contingut a aquest canvas");
             return "CanvasDraw";
-            //throw new RuntimeException();
         }
         String nameCanvas = req.getParameter("nomDibuix");
         //si el user no ha posat un nom se asigna automaticament.

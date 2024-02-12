@@ -29,6 +29,12 @@
   <p><input name="Enviar" value="Registrarse" type="submit"></p>
 </form>
 <a href="login">Ir a Login</a>
+<!--Unirse a traves de Discord-->
+<div style="text-align: center; margin-top: 20px;">
+  <a href="/logindiscord" class="discord-button">
+    Join with Discord account <i class="fa-brands fa-discord"></i>
+  </a>
+</div>
 <!-- Mensajes de éxito o error -->
 <div th:if="${missatgeRegistre != null}" style="color: green;">
   <span th:text="${missatgeRegistre}"></span>
