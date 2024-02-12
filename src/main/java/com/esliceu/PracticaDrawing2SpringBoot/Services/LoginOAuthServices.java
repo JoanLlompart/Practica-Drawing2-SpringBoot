@@ -80,6 +80,7 @@ public class LoginOAuthServices {
         }
         post.setEntity(new UrlEncodedFormEntity(nvps));
         CloseableHttpResponse response = httpClient.execute(post);
+        System.out.println(response);
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             return EntityUtils.toString(response.getEntity());
         }

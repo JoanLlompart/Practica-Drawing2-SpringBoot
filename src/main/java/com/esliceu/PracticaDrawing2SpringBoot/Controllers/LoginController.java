@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Enumeration;
+
 @Controller
 //@RequestMapping("/login")
 public class LoginController {
@@ -80,17 +83,35 @@ public class LoginController {
     @GetMapping("/discord/callback")
     public String discordCallback(@RequestParam String code, HttpSession session) throws Exception{
         String email = loginOAuthServices.getDiscordUserEmail(code);
-        System.out.println("email" + code);
+        System.out.println("email" + email);
         session.setAttribute("email",email);
         if (email.isEmpty()) return "redirect:/error";
         userService.setEmail(email);
         userService.setPassword("");
-        userService.registrarUsuari("",email, userService.getPassword());
-        System.out.println(email);
-        return "redirect:/canvasDrawing";
+        boolean validLogWithDiscord=userService.logWithOauth2();
+        if (validLogWithDiscord) {
+            System.out.println("Valid login discord");
+            session.setAttribute("email", userService.getEmail());
+            session.setAttribute("loginAttempts", 0);
+            session.setAttribute("usuariLogueat", true);
+            session.setAttribute("name", "");
+            printSession(session);
+            return "redirect:/canvasDraw";
+        } else {
+            return "login";
+        }
     }
 
-
+    private void printSession(HttpSession session) {
+        Enumeration<String> attributeNames = session.getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            String attributeName = attributeNames.nextElement();
+            Object attributeValue = session.getAttribute(attributeName);
+            // Realiza alguna acción con el nombre y el valor del atributo
+            System.out.println("(Ojo que en hi ha)Nombre del atributo: " + attributeName);
+            System.out.println("(Ojo que en hi ha)Valor del atributo: " + attributeValue);
+        }
+    }
 
 
 }

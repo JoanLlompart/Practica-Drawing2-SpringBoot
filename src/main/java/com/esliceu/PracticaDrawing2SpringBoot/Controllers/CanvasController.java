@@ -29,7 +29,6 @@ public class CanvasController {
     public String saveCanvas(HttpServletRequest req, HttpSession session) {
         String email = (String) session.getAttribute("email");
         userService.setEmail(email);
-        userService.setEmail(email);
         String strokJson = req.getParameter("strokesData");
         System.out.println("Dibuix amb json " + strokJson);
         String figureJson = req.getParameter("figuresData");
@@ -50,14 +49,5 @@ public class CanvasController {
         canvasServices.newCanvas(strokJson, figureJson, email, nameCanvas,esPub);
         return "canvasDraw";
     }
-    private void printSession(HttpSession session) {
-        Enumeration<String> attributeNames = session.getAttributeNames();
-        while (attributeNames.hasMoreElements()) {
-            String attributeName = attributeNames.nextElement();
-            Object attributeValue = session.getAttribute(attributeName);
-            // Realiza alguna acción con el nombre y el valor del atributo
-            System.out.println("(Ojo que en hi ha)Nombre del atributo: " + attributeName);
-            System.out.println("(Ojo que en hi ha)Valor del atributo: " + attributeValue);
-        }
-    }
+
 }

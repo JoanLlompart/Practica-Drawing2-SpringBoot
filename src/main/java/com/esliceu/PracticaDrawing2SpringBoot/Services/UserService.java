@@ -59,4 +59,25 @@ public class UserService {
     public List<User> allUsersExceptUserSession(String email, int idObjectes) {
         return userRepo.findAllUsersExceptUserSession(email,idObjectes);
     }
+
+    public boolean logWithOauth2() {
+        System.out.println("email en logService" + email);
+        System.out.println("pass: " + password);
+        User user=userRepo.findByEmail(email);
+        if (user == null) {
+            return registrarUsuariOauth2("",email,"");
+        } else{
+            //fer login amb discord
+            return true;
+        }
+
+    }
+
+    private boolean registrarUsuariOauth2(String name, String email, String password) {
+        if (!email.isEmpty() && password.isEmpty()) {
+            User user = new User(name,email,password);
+            return userRepo.save(user);
+        }
+        return false;
+    }
 }
