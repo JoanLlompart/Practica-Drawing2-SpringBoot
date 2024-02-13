@@ -83,6 +83,7 @@ public class LoginController {
     @GetMapping("/discord/callback")
     public String discordCallback(@RequestParam String code, HttpSession session) throws Exception{
         String email = loginOAuthServices.getDiscordUserEmail(code);
+        //String username = loginOAuthServices.getDiscordUserName(code);
         System.out.println("email" + email);
         session.setAttribute("email",email);
         if (email.isEmpty()) return "redirect:/error";

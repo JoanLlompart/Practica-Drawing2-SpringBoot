@@ -86,4 +86,27 @@ public class LoginOAuthServices {
         }
         throw new RuntimeException("Error in response");
     }
+
+    /*
+    public String getDiscordUserName(String code) throws Exception{
+        // Este método es similar al getDiscordUserEmail, pero en vez de devolver el email, devuelve el username
+        URL uri = new URL("https://discord.com/api/oauth2/token");
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("client_id", clientidDiscord);
+        parameters.put("client_secret", clientSecretDiscord);
+        parameters.put("code", code);
+        parameters.put("redirect_uri", redirecturiDiscord);
+        parameters.put("grant_type", "authorization_code");
+
+        String res = doPostDiscord(uri, parameters);
+        Map<String, String> mapJson = new Gson().fromJson(res, HashMap.class);
+        String access_token = mapJson.get("access_token");
+
+        URIBuilder uri2 = new URIBuilder("https://discord.com/api/users/@me");
+        String response = doGetDiscord(uri2.build().toURL(), access_token);
+        Map<String, String> mapJson2 = new Gson().fromJson(response, HashMap.class);
+        return mapJson2.get("username");
+    }
+
+     */
 }
