@@ -32,6 +32,12 @@ public class LoginOAuthServices {
     String clientSecretDiscord;
 
     public String getDiscordRedirection() throws Exception {
+        /*
+       1 Solicitud de autorización (Authorization Request):
+        Esta función construye y devuelve la URL de redirección para que el cliente solicite la autorización
+        del usuario en Discord.
+        Incluye parámetros como el client_id, redirect_uri, response_type y scope, necesarios para solicitar la autorización.
+         */
         URIBuilder uri = new URIBuilder("https://discord.com/api/oauth2/authorize");
         uri.addParameter("client_id", clientidDiscord);
         uri.addParameter("redirect_uri", redirecturiDiscord);
@@ -41,6 +47,12 @@ public class LoginOAuthServices {
     }
 
     public String getDiscordUserEmail(String code) throws Exception {
+        /*
+        4- Solicitud de token de acceso (Access Token Request):
+        Esta función realiza una solicitud POST al endpoint de Discord para intercambiar el código de autorización (code)
+        por un token de acceso. Los parámetros necesarios se pasan en el cuerpo de la solicitud,
+        incluyendo el client_id, client_secret, code, redirect_uri, y grant_type.
+         */
         URL uri = new URL("https://discord.com/api/oauth2/token");
         Map<String, String> parameters = new HashMap<>();
         parameters.put("client_id", clientidDiscord);
@@ -59,19 +71,15 @@ public class LoginOAuthServices {
         return mapJson2.get("email");
     }
 
-    private String doGetDiscord(URL url, String accessToken) throws Exception {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet get = new HttpGet(url.toString());
-        get.setHeader("Authorization", "Bearer " + accessToken);
 
-        CloseableHttpResponse response = httpClient.execute(get);
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-            return EntityUtils.toString(response.getEntity());
-        }
-        throw new RuntimeException("Error in response: GET");
-    }
 
     private String doPostDiscord(URL url, Map<String, String> parameters) throws Exception {
+        /*
+        5 .Recepción del token de acceso (Access Token Response):
+        La recepción del token de acceso ocurre implícitamente en el método doPostDiscord() cuando se recibe una respuesta
+        exitosa del servidor de autorización. El token de acceso se extrae de la respuesta y se utiliza para
+        acceder a los recursos protegidos.
+         */
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost post = new HttpPost(url.toString());
         List<NameValuePair> nvps = new ArrayList<>();
@@ -85,5 +93,20 @@ public class LoginOAuthServices {
             return EntityUtils.toString(response.getEntity());
         }
         throw new RuntimeException("Error in response");
+    }
+
+    private String doGetDiscord(URL url, String accessToken) throws Exception {
+    /*
+    6 - Acceso a los recursos protegidos (Access Protected Resources):
+    */
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet get = new HttpGet(url.toString());
+        get.setHeader("Authorization", "Bearer " + accessToken);
+
+        CloseableHttpResponse response = httpClient.execute(get);
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            return EntityUtils.toString(response.getEntity());
+        }
+        throw new RuntimeException("Error in response: GET");
     }
 }
